@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seccion Ver Mas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      color: #ddd;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #000000;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      gap: 5px;
+      padding: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .serie {
+      background-color: var(--card-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poster a {
+      display: block;
+      width: 100%;
+      height: 185px;
+      overflow: hidden;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .poster img:hover {
+      transform: scale(1.04);
+    }
+
+    .titulo-serie {
+      padding: 5px;
+      text-align: center;
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: #1f1f1f;
+  border-radius: 16px;
+  padding: 35px 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal h2 {
+  margin: 0;
+  color: #ff4d4d;
+  font-size: 22px;
+}
+
+.modal p {
+  font-size: 16px;
+  margin: 15px 0;
+  color: #ccc;
+}
+
+.modal ul {
+  text-align: left;
+  margin: 10px 0 0 0;
+  padding-left: 20px;
+  color: #999;
+  font-size: 14px;
+}
+
+.modal button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 10000;
+}
+go:236994L
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Quita resaltado azul y menú táctil */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Bloqueo de selección y arrastre */
+  body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;         /* Estándar */
+  }
+
+  img {
+    -webkit-user-drag: none; /* Safari */
+    user-drag: none;         /* Estándar */
+    pointer-events: none;    /* Opcional: evita interacción con arrastrar imágenes */
+  }
+      /* Media Queries para pantallas más pequeñas */
+    @media (max-width: 788px) {
+      .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .buscador input {
+        width: 90%;
+      }
+
+      .titulo-serie {
+        font-size: 0.5rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .catalogo {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Catálogo Hentai</h1>
+  </header>
+
+  <div class="catalogo">
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai002">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/o3KsbsHaFcDjulFzO1ZxBdzKJeL.jpg" alt="Sakusei Byoutou The Animation">
+        </a>
+      </div>
+      <div class="titulo-serie">Sakusei Byoutou The Animation</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai003">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fu19rN3cEKVillGJiNUGy7kr5L7.jpg" alt="Kaede to Suzu The Animation">
+        </a>
+      </div>
+      <div class="titulo-serie">Kaede to Suzu The Animation</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai004">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gEajgDHjiBpqM2kx8RdFTWi7l9D.jpg" alt="Mama Katsu">
+        </a>
+      </div>
+      <div class="titulo-serie">Mama Katsu</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai005">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/Bso0mfg2ohx8hO65WATccTbSQI.jpg" alt="Enkou JK Bitch Gal">
+        </a>
+      </div>
+      <div class="titulo-serie">Enkou JK Bitch Gal</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai006">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/yLDIp0RSIutDA2D8ZQI2DIxoboa.jpg" alt="Real Eroge Situation!">
+        </a>
+      </div>
+      <div class="titulo-serie">Real Eroge Situation!</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai007">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6I4IHARjlDdrpw30K5svtbKCCUz.jpg" alt="Real Eroge Situation! 2">
+        </a>
+      </div>
+      <div class="titulo-serie">Real Eroge Situation! 2</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai008">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jRwmCoKVgorXIRRWIP4f8JMNfwb.jpg" alt="Nariyuki: Papakatsu Girls!!">
+        </a>
+      </div>
+      <div class="titulo-serie">Nariyuki: Papakatsu Girls!!</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai009">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v2TLOn7dvFGsG9B8Zjzik36OXGo.jpg" alt="Youkoso! Sukebe Elf no Mori e">
+        </a>
+      </div>
+      <div class="titulo-serie">Youkoso! Sukebe Elf no Mori e</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai010">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4zoq1qYD1rXAFgM8ZKCPScMPcZ1.jpg" alt="FuriFure">
+        </a>
+      </div>
+      <div class="titulo-serie">FuriFure</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai011">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3mzzH9kPVeU30kg9uKK9K3fcg1x.jpg" alt="Furifure 2">
+        </a>
+      </div>
+      <div class="titulo-serie">Furifure 2</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai012">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v5xzOKqSnNBEuLDYnLDcU5BHzNg.jpg" alt="Nuresuke JK Amayadori Rape">
+        </a>
+      </div>
+      <div class="titulo-serie">Nuresuke JK Amayadori Rape</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai013">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wEIDSWajrZLs8QxFo30SQyJCMan.jpg" alt="Saimin ☆ Gakuen">
+        </a>
+      </div>
+      <div class="titulo-serie">Saimin ☆ Gakuen</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai001">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8OCs9oLfLYCfsPKuBFAUZWVtm6w.jpg" alt="Eroriman 2">
+        </a>
+      </div>
+      <div class="titulo-serie">Eroriman 2</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai014">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6WLm5aXHiSI495rBTCsc2mTO3Ih.jpg" alt="Eroriman">
+        </a>
+      </div>
+      <div class="titulo-serie">Eroriman</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai015">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mRgdv4AFe0ZIzGEcx8jkw1uBfAz.jpg" alt="Toshidensetsu Series">
+        </a>
+      </div>
+      <div class="titulo-serie">Toshidensetsu Series</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai016">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/l48F39mbYUyu4H6y7rmvciSYz8T.jpg" alt="Ore ga Kanojo o Okasu Wake">
+        </a>
+      </div>
+      <div class="titulo-serie">Ore ga Kanojo o Okasu Wake</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai017">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/i5Zpvei9GsxznSeYVl8sJjeGTZt.jpg" alt="Dokidoki Little Ooya-san">
+        </a>
+      </div>
+      <div class="titulo-serie">Dokidoki Little Ooya-san</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai018">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fpyaFlxqL35vNMeMskNoJV5mxXc.jpg" alt="Inkou Kyoushi 4 feat. Ero">
+        </a>
+      </div>
+      <div class="titulo-serie">Inkou Kyoushi 4 feat. Ero</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai019">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ui0Cqdc4pfjzgWfpzUR1YpRHBwh.jpg" alt="Imouto Paradise!">
+        </a>
+      </div>
+      <div class="titulo-serie">Imouto Paradise!</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai020">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8NYx8iWNIFAsrXYhV9uywlaONou.jpg" alt="Imouto Paradise! 2">
+        </a>
+      </div>
+      <div class="titulo-serie">Imouto Paradise! 2</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai021">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xyB8fHTQmLv7adtRkBUoQPAPf03.jpg" alt="Imouto Paradise! 3">
+        </a>
+      </div>
+      <div class="titulo-serie">Imouto Paradise! 3</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai022">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8NQaAG7pcZ6mdtS6O6RMCnwE4t5.jpg" alt="Muchi Muchi Kyousei">
+        </a>
+      </div>
+      <div class="titulo-serie">Muchi Muchi Kyousei</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai023">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k6K34NwoUVM123bnH6bUhRyDKKf.jpg" alt="Ane Chijo Max Heart">
+        </a>
+      </div>
+      <div class="titulo-serie">Ane Chijo Max Heart</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai024">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6PmquVlOE1hdktlMAvXlrCgOGD9.jpg" alt="Elf no Oshiego to Sensei">
+        </a>
+      </div>
+      <div class="titulo-serie">Elf no Oshiego to Sensei</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai025">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jwbmwgxt3cUYxMJCyxjAMTDm4em.jpg" alt="Niizuma Koyomi">
+        </a>
+      </div>
+      <div class="titulo-serie">Niizuma Koyomi</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai026">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3YfcPSEsZUSlaClf2tlXW45DRoS.jpg" alt="Hatsujou Switch">
+        </a>
+      </div>
+      <div class="titulo-serie">Hatsujou Switch</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai027">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7XsUsF4m80ijZfDFTGVn8zc3Q0Q.jpg" alt="Oyasumi Sex">
+        </a>
+      </div>
+      <div class="titulo-serie">Oyasumi Sex</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai028">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6qYRDJOwJUgjyS3rSYl9qRnnQNL.jpg" alt="Tinderbox">
+        </a>
+      </div>
+      <div class="titulo-serie">Tinderbox</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai029">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/x3ehSgtvmNVgajjBUij79FNjhT9.jpg" alt="Rape Gouhouka!!!">
+        </a>
+      </div>
+      <div class="titulo-serie">Rape Gouhouka!!!</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai030">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hR9A0p0Bc3AjZxKvCPpAz4b8shj.jpg" alt="Boku to Nurse no Kenshuu">
+        </a>
+      </div>
+      <div class="titulo-serie">Boku to Nurse no Kenshuu</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai031">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gWRh7Mgw5oZY2Ng4hVI2JU4WWzk.jpg" alt="Kyonyuu Dosukebe Gakuen">
+        </a>
+      </div>
+      <div class="titulo-serie">Kyonyuu Dosukebe Gakuen</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai032">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3KfM0jDVrOYmIVY0UBZFSEJXZYD.jpg" alt="Muma no Machi Cornelica">
+        </a>
+      </div>
+      <div class="titulo-serie">Muma no Machi Cornelica</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai033">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/q6hJQAgSEQ3xWb7nJDG58qohNy9.jpg" alt="Rune’s Pharmacy">
+        </a>
+      </div>
+      <div class="titulo-serie">Rune’s Pharmacy</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai034">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2vGE26G8uUvkddamOuP3N8kUbrE.jpg" alt="Tiny Evil">
+        </a>
+      </div>
+      <div class="titulo-serie">Tiny Evil</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai035">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8vG8ibRy7pW5RRZRiF6TYraOfWX.jpg" alt="Maken no Hime wa Ero">
+        </a>
+      </div>
+      <div class="titulo-serie">Maken no Hime wa Ero</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai036">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vNoWpn2aosCAU7Rowg5rSC3qn3d.jpg" alt="Saimin Seishidou">
+        </a>
+      </div>
+      <div class="titulo-serie">Saimin Seishidou</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai037">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1mOpL3usOyVG9MkgrGHAfLYueRu.jpg" alt="Kanpeki Ojou-sama">
+        </a>
+      </div>
+      <div class="titulo-serie">Kanpeki Ojou-sama</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai038">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/70QTLK9pQ7oONUbMyUHM6YU43OK.jpg" alt="Gaki ni Modotte Yarinaoshi">
+        </a>
+      </div>
+      <div class="titulo-serie">Gaki ni Modotte Yarinaoshi</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai039">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3OeACDOfj8Rnjmb1taHh2cRsONr.jpg" alt="Venus Blood: Brave">
+        </a>
+      </div>
+      <div class="titulo-serie">Venus Blood: Brave</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai040">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gHj2tCS2kGJAlGIejKdJRxnZi8V.jpg" alt="Seikatsu Shuukan The Animation">
+        </a>
+      </div>
+      <div class="titulo-serie">Seikatsu Shuukan The Animation</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai041">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ypWFpMevUOjXakVyt1GJKX51sUo.jpg" alt="Isekai Kita no de Special Skill">
+        </a>
+      </div>
+      <div class="titulo-serie">Isekai Kita no de Special Skill</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai042">
+          <img src="https://image.tmdb.org/t/p/original/4TLu0Ue26R1ZhXdYi065SlCASEI.jpg" alt="Imouto wa Gal Kawaii">
+        </a>
+      </div>
+      <div class="titulo-serie">Imouto wa Gal Kawaii</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:Hentai043">
+          <img src="https://image.tmdb.org/t/p/original/yadvq7vcBnxxNlLqKGfVZOLIEc0.jpg" alt="Boku no Risou no Isekai">
+        </a>
+      </div>
+      <div class="titulo-serie">Boku no Risou no Isekai</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+
+    <div class="serie">
+      <div class="poster">
+        <a href="go:">
+          <img src="https" alt="Serie">
+        </a>
+      </div>
+      <div class="titulo-serie">Serie</div>
+    </div>
+  </div>
+
+<!-- Modal si no hay conexión -->
+<div class="modal-overlay" id="connectionModal">
+  <div class="modal">
+    <h2>Sin conexión</h2>
+    <p>No se detecta acceso a Internet. Por favor verifica lo siguiente:</p>
+    <ul>
+      <li>Revisa tu señal Wi-Fi o datos móviles</li>
+      <li>Conecta a una red disponible</li>
+      <li>Espera unos segundos mientras se intenta reconectar</li>
+    </ul>
+    <button disabled>Reconectando...</button>
+  </div>
+</div>
+
+<!-- Toast: conexión restaurada -->
+<div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
+
+<script>
+  const modal = document.getElementById("connectionModal");
+  const toast = document.getElementById("toast");
+  let wasOffline = false;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+  }
+
+  function updateConnectionStatus() {
+    if (!navigator.onLine) {
+      modal.classList.add("active");
+      wasOffline = true;
+    } else {
+      modal.classList.remove("active");
+      if (wasOffline) {
+        showToast("✅ ¡Conexión restaurada!");
+        wasOffline = false;
+      }
+    }
+  }
+
+  window.addEventListener("load", updateConnectionStatus);
+  window.addEventListener("offline", updateConnectionStatus);
+  window.addEventListener("online", updateConnectionStatus);
+</script>
+
+<script>
+  // Bloquea el arrastre de imágenes y otros elementos
+  document.addEventListener("dragstart", function(event) {
+    event.preventDefault();
+  });
+
+  // Bloquea la selección de texto
+  document.addEventListener("selectstart", function(event) {
+    event.preventDefault();
+  });
+</script>
+</body>
+</html>
