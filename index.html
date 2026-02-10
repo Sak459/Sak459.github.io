@@ -36,12 +36,12 @@
     .series-list {
       display: flex;
       overflow-x: auto;
-      gap: 6px;
+      gap: 9px;
       padding-bottom: 2px;
     }
 
     .series-card {
-      width: 140px;
+      width: 135px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
@@ -50,10 +50,31 @@
 
     .series-card img {
       width: 100%;
-      height: 215px;
+      height: 210px;
       object-fit: cover;
       border-radius: 10px;
       display: block;
+    }
+    
+     /* === SOLO PARA RECIENTES === */
+    .recientes .series-card {
+      width: 205px; /* más ancho */
+    }
+
+    .recientes .series-card img {
+      height: 105px; /* thumbnail horizontal */
+      border-radius: 10px;
+    }
+
+    .recientes .series-title {
+      font-size: 0.75rem;
+      text-align: left;
+      padding: 4px 2px;
+    }
+    
+    /* === TITULO CENTRADO SOLO EN RECIENTES === */
+    .recientes .series-title {
+      text-align: center;
     }
 
     .series-title {
@@ -107,6 +128,24 @@
 
     .bottom-menu i {
       font-size: 1.2rem;
+    }
+    
+    /* Badge NUEVO / ESTRENO */
+    .series-card {
+      position: relative;
+    }
+
+    .badge-new {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: #ff3c78;
+      color: white;
+      font-size: 0.75rem;
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-weight: bold;
+      z-index: 10;
     }
 
     /* Toast */
@@ -173,7 +212,7 @@
       <div class="logo"></div>
     </div>
   </div>
-
+  
     <!-- Carrusel de destacados -->
   <div id="destacadosCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -208,20 +247,23 @@
   <!-- Categorías -->
   <div class="container">
     <div class="category-title">Recientes</div>
-    <div class="series-list">
+    <div class="series-list recientes">
       <div class="series-card">
+        <div class="badge-new">Nuevo</div>
         <a href="go:Hentai041">
           <img src="https://image.tmdb.org/t/p/original/ypWFpMevUOjXakVyt1GJKX51sUo.jpg" alt="Isekai Kita no de Special Skill">
           <div class="series-title">Isekai Kita no de Special Skill</div>
         </a>
       </div>
       <div class="series-card">
+        <div class="badge-new">Nuevo</div>
         <a href="go:Hentai002">
           <img src="https://image.tmdb.org/t/p/original/o3KsbsHaFcDjulFzO1ZxBdzKJeL.jpg" alt="Sakusei Byoutou The Animation">
           <div class="series-title">Sakusei Byoutou The Animation</div>
         </a>
       </div>
       <div class="series-card">
+        <div class="badge-new">Nuevo</div>
         <a href="go:Hentai003">
           <img
 src="https://veohentai.com/wp-content/uploads/2024/12/Kaede-To-Suzu-The-Animation-Episode-3.jpg" alt="Kaede to Suzu The Animation">
@@ -229,12 +271,14 @@ src="https://veohentai.com/wp-content/uploads/2024/12/Kaede-To-Suzu-The-Animatio
         </a>
       </div>
       <div class="series-card">
+        <div class="badge-new">Nuevo</div>
         <a href="go:Hentai004">
           <img src="https://veohentai.com/wp-content/uploads/2022/12/Mama-Katsu-Midareru-Mama-tachi-no-Himitsu-Episode-1.jpg" alt="Mama Katsu">
           <div class="series-title">Mama Katsu</div>
         </a>
       </div>
       <div class="series-card">
+        <div class="badge-new">Nuevo</div>
         <a href="go:">
           <img
 src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 5">
@@ -330,18 +374,18 @@ src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.sv
         </a>
       </div>
     </div>
-
+    
     <div class="category-title">Hentai Latino</div>
     <div class="series-list">
       <div class="series-card">
-        <a href="HentaiLat/HenLa001.html">
+        <a href="go:HenLa001">
           <img src="https://image.tmdb.org/t/p/original/t5hPL0gOoTyBFPvzdefPcqEeHx3.jpg" alt="Ane wa Yan Mama">
           <div class="series-title">Ane wa Yan Mama</div>
         </a>
       </div>
       <div class="series-card">
         <a href="go:HenLa002">
-          <img
+          <img 
 src="https://image.tmdb.org/t/p/original/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="Itadaki! Seieki">
           <div class="series-title">Itadaki! Seieki</div>
         </a>
@@ -389,7 +433,7 @@ src="https://image.tmdb.org/t/p/original/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="It
         </a>
       </div>
       <div class="series-card">
-        <a href="HenLat.html">
+        <a href="go:HenLat">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 40">
           <div class="series-title">Ver Más</div>
         </a>
@@ -400,8 +444,8 @@ src="https://image.tmdb.org/t/p/original/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="It
   <!-- Menú inferior fijo -->
   <div class="bottom-menu">
     <a href="go:Home" class="active"><i class="fas fa-home"></i><span>Inicio</span></a>
-    <a href="Buscar.html"><i class="fas fa-search"></i><span>Buscar</span></a>
-    <a href="Favori.html"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
+    <a href="go:Buscar"><i class="fas fa-search"></i><span>Buscar</span></a>
+    <a href="go:Favori"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
     <a href="go:AvisoSeguridad"><i class="fas fa-info-circle"></i><span>Seguridad</span></a>
   </div>
 
