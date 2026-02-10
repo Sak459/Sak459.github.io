@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Favoritos</title>
+
+<style>
+:root{
+  --bg:#000;
+  --accent:#ffffff;
+  --card:#000000;
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:2px;
+}
+
+header{
+  font-size:1.7rem;
+  color:var(--accent);
+  margin-bottom:5px;
+  text-align: center;
+  font-weight:bold;
+}
+
+/* GRID */
+.favorites-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:5px;
+  padding: 5px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  transition:.25s;
+}
+
+.card img{
+  width:100%;
+  height:185px;
+  object-fit:cover;
+}
+
+/* TITULO */
+.card-title{
+  padding:0px;
+  font-size:.65rem;
+  background-color: #0E0C0C;
+  text-align:center;
+}
+
+/* BOTÓN QUITAR FAVORITO */
+.remove-btn{
+  position:absolute;
+  top:6px;
+  right:6px;
+  background:rgba(255,60,120,0.9);
+  border:none;
+  color:#fff;
+  font-size:1.1rem;
+  border-radius:50%;
+  width:24px;
+  height:24px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+
+    /* Modal desconexión */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #1f1f1f;
+      border-radius: 16px;
+      padding: 35px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: #ff4d4d;
+      font-size: 22px;
+    }
+
+    .modal p {
+      font-size: 18px;
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .modal ul {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+      color: #999;
+      font-size: 15px;
+    }
+
+    .modal button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    /* Toast reconexión */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Quita resaltado azul y menú táctil */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+  }
+
+       /* Media Queries para pantallas más pequeñas */
+    @media (max-width: 788px) {
+      .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .buscador input {
+        width: 90%;
+      }
+
+      .titulo-serie {
+        font-size: 0.5rem;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .catalogo {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+      }
+    }
+</style>
+</head>
+
+<body>
+<br>
+<header>Mis Favoritos</header>
+<br>
+<div class="favorites-grid" id="favoritesGrid"></div>
+
+    <!-- Modal desconexión -->
+  <div class="modal-overlay" id="connectionModal">
+    <div class="modal">
+      <h2>Sin conexión</h2>
+      <p>No se detecta acceso a Internet. Por favor verifica lo siguiente:</p>
+      <ul>
+        <li>Revisa tu señal Wi-Fi o datos móviles</li>
+        <li>Conecta a una red disponible</li>
+        <li>Espera unos segundos mientras se intenta reconectar</li>
+      </ul>
+      <button disabled>Reconectando...</button>
+    </div>
+  </div>
+
+  <!-- Toast reconexión -->
+  <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
+
+<script>
+const grid = document.getElementById('favoritesGrid');
+
+function loadFavorites(){
+  grid.innerHTML = '';
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  if(favorites.length === 0){
+    grid.innerHTML = '<p>No tienes series guardadas.</p>';
+    return;
+  }
+
+  favorites.forEach(series => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+      <img src="${series.banner}" alt="${series.title}">
+      <div class="card-title">${series.title}</div>
+      <button class="remove-btn">×</button>
+    `;
+
+    // Clic en la tarjeta abre la serie
+    card.querySelector('.card-title').onclick = card.querySelector('img').onclick = () => {
+      // Redirigir a la serie
+      // window.location.href = `serie.html?id=${series.id}`;
+      alert('Abrir serie: ' + series.title);
+    };
+
+    // Clic en botón ❌ quita de favoritos
+    card.querySelector('.remove-btn').onclick = (e) => {
+      e.stopPropagation(); // evita que abra la serie
+      let favs = JSON.parse(localStorage.getItem('favorites')) || [];
+      favs = favs.filter(s => s.id !== series.id);
+      localStorage.setItem('favorites', JSON.stringify(favs));
+      loadFavorites(); // recargar la lista
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+// Cargar al inicio
+loadFavorites();
+
+// Modal de conexión
+const modal = document.getElementById("connectionModal");
+let wasOffline = false;
+function updateConnectionStatus() {
+  if (!navigator.onLine) {
+    modal.classList.add("active");
+    document.body.classList.add("modal-active");
+    wasOffline = true;
+  } else {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-active");
+    if (wasOffline) {
+      showToast("✅ ¡Conexión restaurada!");
+      wasOffline = false;
+    }
+  }
+}
+window.addEventListener("load", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+window.addEventListener("online", updateConnectionStatus);
+
+// Toast
+function showToast(message, color = "#28a745") {
+  toast.style.background = color;
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+// Prevención de selección/arrastre
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+</script>
+</body>
+</html>

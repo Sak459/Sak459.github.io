@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies Premium+</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: red;
+    }
+
+    .container {
+       width: 100%;
+       max-width:1000px;
+       margin: auto;
+       position: relative;
+     }
+
+    .category-title {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .series-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding-bottom: 2px;
+    }
+
+    .series-card {
+      width: 140px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .series-card img {
+      width: 100%;
+      height: 215px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .series-title {
+      font-size: 0.8rem;
+      text-align: center;
+      margin-top: 5px;
+      color: #ddd;
+      word-wrap: break-word;
+      white-space: normal;
+      overflow-wrap: break-word;
+      line-height: 1.1;
+    }
+
+    .series-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+    }
+
+    .series-card a:hover .series-title {
+      color: white;
+    }
+
+    .bottom-menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #000;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid #222;
+      z-index: 1000;
+    }
+
+    .bottom-menu a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bottom-menu a.active {
+      color: white;
+    }
+
+    .bottom-menu i {
+      font-size: 1.2rem;
+    }
+
+    /* Toast */
+    #reconnect-toast {
+      background: rgba(33, 150, 243, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.5);
+      min-width: 280px;
+      max-width: 90vw;
+      font-weight: 600;
+      font-size: 1rem;
+      z-index: 12000;
+    }
+
+    /* Modal moderno */
+    #offlineModal .modal-content {
+      background: #1f1f1f;
+      color: white;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+    }
+
+    #offlineModal .modal-body i {
+      color: #ff4d4d;
+    }
+
+    #offlineModal .modal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .modal-backdrop.show {
+      opacity: 0.85 !important;
+      background-color: #000 !important;
+      z-index: 1050;
+    }
+
+    /* Bloqueo de selección y arrastre */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="container py-1">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="logo"></div>
+    </div>
+  </div>
+
+    <!-- Carrusel de destacados -->
+  <div id="destacadosCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="detalle.html?id=serie1">
+          <img src="https://image.tmdb.org/t/p/original/9E0C4FVsGfQzeuQA7wMxYKwhxVv.jpg" class="d-block w-100" alt="Destacado 1">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="detalle.html?id=serie1">
+          <img src="https://image.tmdb.org/t/p/original/66RevrrXlGQ8jR3IWLNOUvMvgbH.jpg" class="d-block w-100" alt="Destacado 2">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="detalle.html?id=serie1">
+          <img src="https://image.tmdb.org/t/p/original/9qqYLAHCpA4gLUl7Irhm2SBZr5X.jpg" class="d-block w-100" alt="Destacado 3">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="detalle.html?id=serie1">
+          <img src="https://image.tmdb.org/t/p/original/jd9Ln9txiR9GB7a4rS54Q9zqAoy.jpg" class="d-block w-100" alt="Destacado 4">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="detalle.html?id=serie1">
+          <img src="https://image.tmdb.org/t/p/original/v7ocuLE59xrKCnz21mCrwSo2xN4.jpg" class="d-block w-100" alt="Destacado 5">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categorías -->
+  <div class="container">
+    <div class="category-title">Recientes</div>
+    <div class="series-list">
+      <div class="series-card">
+        <a href="go:Hentai041">
+          <img src="https://image.tmdb.org/t/p/original/ypWFpMevUOjXakVyt1GJKX51sUo.jpg" alt="Isekai Kita no de Special Skill">
+          <div class="series-title">Isekai Kita no de Special Skill</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:Hentai002">
+          <img src="https://image.tmdb.org/t/p/original/o3KsbsHaFcDjulFzO1ZxBdzKJeL.jpg" alt="Sakusei Byoutou The Animation">
+          <div class="series-title">Sakusei Byoutou The Animation</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:Hentai003">
+          <img
+src="https://veohentai.com/wp-content/uploads/2024/12/Kaede-To-Suzu-The-Animation-Episode-3.jpg" alt="Kaede to Suzu The Animation">
+          <div class="series-title">Kaede to Suzu The Animation</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:Hentai004">
+          <img src="https://veohentai.com/wp-content/uploads/2022/12/Mama-Katsu-Midareru-Mama-tachi-no-Himitsu-Episode-1.jpg" alt="Mama Katsu">
+          <div class="series-title">Mama Katsu</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:">
+          <img
+src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 5">
+          <div class="series-title">Ver Más</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category-title">Catálogo</div>
+    <div class="series-list">
+      <div class="series-card">
+        <a href="go:Hentai042">
+          <img src="https://image.tmdb.org/t/p/original/4TLu0Ue26R1ZhXdYi065SlCASEI.jpg" alt="Imouto wa Gal Kawaii">
+          <div class="series-title">Imouto wa Gal Kawaii</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:Hentai043">
+          <img src="https://image.tmdb.org/t/p/original/yadvq7vcBnxxNlLqKGfVZOLIEc0.jpg" alt="Boku no Risou no Isekai">
+          <div class="series-title">Boku no Risou no Isekai</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:223564-1">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uGLPOAWnrbHxf1m5SZsrmNVHvYg.jpg" alt="Serie 10">
+          <div class="series-title">Kimi no Koto ga Daidai Season 2</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:259140">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/b89RP6Na8EqV7U9ZR1IRFgdMSp0.jpg" alt="Serie 11">
+          <div class="series-title">Ranma ½ (2024)</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:30984-4">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mtbY8EkmzQECgozxBIhIgkjCy3Q.jpg" alt="Serie 12">
+          <div class="series-title">Bleach: Sennen Kessen-hen</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:240411">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bOPmmOXj33bxVW5DoWabkCLn6vE.jpg" alt="Serie 13">
+          <div class="series-title">Dandadan</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:158373-2">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dMoSKLwUqCyNT5DI2KkQaNIphg1.jpg" alt="Serie 14">
+          <div class="series-title">NieR:Automata Ver1.1a Part 2</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:85937-5">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mR02dQFzqwxcSOZjHNDOAc0m3AT.jpg" alt="Serie 15">
+          <div class="series-title">Kimetsu no Yaiba: Season 5</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:65844-3">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mksUUu0KaFAwImthyrqjL1FLdP1.jpg" alt="Serie 16">
+          <div class="series-title">Kono Subarashii Sekai Season 3</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:61374_4">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2EpqEQjsanxlL0SV2zVCHzuNkGu.jpg" alt="Serie 17">
+          <div class="series-title">Tokyo Ghoul:re Season 2</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:209867">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dDRiOkCBCkd7w6ysMFr39G16opQ.jpg" alt="Serie 18">
+          <div class="series-title">Sousou no Frieren</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:210879_3">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fXLiRlCqwuUQOR3TUMnpytruNuD.jpg" alt="Serie 19">
+          <div class="series-title">Rurouni Kenshin 2024</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:127532">
+          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1KRSR1dUAOpUv3mxHU5W3QWo2og.jpg" alt="Serie 20">
+          <div class="series-title">Solo Leveling</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:Ver.H">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 20">
+          <div class="series-title">Ver Más</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category-title">Hentai Latino</div>
+    <div class="series-list">
+      <div class="series-card">
+        <a href="HentaiLat/HenLa001.html">
+          <img src="https://image.tmdb.org/t/p/original/t5hPL0gOoTyBFPvzdefPcqEeHx3.jpg" alt="Ane wa Yan Mama">
+          <div class="series-title">Ane wa Yan Mama</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa002">
+          <img
+src="https://image.tmdb.org/t/p/original/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="Itadaki! Seieki">
+          <div class="series-title">Itadaki! Seieki</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa003">
+          <img src="https://image.tmdb.org/t/p/original/4QZEWfL34hYW845iiJZCaj522WB.jpg" alt="Overflow">
+          <div class="series-title">Overflow</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa004">
+          <img src="https://image.tmdb.org/t/p/original/ybcSDAHvjVq0br9auUIoqYC44al.jpg" alt="Imaizumin-chi wa Douyara">
+          <div class="series-title">Imaizumin-chi wa Douyara</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa005">
+          <img src="https://image.tmdb.org/t/p/original/5kdFJzQpFErFKF5sjO9slXo24j6.jpg" alt="Uchi no Otouto">
+          <div class="series-title">Uchi no Otouto</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa006">
+          <img src="https://image.tmdb.org/t/p/original/fu19rN3cEKVillGJiNUGy7kr5L7.jpg" alt="Kaede to Suzu">
+          <div class="series-title">Kaede to Suzu</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa007">
+          <img src="https://image.tmdb.org/t/p/original/xjiZHTfeNffOuCryRNgYYQUoLfW.jpg" alt="Otogibanashi no Onigokko">
+          <div class="series-title">Otogibanashi no Onigokko</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa008">
+          <img src="https://image.tmdb.org/t/p/original/os4vEDx1rWEazEXEw2bVVBD71Et.jpg" alt="Majo wa Kekkyoku">
+          <div class="series-title">Majo wa Kekkyoku</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="go:HenLa009">
+          <img src="https://image.tmdb.org/t/p/original/clOiiLPWRrhw0ajjJuumffz3pNK.jpg" alt="Isekai Harem Monogatari">
+          <div class="series-title">Isekai Harem Monogatari</div>
+        </a>
+      </div>
+      <div class="series-card">
+        <a href="HenLat.html">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 40">
+          <div class="series-title">Ver Más</div>
+        </a>
+      </div>
+    </div>
+  </div>
+    <br>
+  <!-- Menú inferior fijo -->
+  <div class="bottom-menu">
+    <a href="go:Home" class="active"><i class="fas fa-home"></i><span>Inicio</span></a>
+    <a href="Buscar.html"><i class="fas fa-search"></i><span>Buscar</span></a>
+    <a href="Favori.html"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
+    <a href="go:AvisoSeguridad"><i class="fas fa-info-circle"></i><span>Seguridad</span></a>
+  </div>
+
+  <!-- Modal Sin Conexión -->
+  <div class="modal fade" id="offlineModal" tabindex="-1" aria-labelledby="offlineModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4">
+        <div class="modal-body">
+          <i class="fas fa-wifi-slash fa-3x mb-3"></i>
+          <h5 class="modal-title mb-3">Sin conexión a Internet</h5>
+          <p>Revisa tu conexión y vuelve a intentarlo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Reconectado -->
+  <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5" style="z-index: 12000;">
+    <div id="reconnect-toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M21 7L9 19l-5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+          Conexión restablecida
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const offlineModal = new bootstrap.Modal(document.getElementById('offlineModal'));
+    const reconnectToastEl = document.getElementById('reconnect-toast');
+    const reconnectToast = new bootstrap.Toast(reconnectToastEl, { delay: 3000 });
+    const bottomMenu = document.querySelector('.bottom-menu');
+
+    function setMenuDisabled(state) {
+      bottomMenu.classList.toggle('disabled', state);
+    }
+
+    function checkConnection() {
+      if (!navigator.onLine) {
+        offlineModal.show();
+        setMenuDisabled(true);
+      } else {
+        offlineModal.hide();
+        setMenuDisabled(false);
+      }
+    }
+
+    window.addEventListener('offline', () => {
+      offlineModal.show();
+      setMenuDisabled(true);
+    });
+
+    window.addEventListener('online', () => {
+      offlineModal.hide();
+      reconnectToast.show();
+      setMenuDisabled(false);
+    });
+
+    window.addEventListener('load', checkConnection);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Bloquea el arrastre de imágenes y otros elementos
+  document.addEventListener("dragstart", function(event) {
+    event.preventDefault();
+  });
+
+  // Bloquea la selección de texto
+  document.addEventListener("selectstart", function(event) {
+    event.preventDefault();
+  });
+</script>
+</body>
+</html>
