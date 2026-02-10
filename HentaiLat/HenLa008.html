@@ -1,0 +1,467 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla Rakuen Hentai</title>
+
+<style>
+:root{
+  --bg:#000;
+  --accent:#ff3c78;
+  --card:#1a1a1a;
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* HEADER */
+.header-fixed{
+  width:100%;
+  max-width:1000px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* BANNER */
+.banner-top{
+  width:100%;
+  height:155px;
+  object-fit:cover;
+  border-radius:6px;
+  margin-bottom:10px;
+}
+
+/* ACCIONES */
+.series-actions{
+  display:flex;
+  gap:24px;
+  margin-bottom:6px;
+}
+
+.action-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:90px;
+  padding:8px;
+  border-radius:12px;
+  background:#111;
+  cursor:pointer;
+  font-size:.75rem;
+  color:#bbb;
+  transition:.2s;
+}
+
+.action-btn svg{
+  width:25px;
+  height:25px;
+  fill:currentColor;
+}
+
+.action-btn.active{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* TEXTOS */
+header{
+  font-size:1.4rem;
+  font-weight:bold;
+  color:var(--accent);
+  margin-bottom:4px;
+  text-align:center;
+}
+
+#episodeTitle{
+  font-size:1rem;
+  margin-bottom:8px;
+}
+
+/* PLAYER */
+.player-container{
+  display:none;
+  width:100%;
+  max-width:1000px;
+  aspect-ratio:16/9;
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* EPISODIOS */
+.scroll-episodes{
+  width:95%;
+  max-width:1000px;
+  flex-grow:1;
+  overflow-y:auto;
+  padding:8px;
+}
+
+.episode-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.episode{
+  background:var(--card);
+  border-radius:14px;
+  min-height:40px;
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  position:relative;
+}
+
+.episode::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  border-radius:14px;
+}
+
+.episode span{
+  position:relative;
+  z-index:2;
+}
+
+.episode.active,
+.episode.last-watched{
+  outline:2px solid var(--accent);
+}
+
+    /* Modal desconexión */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #1f1f1f;
+      border-radius: 16px;
+      padding: 35px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: #ff4d4d;
+      font-size: 22px;
+    }
+
+    .modal p {
+      font-size: 18px;
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .modal ul {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+      color: #999;
+      font-size: 15px;
+    }
+
+    .modal button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    /* Toast reconexión */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Quita resaltado azul y menú táctil */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header-fixed">
+
+  <img class="banner-top" src="https://image.tmdb.org/t/p/original/wSLjmSf7J0kOSmqGTVt9L60sO43.jpg">
+
+  <div class="series-actions">
+
+    <!-- FAVORITOS -->
+    <div class="action-btn" id="favoriteBtn">
+      ❤️
+      Favoritos
+    </div>
+
+    <!-- FINALIZADA -->
+    <div class="action-btn" id="watchedBtn">
+      ✔
+      Finalizada
+    </div>
+
+  </div>
+
+  <header>Majo wa Kekkyoku Sono Kyaku to… The Animation Audio Latino</header>
+  <div id="episodeTitle">Selecciona un episodio</div>
+  <div class="player-container" id="player-container"></div>
+</div>
+
+    <!-- Modal desconexión -->
+  <div class="modal-overlay" id="connectionModal">
+    <div class="modal">
+      <h2>Sin conexión</h2>
+      <p>No se detecta acceso a Internet. Por favor verifica lo siguiente:</p>
+      <ul>
+        <li>Revisa tu señal Wi-Fi o datos móviles</li>
+        <li>Conecta a una red disponible</li>
+        <li>Espera unos segundos mientras se intenta reconectar</li>
+      </ul>
+      <button disabled>Reconectando...</button>
+    </div>
+  </div>
+
+  <!-- Toast reconexión -->
+  <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
+
+<div class="scroll-episodes">
+  <section class="episode-list" id="episodeList"></section>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const seriesId = 'HenLa008';
+
+const seriesData = {
+  id: seriesId,
+  title: 'Majo wa Kekkyoku Latino',
+  banner: 'https://image.tmdb.org/t/p/original/os4vEDx1rWEazEXEw2bVVBD71Et.jpg',
+  synopsis: ''
+};
+
+const episodes = [
+      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FokwgOhvRBaxCPddm84vEe0MCpVDKpqbcqKTnQSX%2BgZAmTBMw9AB5gtFIAAVl%2B33U9MKcS6m6c2g%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/5T7Y9PQfoD1tm20vLCnBA3wS215.jpg' },
+      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18%2FMlIZF5Ry6o7BNnLCYwKnDAxvXu%2FMGRR%2BceqltK0enCEzG%2BOfZ0rMxwwaVh0N%2B7ZXTKBZZg0riw%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/f6aZSm5ZFUoIUsRnISyeOfyUKv1.jpg' }
+      // puedes añadir más...
+    ];
+
+/* ================= ELEMENTOS ================= */
+const episodeList = document.getElementById('episodeList');
+const episodeTitle = document.getElementById('episodeTitle');
+const playerContainer = document.getElementById('player-container');
+const favBtn = document.getElementById('favoriteBtn');
+const watchedBtn = document.getElementById('watchedBtn');
+
+/* ================= STORAGE ================= */
+const getList = k => JSON.parse(localStorage.getItem(k)) || [];
+const saveList = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+/* ================= FAVORITOS ================= */
+function isFavorite(){
+  return getList('favorites').some(s => s.id === seriesId);
+}
+
+function toggleFavorite(){
+  let favs = getList('favorites');
+  if(isFavorite()){
+    favs = favs.filter(s => s.id !== seriesId);
+    favBtn.classList.remove('active');
+  }else{
+    favs.push(seriesData);
+    favBtn.classList.add('active');
+  }
+  saveList('favorites', favs);
+}
+
+/* ================= FINALIZADA ================= */
+function toggleWatched(){
+  let list = getList('watched');
+  if(list.includes(seriesId)){
+    list = list.filter(id => id !== seriesId);
+    watchedBtn.classList.remove('active');
+  }else{
+    list.push(seriesId);
+    watchedBtn.classList.add('active');
+  }
+  saveList('watched', list);
+}
+
+/* ================= EPISODIOS ================= */
+let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
+currentEpisode = currentEpisode !== null ? parseInt(currentEpisode) : null;
+
+episodes.forEach((ep,i)=>{
+  const div = document.createElement('div');
+  div.className='episode';
+  div.style.backgroundImage=`url(${ep.thumbnail})`;
+  div.innerHTML=`<span>${ep.title}</span>`;
+  div.onclick=()=>loadEpisode(i);
+  episodeList.appendChild(div);
+});
+
+function loadEpisode(i){
+  currentEpisode=i;
+  episodeTitle.textContent=episodes[i].title;
+  playerContainer.style.display='block';
+  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
+  localStorage.setItem(seriesId+'_lastEpisode',i);
+  updateUI();
+  enterFullscreen();
+}
+
+function updateUI(){
+  document.querySelectorAll('.episode').forEach((e,idx)=>{
+    e.classList.toggle('active',idx===currentEpisode);
+    e.classList.toggle('last-watched',idx===currentEpisode);
+  });
+}
+
+/* ================= FULLSCREEN ================= */
+function enterFullscreen(){
+  if(playerContainer.requestFullscreen) playerContainer.requestFullscreen();
+}
+
+document.addEventListener('fullscreenchange',()=>{
+  if(!document.fullscreenElement){
+    playerContainer.style.display='none';
+    playerContainer.innerHTML='';
+  }
+});
+
+/* ================= INIT ================= */
+if(isFavorite()) favBtn.classList.add('active');
+if(getList('watched').includes(seriesId)) watchedBtn.classList.add('active');
+
+favBtn.onclick = toggleFavorite;
+watchedBtn.onclick = toggleWatched;
+
+if(currentEpisode!==null && episodes[currentEpisode]){
+  episodeTitle.textContent=episodes[currentEpisode].title;
+  updateUI();
+  setTimeout(()=>{
+    document.querySelectorAll('.episode')[currentEpisode]
+      ?.scrollIntoView({behavior:'smooth',block:'center'});
+  },300);
+}
+
+// Modal de conexión
+const modal = document.getElementById("connectionModal");
+let wasOffline = false;
+function updateConnectionStatus() {
+  if (!navigator.onLine) {
+    modal.classList.add("active");
+    document.body.classList.add("modal-active");
+    wasOffline = true;
+  } else {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-active");
+    if (wasOffline) {
+      showToast("✅ ¡Conexión restaurada!");
+      wasOffline = false;
+    }
+  }
+}
+window.addEventListener("load", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+window.addEventListener("online", updateConnectionStatus);
+
+// Toast
+function showToast(message, color = "#28a745") {
+  toast.style.background = color;
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+// Prevención de selección/arrastre
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+</script>
+</body>
+</html>
