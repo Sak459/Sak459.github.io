@@ -39,7 +39,7 @@ body{
 /* BANNER */
 .banner-top{
   width:100%;
-  height:155px;
+  height:185px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
@@ -100,10 +100,16 @@ header{
   aspect-ratio:16/9;
 }
 
-iframe{
+#artplayer{
   width:100%;
   height:100%;
-  border:none;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
 }
 
 /* EPISODIOS */
@@ -314,6 +320,8 @@ iframe{
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai041';
@@ -321,18 +329,17 @@ const seriesId = 'Hentai041';
 const seriesData = {
   id: seriesId,
   title: 'Isekai Kita no de Special Skil',
-  banner: 'https://image.tmdb.org/t/p/original/ypWFpMevUOjXakVyt1GJKX51sUo.jpg',
-  synopsis: ''
+  banner: 'https://image.tmdb.org/t/p/original/ypWFpMevUOjXakVyt1GJKX51sUo.jpg'
 };
 
 const episodes = [
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18Hgj6DmIF%2FXOOOpuN4HaXnx%2BwV3coM7l7Xc5neun6GzUqutQUov%2FhRwKoQsTDoMepmbxegkSdU28xR1aPJS3wUrXviBczdyTtCeO1sF4Hcf2dh%2BuLTT3eWvAsp5ZkV3pLeveYTGzDkNg%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/7S5EQc1pTyf1x3B8k7j8nKwDOgt.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FUPrfu6ncqOhniMktqP5BDEMu6M45cPy0jjOieO42cl52eTgX%2FaZ1U5OGXKaUg%2BQkaD13JWZ7XhrR253D047q17aYrUx3LQYoGdnC%2BHUcQMIsJIxmqAiGiyhV72wc4T34mdePec%2FVeGg%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/j9CSzNfDSYuvfkn7qQejIIXl6AG.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18Tmsm6e%2BLrlkTiVout4V1AjT0p1UUoyBorjgCVy0Mx8OZ3OL3ELEkjaue6sVS2CdLFVQn9NEwtdE7lSE8dB9gnAXuyJ4goFrydmPftKCsx%2FQ7RO46EfsX3f5QClC28kTHHJB3kpf6yOQ%3D%3D', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/zmxTYxJozXi3ne68jkKFZSdEkAE.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19VAo8cihcdeg3f9xZ0WA9qIfeMjdHfPZyp1X4QqlqlRQkt%2BYkfphCgMsnzdddpFWPh8ovG%2BXHB%2F0EDxwDHdgE8pHzXsuRe8HTkPEApd7OJOHqm9Tk1lYVSJbLMPs6JqNSZs6AW94ZqOQ%3D%3D', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/9zWFUpOFVHJXYEVPKTZIO0nZZjj.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19q7VJr45tmIF3PLeH6a8vIXS3F6l9NXTKJGCpLw0nyTrt2IKWWX6hEQfqR2iwHij0XUEWqNaBQwTLsgP0ogDPitBwXLSQe3gAsyJe%2FugQuXcwmkVGilferK9TEoNBozAbClsnaVTncYFF6dVKUedITLQubUzqHe2PjVAc1XTgW1nBoktgZ38jB', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/batPNTNkadgucDet0z2wLmO9CR8.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FvwzY4tXjn0cftfx8ugVxoY2Mq%2Ffkrlf8%2F2V4GeOIQYUpjTszDZmQqEjHLfSZ8ySz3t33Rz%2B9cN5ENdcAyu3W9Ah%2F7tGpAjJQ16tjxayHER0Kv97pGxU1aBlANEuGynv%2FJqFqwPjQPO1WYDrNvimWvtp734MOMZohIe410OQeoDGRcWihk06XD', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/zustZ2WtCDnkIbVyiL3bphUsQjv.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FPcRdv5MnZriPP5Mjt1V4A3P2Cl4KCfTRifCVnoNReAhE1viA4TrRqMEuWznpZ%2Fn4agjgo0Mh201%2FSeQPgCYuhnUztbJwtHfEMXHIp0oXsDPMtf162o4rgeoLGNcb3hiCrKuSKSQZx0L%2BqyQ%2B8QKpv3fUxoSflF1MU0wXON9wpCmJ1II%2BoupNz', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/ktSfgthRA0KiNeoQBqbSyLvUjOf.jpg' }
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-1-esp/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/7S5EQc1pTyf1x3B8k7j8nKwDOgt.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-2-esp/master.m3u8', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/j9CSzNfDSYuvfkn7qQejIIXl6AG.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-3-esp/master.m3u8', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/zmxTYxJozXi3ne68jkKFZSdEkAE.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-4-esp/master.m3u8', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/9zWFUpOFVHJXYEVPKTZIO0nZZjj.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-de-zenryoku-ouka-shiyou-to-omou-5-esp/master.m3u8', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/batPNTNkadgucDet0z2wLmO9CR8.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-node-sukebe-skill-de-zenryoku-ouka-shiyou-to-omou-6-esp/master.m3u8', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/zustZ2WtCDnkIbVyiL3bphUsQjv.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/isekai-kita-no-de-sukebe-skill-de-zenryoku-ouka-shiyou-to-omou-7-es/master.m3u8', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/ktSfgthRA0KiNeoQBqbSyLvUjOf.jpg' }
       // puedes añadir más...
     ];
 
@@ -390,12 +397,49 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
+let art = null;
+
 function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
   enterFullscreen();
 }
@@ -415,6 +459,10 @@ function enterFullscreen(){
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){
     playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
     playerContainer.innerHTML='';
   }
 });
