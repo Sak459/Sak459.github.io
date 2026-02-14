@@ -39,7 +39,7 @@ body{
 /* BANNER */
 .banner-top{
   width:100%;
-  height:155px;
+  height:185px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
@@ -100,10 +100,16 @@ header{
   aspect-ratio:16/9;
 }
 
-iframe{
+#artplayer{
   width:100%;
   height:100%;
-  border:none;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
 }
 
 /* EPISODIOS */
@@ -314,6 +320,8 @@ iframe{
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai043';
@@ -321,14 +329,13 @@ const seriesId = 'Hentai043';
 const seriesData = {
   id: seriesId,
   title: 'Boku no Risou no Isekai',
-  banner: 'https://image.tmdb.org/t/p/original/yadvq7vcBnxxNlLqKGfVZOLIEc0.jpg',
-  synopsis: ''
+  banner: 'https://image.tmdb.org/t/p/original/nZfBeVjQR2OGBcooyRCtydPn02U.jpg'
 };
 
 const episodes = [
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2BH0wu0AgioPU21hhES%2FBe6zIwVJAuckwc8R04i4easr%2FODAcLFGXwxNS6mRHiPUPV9tEr3rk%2FQmQHG%2FP1sylNin49Iq4Cii5ZDQhNat907jTDAQPysjBWNqYR6a5Y%2FM1QUj2%2Bhek18zw%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/dGVXGUF8Sdskw67M571Zi4xHzsq.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FsUPvy3v3pczr8RwmLO5nzY3t3dqnK3w6etgDt%2B9atVW2Ott%2BxXqbJOSw7OWEvT%2FPjo0CEuCs7aUR2R3%2F5AX8v7TNud7MXw5c5U96qAX27I6Ucg1daRbgP8pj8QpNqWfwDYwRc75ONMA%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/sqiJFc2RUVoS717TPNsnaKgw7Qt.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18aR7Vr0J8KyzH1oUbb9uEasL2vH%2Bwd%2BTc%2FJ6pNDY3K6Qd%2FNVMYBJh0WWGWhS9pOKVM4w5CoSAVGvXLw3eUwGo%2BSwJGJd6caMuYlg9EjQkPX%2BDRXxERecXX3gv9LZdKLOdi5A6LDr1Okg%3D%3D', title: 'Episodio 3', thumbnail: 'https://veohentai.com/wp-content/uploads/2026/01/157876h.jpg' }
+      { url: 'https://es.master-lengs.org/api/v3/hh/boku-no-risou-no-isekai-seikatsu-1-esp/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/dGVXGUF8Sdskw67M571Zi4xHzsq.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/boku-no-risou-no-isekai-seikatsu-2-esp/master.m3u8', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/sqiJFc2RUVoS717TPNsnaKgw7Qt.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/boku-no-risou-no-isekai-seikatsu-3-esp/master.m3u8', title: 'Episodio 3', thumbnail: 'https://veohentai.com/wp-content/uploads/2026/01/157876h.jpg' }
       // puedes añadir más...
     ];
 
@@ -386,12 +393,49 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
+let art = null;
+
 function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
   enterFullscreen();
 }
@@ -411,6 +455,10 @@ function enterFullscreen(){
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){
     playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
     playerContainer.innerHTML='';
   }
 });
