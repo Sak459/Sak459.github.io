@@ -39,7 +39,7 @@ body{
 /* BANNER */
 .banner-top{
   width:100%;
-  height:155px;
+  height:185px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
@@ -100,10 +100,16 @@ header{
   aspect-ratio:16/9;
 }
 
-iframe{
+#artplayer{
   width:100%;
   height:100%;
-  border:none;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
 }
 
 /* EPISODIOS */
@@ -314,6 +320,8 @@ iframe{
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
 /* ================= CONFIG ================= */
 const seriesId = 'HenLa004';
@@ -321,15 +329,14 @@ const seriesId = 'HenLa004';
 const seriesData = {
   id: seriesId,
   title: 'Imaizumin-chi wa Douyara Latino',
-  banner: 'https://image.tmdb.org/t/p/original/ybcSDAHvjVq0br9auUIoqYC44al.jpg',
-  synopsis: ''
+  banner: 'https://image.tmdb.org/t/p/original/ybcSDAHvjVq0br9auUIoqYC44al.jpg'
 };
 
 const episodes = [
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19CiEn8w1DLp880fuhAGoDN8Or2OdUWKzHnmqG5S3vX1cYHWN79HKm7KkyIkJf%2FxuGwAn0DElCB7w%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/2E1311ig0ho0zHac6rHqN8Ym7Hc.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19RoQV81XNvnbOrNZkhrEPbMKvB2d9iS0g9wy%2BA3PZjSLuSK4w8qAPsemM00Q4XU02tE1QtTKW%2FBw%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/rHpEXRumihFbtBwWi6ulWDyjJGX.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2B64azb8O0YE1DhH4lavRWkn3Y9OZIM%2BLlKuitwi9F4TgjMehMUNQw%2B4Gy0d32OVRAYYg1VUusl5w%3D%3D', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/zdb9i5WzZleNhkD0KcHp9Olo19q.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18XgTynmtJ8q3uXdU6pYqgcfqCaU1g%2BtNL5A9jBtjn0PdfXPeFly4GI5S2ikOsKpunldKDj44Sp0g%3D%3D', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/tMcllZ9WiNvFpDUgCslR0f2NGUn.jpg' }
+      { url: 'https://files.catbox.moe/hd3ter.mp4', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/2E1311ig0ho0zHac6rHqN8Ym7Hc.jpg' },
+      { url: 'https://files.catbox.moe/x1ax7z.mp4', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/rHpEXRumihFbtBwWi6ulWDyjJGX.jpg' },
+      { url: 'https://files.catbox.moe/r9rbub.mp4', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/zdb9i5WzZleNhkD0KcHp9Olo19q.jpg' },
+      { url: 'https://files.catbox.moe/0pxk19.mp4', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/tMcllZ9WiNvFpDUgCslR0f2NGUn.jpg' }
       // puedes añadir más...
     ];
 
@@ -387,12 +394,49 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
+let art = null;
+
 function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
   enterFullscreen();
 }
@@ -412,6 +456,10 @@ function enterFullscreen(){
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){
     playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
     playerContainer.innerHTML='';
   }
 });
