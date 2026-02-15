@@ -39,7 +39,7 @@ body{
 /* BANNER */
 .banner-top{
   width:100%;
-  height:155px;
+  height:185px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
@@ -100,10 +100,16 @@ header{
   aspect-ratio:16/9;
 }
 
-iframe{
+#artplayer{
   width:100%;
   height:100%;
-  border:none;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
 }
 
 /* EPISODIOS */
@@ -314,6 +320,8 @@ iframe{
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
 /* ================= CONFIG ================= */
 const seriesId = 'HenLa005';
@@ -321,13 +329,12 @@ const seriesId = 'HenLa005';
 const seriesData = {
   id: seriesId,
   title: 'Uchi no Otouto Latino',
-  banner: 'https://image.tmdb.org/t/p/original/5kdFJzQpFErFKF5sjO9slXo24j6.jpg',
-  synopsis: ''
+  banner: 'https://image.tmdb.org/t/p/original/5kdFJzQpFErFKF5sjO9slXo24j6.jpg'
 };
 
 const episodes = [
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19NL1pFtlD6C0eHLH%2FLYfo5tpkEYIIp8TsI5lEwyaD69FoczcPmTOwOSrINEZqS6J1r4Qxu3PmU2Q%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/3Eizp0aYnk4YM7UwvYn4ORO6f7Y.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19jKKRah18418H%2BnAbnxatTFG1DPHsuzJ2ux%2FSU%2FW0%2BVbZVLahmhrMKpKe8TUqZsPeUHuSygiUt1Q%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/tXhHAzVCyDgWpk7kXKdWV3I030o.jpg' }
+      { url: 'https://files.catbox.moe/bx2bue.mp4', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/3Eizp0aYnk4YM7UwvYn4ORO6f7Y.jpg' },
+      { url: 'https://files.catbox.moe/j0kcvs.mp4', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/tXhHAzVCyDgWpk7kXKdWV3I030o.jpg' }
       // puedes añadir más...
     ];
 
@@ -385,12 +392,49 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
+let art = null;
+
 function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
   enterFullscreen();
 }
@@ -410,6 +454,10 @@ function enterFullscreen(){
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){
     playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
     playerContainer.innerHTML='';
   }
 });
