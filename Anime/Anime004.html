@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla Rakuen Hentai</title>
+
+<style>
+:root{
+  --bg:#000;
+  --accent:#ff3c78;
+  --card:#1a1a1a;
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* HEADER */
+.header-fixed{
+  width:100%;
+  max-width:1000px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* BANNER */
+.banner-top{
+  width:100%;
+  height:185px;
+  object-fit:cover;
+  border-radius:6px;
+  margin-bottom:10px;
+}
+
+/* ACCIONES */
+.series-actions{
+  display:flex;
+  gap:24px;
+  margin-bottom:6px;
+}
+
+.action-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:90px;
+  padding:8px;
+  border-radius:12px;
+  background:#111;
+  cursor:pointer;
+  font-size:.75rem;
+  color:#bbb;
+  transition:.2s;
+}
+
+.action-btn svg{
+  width:25px;
+  height:25px;
+  fill:currentColor;
+}
+
+.action-btn.active{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* TEXTOS */
+header{
+  font-size:1.4rem;
+  font-weight:bold;
+  color:var(--accent);
+  margin-bottom:4px;
+  text-align:center;
+}
+
+#episodeTitle{
+  font-size:1rem;
+  margin-bottom:8px;
+}
+
+/* PLAYER */
+.player-container{
+  display:none;
+  width:100%;
+  max-width:1000px;
+  aspect-ratio:16/9;
+}
+
+#artplayer{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
+}
+
+/* EPISODIOS */
+.scroll-episodes{
+  width:95%;
+  max-width:1000px;
+  flex-grow:1;
+  overflow-y:auto;
+  padding:8px;
+}
+
+.episode-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.episode{
+  background:var(--card);
+  border-radius:14px;
+  min-height:40px;
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  position:relative;
+}
+
+.episode::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  border-radius:14px;
+}
+
+.episode span{
+  position:relative;
+  z-index:2;
+}
+
+.episode.active,
+.episode.last-watched{
+  outline:2px solid var(--accent);
+}
+
+    /* Modal desconexión */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #1f1f1f;
+      border-radius: 16px;
+      padding: 35px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: #ff4d4d;
+      font-size: 22px;
+    }
+
+    .modal p {
+      font-size: 18px;
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .modal ul {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+      color: #999;
+      font-size: 15px;
+    }
+
+    .modal button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    /* Toast reconexión */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Quita resaltado azul y menú táctil */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header-fixed">
+
+  <img class="banner-top" src="https://image.tmdb.org/t/p/original/olR0aesiPDkGlAKvYxKKoILF5hS.jpg">
+
+  <div class="series-actions">
+
+    <!-- FAVORITOS -->
+    <div class="action-btn" id="favoriteBtn">
+      ❤️
+      Favoritos
+    </div>
+
+    <!-- FINALIZADA -->
+    <div class="action-btn" id="watchedBtn">
+      ✔
+      Finalizada
+    </div>
+
+  </div>
+
+  <header>Yuusha-kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku</header>
+  <div id="episodeTitle">Selecciona un episodio</div>
+  <div class="player-container" id="player-container"></div>
+</div>
+
+    <!-- Modal desconexión -->
+  <div class="modal-overlay" id="connectionModal">
+    <div class="modal">
+      <h2>Sin conexión</h2>
+      <p>No se detecta acceso a Internet. Por favor verifica lo siguiente:</p>
+      <ul>
+        <li>Revisa tu señal Wi-Fi o datos móviles</li>
+        <li>Conecta a una red disponible</li>
+        <li>Espera unos segundos mientras se intenta reconectar</li>
+      </ul>
+      <button disabled>Reconectando...</button>
+    </div>
+  </div>
+
+  <!-- Toast reconexión -->
+  <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
+
+<div class="scroll-episodes">
+  <section class="episode-list" id="episodeList"></section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+<script>
+/* ================= CONFIG ================= */
+const seriesId = 'Anime004';
+
+const seriesData = {
+  id: seriesId,
+  title: 'Yuusha-kei ni Shosu',
+  banner: 'https://image.tmdb.org/t/p/original/k8bh5mvHDx3czHSF56v9lRyulLC.jpg'
+};
+
+const episodes = [
+  { url: 'https://player.zilla-networks.com/m3u8/45a973a177618733ddbc6422b82f594f', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/drIImFRf6ip1dSPQxmdNkWW4qfp.jpg' },
+  { url: 'https://player.zilla-networks.com/m3u8/0d690c99f2b69c00467b7615f04c62dc', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/vR3dSwcXHUNo6WIFTjFeVJtPml7.jpg' },
+  { url: 'https://player.zilla-networks.com/m3u8/0388d10d3ff40e6699049b05384e0297', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/8iZELJkQsuIXi4lIP9xXYWBHtWM.jpg' },
+  { url: 'https://player.zilla-networks.com/m3u8/cd539a3532db355f398b7328805b36bb', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/7cFdqvjXFaopvXc5gwYghTp4uXV.jpg' },
+  { url: 'https://player.zilla-networks.com/m3u8/3311ae65f176a9ae73704ceae9bda3a5', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/2CTu96bigRTqMcpWHCzPUhaIN7T.jpg' },
+  { url: 'https://player.zilla-networks.com/m3u8/c8fb0bb315e3e46e3ec4f73aa981cf59', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/n3LzKWE7dWMnY7GadShIQbIbMCV.jpg' }
+  // añade más episodios aquí
+];
+
+/* ================= ELEMENTOS ================= */
+const episodeList = document.getElementById('episodeList');
+const episodeTitle = document.getElementById('episodeTitle');
+const playerContainer = document.getElementById('player-container');
+const favBtn = document.getElementById('favoriteBtn');
+const watchedBtn = document.getElementById('watchedBtn');
+
+/* ================= STORAGE ================= */
+const getList = k => JSON.parse(localStorage.getItem(k)) || [];
+const saveList = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+/* ================= FAVORITOS ================= */
+function isFavorite(){
+  return getList('favorites').some(s => s.id === seriesId);
+}
+
+function toggleFavorite(){
+  let favs = getList('favorites');
+  if(isFavorite()){
+    favs = favs.filter(s => s.id !== seriesId);
+    favBtn.classList.remove('active');
+  }else{
+    favs.push(seriesData);
+    favBtn.classList.add('active');
+  }
+  saveList('favorites', favs);
+}
+
+/* ================= FINALIZADA ================= */
+function toggleWatched(){
+  let list = getList('watched');
+  if(list.includes(seriesId)){
+    list = list.filter(id => id !== seriesId);
+    watchedBtn.classList.remove('active');
+  }else{
+    list.push(seriesId);
+    watchedBtn.classList.add('active');
+  }
+  saveList('watched', list);
+}
+
+/* ================= EPISODIOS ================= */
+let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
+currentEpisode = currentEpisode !== null ? parseInt(currentEpisode) : null;
+
+episodes.forEach((ep,i)=>{
+  const div = document.createElement('div');
+  div.className='episode';
+  div.style.backgroundImage=`url(${ep.thumbnail})`;
+  div.innerHTML=`<span>${ep.title}</span>`;
+  div.onclick=()=>loadEpisode(i);
+  episodeList.appendChild(div);
+});
+
+let art = null;
+
+function loadEpisode(i){
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
+  updateUI();
+  enterFullscreen();
+}
+
+function updateUI(){
+  document.querySelectorAll('.episode').forEach((e,idx)=>{
+    e.classList.toggle('active',idx===currentEpisode);
+    e.classList.toggle('last-watched',idx===currentEpisode);
+  });
+}
+
+/* ================= FULLSCREEN ================= */
+function enterFullscreen(){
+  if(playerContainer.requestFullscreen) playerContainer.requestFullscreen();
+}
+
+document.addEventListener('fullscreenchange',()=>{
+  if(!document.fullscreenElement){
+    playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
+    playerContainer.innerHTML='';
+  }
+});
+
+/* ================= INIT ================= */
+if(isFavorite()) favBtn.classList.add('active');
+if(getList('watched').includes(seriesId)) watchedBtn.classList.add('active');
+
+favBtn.onclick = toggleFavorite;
+watchedBtn.onclick = toggleWatched;
+
+if(currentEpisode!==null && episodes[currentEpisode]){
+  episodeTitle.textContent=episodes[currentEpisode].title;
+  updateUI();
+  setTimeout(()=>{
+    document.querySelectorAll('.episode')[currentEpisode]
+      ?.scrollIntoView({behavior:'smooth',block:'center'});
+  },300);
+}
+
+// Modal de conexión
+const modal = document.getElementById("connectionModal");
+let wasOffline = false;
+function updateConnectionStatus() {
+  if (!navigator.onLine) {
+    modal.classList.add("active");
+    document.body.classList.add("modal-active");
+    wasOffline = true;
+  } else {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-active");
+    if (wasOffline) {
+      showToast("✅ ¡Conexión restaurada!");
+      wasOffline = false;
+    }
+  }
+}
+window.addEventListener("load", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+window.addEventListener("online", updateConnectionStatus);
+
+// Toast
+function showToast(message, color = "#28a745") {
+  toast.style.background = color;
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+// Prevención de selección/arrastre
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+</script>
+</body>
+</html>
