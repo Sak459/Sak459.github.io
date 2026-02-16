@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -39,7 +39,7 @@ body{
 /* BANNER */
 .banner-top{
   width:100%;
-  height:155px;
+  height:185px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
@@ -100,10 +100,16 @@ header{
   aspect-ratio:16/9;
 }
 
-iframe{
+#artplayer{
   width:100%;
   height:100%;
-  border:none;
+  position:relative;
+}
+
+/* Thumbnail mientras carga */
+.art-poster {
+  background-size:cover !important;
+  background-position:center !important;
 }
 
 /* EPISODIOS */
@@ -314,6 +320,8 @@ iframe{
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
 /* ================= CONFIG ================= */
 const seriesId = 'HenLa025';
@@ -326,14 +334,14 @@ const seriesData = {
 };
 
 const episodes = [
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2BFyRE3X5iy9q1wbKv5FVtFxQdkApqcEUazB2Pu3p77WJIBGGlpPjNxOwoJrCh7bJJbrQtNlTtQhA%3D%3D', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/e7xNanwFUCrysbHTSolr69kvQXN.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX187GcnXDZF0jug3ZC0WIILGfPAqsoQ0QID4F4yDhiByN0qVJ3QwmFbId8esRzXgdr%2Bvn63eiocPLw%3D%3D', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/dJs0ItTy5TSKGwNm68hKn5DDHeh.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19xgGnO4TlrnkwnqVEfbDQtiksFQaHlpbqaM012f9GsFuyvF5TlklNwqao9MFhg6TinpBWgWARlog%3D%3D', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/3Ud5UwWmnkP5RGWJPNQqX8K8qZf.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX18qKHUWc5CPFs90xx4Sg4UEi4ShvZ9FT9MCRZm68V6lUF2AuwTA4c4M5kL%2Fn0cWP0D7D9NxjbmuaQ%3D%3D', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/jfVv92z8iO5wA1KEebMOkp9fIeJ.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19%2F4aFeqZhBT1DfEVKJWQc0FlVhEmhVqpuE%2FqAdRpSmoiDx%2BQvK2tjxNIqj9eK6v5Miy2MXEtkcgg%3D%3D', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/v5cM6W2oia43A4PoizNSD47KpM1.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19%2FehvQQcNdGJVusLugfqRhnHWM7VYnAc5u5nga%2BUuhoCJYUuiV2sDtyko9vVTXJSfO%2BoEBMNRDAQ%3D%3D', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/2dsQtkDRntZi9lRN4biCMlvQvJN.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2FNXfLIfbfaajN1ed0Xt4Imcr%2BDQdVG4SucH3FimovNTHDKqepVPGagEd1uNLfT%2Bj65xdMEi4J2cA%3D%3D', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/rIeZZPVJBEk8Q7hxr4M0Mdqazju.jpg' },
-      { url: 'https://rakuplayer.blogspot.com/?url=U2FsdGVkX1%2F%2BGM9GxbLxqU9uqgdNSGJYHjwJ0swaocO2IBNeQFuyAm09BzuEGJBWcJJGdTForwLA1vcy8e2vrQ%3D%3D', title: 'Episodio 8', thumbnail: 'https://image.tmdb.org/t/p/original/5UmkuhlCKkprqurYyxs9eug5RE8.jpg' }
+      { url: 'https://files.catbox.moe/l3g5dy.mp4', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/e7xNanwFUCrysbHTSolr69kvQXN.jpg' },
+      { url: 'https://files.catbox.moe/f0xc9p.mp4', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/dJs0ItTy5TSKGwNm68hKn5DDHeh.jpg' },
+      { url: 'https://files.catbox.moe/6jgjcm.mp4', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/3Ud5UwWmnkP5RGWJPNQqX8K8qZf.jpg' },
+      { url: 'https://files.catbox.moe/84x1r7.mp4', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/jfVv92z8iO5wA1KEebMOkp9fIeJ.jpg' },
+      { url: 'https', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/v5cM6W2oia43A4PoizNSD47KpM1.jpg' },
+      { url: 'https', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/2dsQtkDRntZi9lRN4biCMlvQvJN.jpg' },
+      { url: 'https', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/rIeZZPVJBEk8Q7hxr4M0Mdqazju.jpg' },
+      { url: 'https', title: 'Episodio 8', thumbnail: 'https://image.tmdb.org/t/p/original/5UmkuhlCKkprqurYyxs9eug5RE8.jpg' }
       // puedes añadir más...
     ];
 
@@ -391,12 +399,49 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
+let art = null;
+
 function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
+  currentEpisode = i;
+  episodeTitle.textContent = episodes[i].title;
+  playerContainer.style.display = 'block';
+
+  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+
+  if(art){
+    art.destroy();
+    art = null;
+  }
+
+  art = new Artplayer({
+    container: '#artplayer',
+    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
+    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
+    autoplay: true,
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: false,
+    hotkey: true,
+    setting: true,
+    playbackRate: true,
+    aspectRatio: true,
+    pip: false,
+    gesture: false,
+
+    customType: {
+      m3u8: function(video, url){
+        if(Hls.isSupported()){
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+          video.src = url;
+        }
+      }
+    }
+  });
+
+  localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
   enterFullscreen();
 }
@@ -416,6 +461,10 @@ function enterFullscreen(){
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){
     playerContainer.style.display='none';
+    if(art){
+      art.destroy();
+      art = null;
+    }
     playerContainer.innerHTML='';
   }
 });
