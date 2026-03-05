@@ -290,8 +290,8 @@ const seriesData = {
 
 const episodes = [
       { url: 'https://streamwish.top/e/c6l5uq3cq80t', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/a47oBhPll8SzPJaef1VzG0Yft91.jpg' },
-      { url: 'https://bysesukior.com/e/jf122pkiyhdv/Chainsaw.2025.720p.mp4', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/m4CdqgEkN0cLhLBHyp9hQzNoZKF.jpg' },
-      { url: 'https://860568956.tapecontent.net/radosgw/3OXowoGxMGhX13/ocXi7LRtgSnpKAF3K0DzKF-wkilXJTNspFq-mWfEk_o-nqVzUfq6cZggMcLm6RkShzbLBB4zfEWLxwVkndiYUqU9sD49WlZOtHfZ0ZTCdUeXr71QC5peWZKJRbCLxdoI-xeZuPwVZCGvGTeNNmGsOyNoLMT7-34q4nqhRECH2RtCTU8mQlk1m0KzCMdMwXgB7hBqt79cZlS5jy-tJGfDRsJS-MCYQQF2b2BMKfTDoLSUwIguowemWRCvgx_yNkcBVP9PF2kkrN0WzFXc_E91lob_9oYRO5f1gyfsp3EqZS2-63mp6bw2sBmQru4toBeioIbialY_e1MjWJssGX_9aNUhNJ8-NrSx7G9Ttg/%5BAnimeOnlineNinja%5D+Frieren%EF%BC%9A+Beyond+Journey%27s+End+2+Latino+01.mp4?stream=1', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/aPX4K7ZtxkKmonWw89NnAAECMNf.jpg' },
+      { url: 'https://player.zilla-networks.com/m3u8/122cd0ea2bbe0a40b8f27843b3058db6', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/m4CdqgEkN0cLhLBHyp9hQzNoZKF.jpg' },
+      { url: 'https://player.zilla-networks.com/m3u8/d391f6e4bdca856183360944d18ae428', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/aPX4K7ZtxkKmonWw89NnAAECMNf.jpg' },
       { url: 'https://player.zilla-networks.com/m3u8/b8010f9fb5c9492322cfecdef0372d50', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/AntllJyOpKULL4Hv6GlRMn68DpM.jpg' }
       // puedes añadir más...
     ];
@@ -353,9 +353,12 @@ function loadEpisode(i){
   currentEpisode = i;
   episodeTitle.textContent = episodes[i].title;
 
-  // 🔥 Enviar URL a Android para ExoPlayer
-  if(window.Android){
-      Android.enviarVideo(episodes[i].url);
+  const url = episodes[i].url;
+
+  if(window.Android && Android.enviarVideo){
+      Android.enviarVideo(url);
+  }else{
+      console.log("Video URL:", url);
   }
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
