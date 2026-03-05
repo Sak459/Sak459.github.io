@@ -26,26 +26,22 @@ body{
   overflow:hidden;
 }
 
-/* HEADER */
 .header-fixed{
   width:100%;
   max-width:1000px;
-  position:relative;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* BANNER */
 .banner-top{
   width:100%;
-  height:185px;
+  height:195px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
 }
 
-/* ACCIONES */
 .series-actions{
   display:flex;
   gap:24px;
@@ -67,18 +63,11 @@ body{
   transition:.2s;
 }
 
-.action-btn svg{
-  width:25px;
-  height:25px;
-  fill:currentColor;
-}
-
 .action-btn.active{
   background:var(--accent);
   color:#fff;
 }
 
-/* TEXTOS */
 header{
   font-size:1.4rem;
   font-weight:bold;
@@ -92,27 +81,6 @@ header{
   margin-bottom:8px;
 }
 
-/* PLAYER */
-.player-container{
-  display:none;
-  width:100%;
-  max-width:1000px;
-  aspect-ratio:16/9;
-}
-
-#artplayer{
-  width:100%;
-  height:100%;
-  position:relative;
-}
-
-/* Thumbnail mientras carga */
-.art-poster {
-  background-size:cover !important;
-  background-position:center !important;
-}
-
-/* EPISODIOS */
 .scroll-episodes{
   width:95%;
   max-width:1000px;
@@ -279,27 +247,14 @@ header{
   <img class="banner-top" src="https://image.tmdb.org/t/p/original/4NRBKA8qVzCvuD3WeLieiLGmIjm.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Overflow Audio Latino</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -316,13 +271,14 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'HenLa003';
 
@@ -347,7 +303,6 @@ const episodes = [
 /* ================= ELEMENTOS ================= */
 const episodeList = document.getElementById('episodeList');
 const episodeTitle = document.getElementById('episodeTitle');
-const playerContainer = document.getElementById('player-container');
 const favBtn = document.getElementById('favoriteBtn');
 const watchedBtn = document.getElementById('watchedBtn');
 
@@ -398,51 +353,20 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
-let art = null;
-
 function loadEpisode(i){
   currentEpisode = i;
   episodeTitle.textContent = episodes[i].title;
-  playerContainer.style.display = 'block';
 
-  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+  const url = episodes[i].url;
 
-  if(art){
-    art.destroy();
-    art = null;
+  if(window.Android && Android.enviarVideo){
+      Android.enviarVideo(url);
+  }else{
+      console.log("Video URL:", url);
   }
-
-  art = new Artplayer({
-    container: '#artplayer',
-    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
-    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
-    autoplay: true,
-    autoSize: true,
-    fullscreen: true,
-    fullscreenWeb: false,
-    hotkey: true,
-    setting: true,
-    playbackRate: true,
-    aspectRatio: true,
-    pip: false,
-    gesture: false,
-
-    customType: {
-      m3u8: function(video, url){
-        if(Hls.isSupported()){
-          const hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(video);
-        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
-          video.src = url;
-        }
-      }
-    }
-  });
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
-  enterFullscreen();
 }
 
 function updateUI(){
@@ -451,22 +375,6 @@ function updateUI(){
     e.classList.toggle('last-watched',idx===currentEpisode);
   });
 }
-
-/* ================= FULLSCREEN ================= */
-function enterFullscreen(){
-  if(playerContainer.requestFullscreen) playerContainer.requestFullscreen();
-}
-
-document.addEventListener('fullscreenchange',()=>{
-  if(!document.fullscreenElement){
-    playerContainer.style.display='none';
-    if(art){
-      art.destroy();
-      art = null;
-    }
-    playerContainer.innerHTML='';
-  }
-});
 
 /* ================= INIT ================= */
 if(isFavorite()) favBtn.classList.add('active');
