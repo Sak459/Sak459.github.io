@@ -26,26 +26,22 @@ body{
   overflow:hidden;
 }
 
-/* HEADER */
 .header-fixed{
   width:100%;
   max-width:1000px;
-  position:relative;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* BANNER */
 .banner-top{
   width:100%;
-  height:185px;
+  height:195px;
   object-fit:cover;
   border-radius:6px;
   margin-bottom:10px;
 }
 
-/* ACCIONES */
 .series-actions{
   display:flex;
   gap:24px;
@@ -67,18 +63,11 @@ body{
   transition:.2s;
 }
 
-.action-btn svg{
-  width:25px;
-  height:25px;
-  fill:currentColor;
-}
-
 .action-btn.active{
   background:var(--accent);
   color:#fff;
 }
 
-/* TEXTOS */
 header{
   font-size:1.4rem;
   font-weight:bold;
@@ -92,27 +81,6 @@ header{
   margin-bottom:8px;
 }
 
-/* PLAYER */
-.player-container{
-  display:none;
-  width:100%;
-  max-width:1000px;
-  aspect-ratio:16/9;
-}
-
-#artplayer{
-  width:100%;
-  height:100%;
-  position:relative;
-}
-
-/* Thumbnail mientras carga */
-.art-poster {
-  background-size:cover !important;
-  background-position:center !important;
-}
-
-/* EPISODIOS */
 .scroll-episodes{
   width:95%;
   max-width:1000px;
@@ -276,30 +244,17 @@ header{
 
 <div class="header-fixed">
 
-  <img class="banner-top" src="https://image.tmdb.org/t/p/original/8s1Cym5F7EesthvaLMDvi6DpMK5.jpg">
+  <img class="banner-top" src="https://image.tmdb.org/t/p/original/8s1Cym5F7EesthvaLMDvi6DpMK5.jpg.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Solo Leveling -Arise from the Shadow-</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -316,13 +271,14 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'Anime002';
 
@@ -333,26 +289,25 @@ const seriesData = {
 };
 
 const episodes = [
-  { url: 'https://player.zilla-networks.com/m3u8/9ede96bdd0a7a106f9d59a5d22679b3f', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/6J8Ps6ma4TMsGtbjRsRM18myueQ.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/b870b334d0083dcab4032a5455fee5ac', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/rKhf8aoINj6UsiCWB3Hp6UanOES.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/a084276c19517b45e9f85adc6c547e70', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/2KGLclwx8Nj5IXZAewH7vlgTbH5.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/0231b2332f321127b34ac39c23f5ed53', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/vXan4lbE0DsNeD7Tkpx8RQ9CYzL.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/67121183509a959da6678e016d473ed2', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/o8cccNR6J3dSuh00elhZgd4Glmu.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/e7661319161c637dc2457bceb6caa869', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/byJcQpCL4XiTwEl4pMG2HaT2bkr.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/71549665c79a802f24da2ee0f2794a68', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/jLEFR1H89LJlgSE57PmpMujE608.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/f099dd0c8988fb5d767ea42df8f1c645', title: 'Episodio 8', thumbnail: 'https://image.tmdb.org/t/p/original/unMSFOjTEsQ0rNfqkvQSfE4ar6S.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/c99445fb7cb46dd82fda2ed1d0cfea8c', title: 'Episodio 9', thumbnail: 'https://image.tmdb.org/t/p/original/eQYTEGlP7TXLkbagw5rMlTOgvTZ.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/5cf40b7330f15805875864ef8f7b113e', title: 'Episodio 10', thumbnail: 'https://image.tmdb.org/t/p/original/iTx8x2eH79xFGRQAs1Q7nIzbQK4.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/54e7d4f514dbf307c4743a15ffcc4c7f', title: 'Episodio 11', thumbnail: 'https://image.tmdb.org/t/p/original/7GtWwrxlrQAyipgbKm6XO6daROu.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/ab6989651c8f311d5dcdbe276d7bd910', title: 'Episodio 12', thumbnail: 'https://image.tmdb.org/t/p/original/ifo6WIOkMjahicQ7yfDL0F26nJI.jpg' },
-  { url: 'https://player.zilla-networks.com/m3u8/7c560eb07575cf44fd36d4df69338338', title: 'Episodio 13', thumbnail: 'https://image.tmdb.org/t/p/original/9O513PBYuL4RfirPXfxTAeEMTy0.jpg' }
+  { url: 'https://pixeldrain.com/api/file/vAVyAZUy', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/6J8Ps6ma4TMsGtbjRsRM18myueQ.jpg' },
+  { url: 'https://pixeldrain.com/api/file/okpAkWWp', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/rKhf8aoINj6UsiCWB3Hp6UanOES.jpg' },
+  { url: 'https://pixeldrain.com/api/file/Wusmhbjg', title: 'Episodio 3', thumbnail: 'https://image.tmdb.org/t/p/original/2KGLclwx8Nj5IXZAewH7vlgTbH5.jpg' },
+  { url: 'https://pixeldrain.com/api/file/7i5e6wZU', title: 'Episodio 4', thumbnail: 'https://image.tmdb.org/t/p/original/vXan4lbE0DsNeD7Tkpx8RQ9CYzL.jpg' },
+  { url: 'https://pixeldrain.com/api/file/jr7gVzVk', title: 'Episodio 5', thumbnail: 'https://image.tmdb.org/t/p/original/o8cccNR6J3dSuh00elhZgd4Glmu.jpg' },
+  { url: 'https://pixeldrain.com/api/file/KNYoLTKu', title: 'Episodio 6', thumbnail: 'https://image.tmdb.org/t/p/original/byJcQpCL4XiTwEl4pMG2HaT2bkr.jpg' },
+  { url: 'https://pixeldrain.com/api/file/FwTKrEzi', title: 'Episodio 7', thumbnail: 'https://image.tmdb.org/t/p/original/jLEFR1H89LJlgSE57PmpMujE608.jpg' },
+  { url: 'https://pixeldrain.com/api/file/zGcVtWy1', title: 'Episodio 8', thumbnail: 'https://image.tmdb.org/t/p/original/unMSFOjTEsQ0rNfqkvQSfE4ar6S.jpg' },
+  { url: 'https://pixeldrain.com/api/file/6MPVVyg4', title: 'Episodio 9', thumbnail: 'https://image.tmdb.org/t/p/original/eQYTEGlP7TXLkbagw5rMlTOgvTZ.jpg' },
+  { url: 'https://pixeldrain.com/api/file/tZGxwvVG', title: 'Episodio 10', thumbnail: 'https://image.tmdb.org/t/p/original/iTx8x2eH79xFGRQAs1Q7nIzbQK4.jpg' },
+  { url: 'https://pixeldrain.com/api/file/2NZyUbrE', title: 'Episodio 11', thumbnail: 'https://image.tmdb.org/t/p/original/7GtWwrxlrQAyipgbKm6XO6daROu.jpg' },
+  { url: 'https://pixeldrain.com/api/file/bFcnqKLB', title: 'Episodio 12', thumbnail: 'https://image.tmdb.org/t/p/original/ifo6WIOkMjahicQ7yfDL0F26nJI.jpg' },
+  { url: 'https://pixeldrain.com/api/file/ak4K2sQk', title: 'Episodio 13', thumbnail: 'https://image.tmdb.org/t/p/original/9O513PBYuL4RfirPXfxTAeEMTy0.jpg' }
   // añade más episodios aquí
 ];
 
 /* ================= ELEMENTOS ================= */
 const episodeList = document.getElementById('episodeList');
 const episodeTitle = document.getElementById('episodeTitle');
-const playerContainer = document.getElementById('player-container');
 const favBtn = document.getElementById('favoriteBtn');
 const watchedBtn = document.getElementById('watchedBtn');
 
@@ -403,51 +358,20 @@ episodes.forEach((ep,i)=>{
   episodeList.appendChild(div);
 });
 
-let art = null;
-
 function loadEpisode(i){
   currentEpisode = i;
   episodeTitle.textContent = episodes[i].title;
-  playerContainer.style.display = 'block';
 
-  playerContainer.innerHTML = `<div id="artplayer"></div>`;
+  const url = episodes[i].url;
 
-  if(art){
-    art.destroy();
-    art = null;
+  if(window.Android && Android.enviarVideo){
+      Android.enviarVideo(url);
+  }else{
+      console.log("Video URL:", url);
   }
-
-  art = new Artplayer({
-    container: '#artplayer',
-    url: episodes[i].url, // ahora puede ser .m3u8 o .mp4
-    poster: episodes[i].thumbnail, // 🔥 thumbnail mientras carga
-    autoplay: true,
-    autoSize: true,
-    fullscreen: true,
-    fullscreenWeb: false,
-    hotkey: true,
-    setting: true,
-    playbackRate: true,
-    aspectRatio: true,
-    pip: false,
-    gesture: false,
-
-    customType: {
-      m3u8: function(video, url){
-        if(Hls.isSupported()){
-          const hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(video);
-        } else if(video.canPlayType('application/vnd.apple.mpegurl')){
-          video.src = url;
-        }
-      }
-    }
-  });
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
-  enterFullscreen();
 }
 
 function updateUI(){
@@ -456,22 +380,6 @@ function updateUI(){
     e.classList.toggle('last-watched',idx===currentEpisode);
   });
 }
-
-/* ================= FULLSCREEN ================= */
-function enterFullscreen(){
-  if(playerContainer.requestFullscreen) playerContainer.requestFullscreen();
-}
-
-document.addEventListener('fullscreenchange',()=>{
-  if(!document.fullscreenElement){
-    playerContainer.style.display='none';
-    if(art){
-      art.destroy();
-      art = null;
-    }
-    playerContainer.innerHTML='';
-  }
-});
 
 /* ================= INIT ================= */
 if(isFavorite()) favBtn.classList.add('active');
