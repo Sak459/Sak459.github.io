@@ -290,7 +290,7 @@ const seriesData = {
 };
 
 const episodes = [
-      { url: 'https://cdn.hvidserv.com/m3u8/8f46248bb5dfa25e40bc6aa198b98987', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/w98HSjNduKYbdlbsobQP39xRWpP.jpg' },
+      { url: 'https://es.master-lengs.org/api/v3/hh/eroriman-2-1-esp/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/w98HSjNduKYbdlbsobQP39xRWpP.jpg' },
       { url: 'https://es.master-lengs.org/api/v3/hh/eroriman-2-2-esp/master.m3u8', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/aJc3hc3ahaKnBTRoOmNoAA30f0i.jpg' }
       // puedes añadir más...
     ];
@@ -354,11 +354,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  if(window.Android && Android.enviarVideo){
-      Android.enviarVideo(url);
-  }else{
-      console.log("Video URL:", url);
-  }
+  window.open(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
