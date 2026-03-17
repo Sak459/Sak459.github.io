@@ -340,6 +340,7 @@ function toggleWatched(){
 
 /* ================= EPISODIOS ================= */
 let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
+currentEpisode = currentEpisode !== null ? parseInt(currentEpisode) : null;
 
 episodes.forEach((ep,i)=>{
   const div = document.createElement('div');
