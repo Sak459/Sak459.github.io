@@ -297,6 +297,7 @@ const episodes = [
       // ... más episodios
     ];
 
+
 /* ================= ELEMENTOS ================= */
 const episodeList = document.getElementById('episodeList');
 const episodeTitle = document.getElementById('episodeTitle');
@@ -356,11 +357,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  if(window.Android && Android.enviarVideo){
-      Android.enviarVideo(url);
-  }else{
-      console.log("Video URL:", url);
-  }
+  window.open(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
