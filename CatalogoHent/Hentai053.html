@@ -247,27 +247,14 @@ header{
   <img class="banner-top" src="https://image.tmdb.org/t/p/original/QdPBhUkSjOfBrBiqKQA1iRkyPn.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Wagaya no Liliana-san The Animation</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -284,25 +271,26 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai053';
 
 const seriesData = {
   id: seriesId,
   title: 'Wagaya no Liliana-san',
-  banner: 'https://image.tmdb.org/t/p/original/yEt6ugULBjVfLl8DjrktxCMfIh2.jpg',
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/yEt6ugULBjVfLl8DjrktxCMfIh2.jpg',
   synopsis: ''
 };
 
 const episodes = [
-  { url: 'https://es.master-lengs.org/api/v3/hh/wagaya-no-liliana-san-1/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/hcWCjr8LMVS3n1Y0uNxGLVzx7Ik.jpg' }
+  { url: 'https://es.master-lengs.org/api/v3/hh/wagaya-no-liliana-san-1/master.m3u8', title: 'Episodio 1', thumbnail: 'https://media.themoviedb.org/t/p/w500_and_h282_face/hcWCjr8LMVS3n1Y0uNxGLVzx7Ik.jpg' }
       // puedes añadir más...
     ];
 
