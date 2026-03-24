@@ -247,27 +247,14 @@ header{
   <img class="banner-top" src="https://image.tmdb.org/t/p/original/2JJkU92A6KQ28uqbaY6OJEyRXma.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Toriko no Shizuku: Natsu no Gouka Kyakusen de Kegasareru Otome-tachi</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -284,26 +271,27 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai051';
 
 const seriesData = {
   id: seriesId,
   title: 'Toriko no Shizuku',
-  banner: 'https://image.tmdb.org/t/p/original/WZq05xXcx4iAa4eGiMXq34Qu6n.jpg',
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/WZq05xXcx4iAa4eGiMXq34Qu6n.jpg',
   synopsis: ''
 };
 
 const episodes = [
-  { url: 'https://es.master-lengs.org/api/v3/hh/toriko-no-shizuku-natsu-no-gouka-1-esp/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/zrVYbtVUajWQgMgdqvxpxWjNiEy.jpg' },
-  { url: 'https://es.master-lengs.org/api/v3/hh/toriko-no-shizuku-natsu-no-gouka-2-esp/master.m3u8', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/18uKznxfkPRDdbDYR7IerojfdV.jpg' }
+  { url: 'https://es.master-lengs.org/api/v3/hh/toriko-no-shizuku-natsu-no-gouka-1-esp/master.m3u8', title: 'Episodio 1', thumbnail: 'https://media.themoviedb.org/t/p/w500_and_h282_face/zrVYbtVUajWQgMgdqvxpxWjNiEy.jpg' },
+  { url: 'https://es.master-lengs.org/api/v3/hh/toriko-no-shizuku-natsu-no-gouka-2-esp/master.m3u8', title: 'Episodio 2', thumbnail: 'https://media.themoviedb.org/t/p/w500_and_h282_face/18uKznxfkPRDdbDYR7IerojfdV.jpg' }
       // puedes añadir más...
     ];
 
