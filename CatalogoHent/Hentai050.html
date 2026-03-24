@@ -247,27 +247,14 @@ header{
   <img class="banner-top" src="https://image.tmdb.org/t/p/original/phA1IArwk3rEDgwdeabJxWLSaJP.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Bitch Gakuen ga Seijun na Hazu ga Nai!!? The Animation</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -284,13 +271,14 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai050';
 
