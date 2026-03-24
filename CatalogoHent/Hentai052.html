@@ -247,27 +247,14 @@ header{
   <img class="banner-top" src="https://image.tmdb.org/t/p/original/8aUanhwG7EcfmKjGj1EkgZrQLdo.jpg">
 
   <div class="series-actions">
-
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
-
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
-
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
   <header>Hinagiku Virgin Lost Club e Youkoso</header>
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
-</div>
 
-    <!-- Modal desconexión -->
+      <!-- Modal desconexión -->
   <div class="modal-overlay" id="connectionModal">
     <div class="modal">
       <h2>Sin conexión</h2>
@@ -284,26 +271,27 @@ header{
   <!-- Toast reconexión -->
   <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
+</div>
+
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 <script>
+
 /* ================= CONFIG ================= */
 const seriesId = 'Hentai052';
 
 const seriesData = {
   id: seriesId,
   title: 'Hinagiku Virgin Lost',
-  banner: 'https://image.tmdb.org/t/p/original/huIW79qCmT9o9NqjJTTfdNDfa3z.jpg',
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/huIW79qCmT9o9NqjJTTfdNDfa3z.jpg',
   synopsis: ''
 };
 
 const episodes = [
-  { url: 'https://es.master-lengs.org/api/v3/hh/hinagiku-virgin-lost-club-e-youkoso-1/master.m3u8', title: 'Episodio 1', thumbnail: 'https://image.tmdb.org/t/p/original/agcUrnY4RTHMpWux0PBBmz3I2tw.jpg' },
-  { url: 'https://es.master-lengs.org/api/v3/hh/hinagiku-virgin-lost-club-e-youkoso-2/master.m3u8', title: 'Episodio 2', thumbnail: 'https://image.tmdb.org/t/p/original/4fbuTgEqw5wM3Vo6GuDtHWF296q.jpg' }
+  { url: 'https://es.master-lengs.org/api/v3/hh/hinagiku-virgin-lost-club-e-youkoso-1/master.m3u8', title: 'Episodio 1', thumbnail: 'https://media.themoviedb.org/t/p/w500_and_h282_face/agcUrnY4RTHMpWux0PBBmz3I2tw.jpg' },
+  { url: 'https://es.master-lengs.org/api/v3/hh/hinagiku-virgin-lost-club-e-youkoso-2/master.m3u8', title: 'Episodio 2', thumbnail: 'https://media.themoviedb.org/t/p/w500_and_h282_face/4fbuTgEqw5wM3Vo6GuDtHWF296q.jpg' }
       // puedes añadir más...
     ];
 
