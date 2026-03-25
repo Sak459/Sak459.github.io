@@ -266,11 +266,9 @@ function loadFavorites(){
     `;
 
     // Clic en la tarjeta abre la serie
-    card.querySelector('.card-title').onclick = card.querySelector('img').onclick = () => {
+    card.onclick = () => {
   if(series.page){
-    window.open(series.page, "_self"); // 🔥 abre la plantilla original
-  }else{
-    alert("Esta serie no tiene página guardada");
+    window.location.href = series.page;
   }
 };
 
