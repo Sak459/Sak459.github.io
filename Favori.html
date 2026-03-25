@@ -267,10 +267,12 @@ function loadFavorites(){
 
     // Clic en la tarjeta abre la serie
     card.querySelector('.card-title').onclick = card.querySelector('img').onclick = () => {
-      // Redirigir a la serie
-      // window.location.href = `serie.html?id=${series.id}`;
-      alert('Abrir serie: ' + series.title);
-    };
+  if(series.page){
+    window.open(series.page, "_self"); // 🔥 abre la plantilla original
+  }else{
+    alert("Esta serie no tiene página guardada");
+  }
+};
 
     // Clic en botón ❌ quita de favoritos
     card.querySelector('.remove-btn').onclick = (e) => {
