@@ -285,7 +285,8 @@ const seriesId = 'HenLa007';
 const seriesData = {
   id: seriesId,
   title: 'Otogibanashi no Onigokko Latino',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xjiZHTfeNffOuCryRNgYYQUoLfW.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xjiZHTfeNffOuCryRNgYYQUoLfW.jpg',
+  page: "HentaiLat/HenLa007.html"
 };
 
 const episodes = [
@@ -352,8 +353,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
