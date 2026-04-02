@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Saimin ☆ Gakuen',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/wEIDSWajrZLs8QxFo30SQyJCMan.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai013.html"
 };
 
 const episodes = [
@@ -356,7 +356,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
