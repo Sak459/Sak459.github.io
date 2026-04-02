@@ -285,7 +285,8 @@ const seriesId = 'HenLa004';
 const seriesData = {
   id: seriesId,
   title: 'Imaizumin-chi wa Douyara Latino',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/ybcSDAHvjVq0br9auUIoqYC44al.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/ybcSDAHvjVq0br9auUIoqYC44al.jpg',
+  page: "HentaiLat/HenLa004.html"
 };
 
 const episodes = [
@@ -355,8 +356,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
