@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Eroriman 2',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/8OCs9oLfLYCfsPKuBFAUZWVtm6w.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai001.html"
 };
 
 const episodes = [
@@ -354,8 +354,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
