@@ -592,33 +592,5 @@ src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97
     event.preventDefault();
   });
 </script>
-  <script>
-let lastPopTime = localStorage.getItem("lastPopTime") || 0;
-const POP_DELAY = 2 * 60 * 1000; // 2 minutos
-
-function showPopunder() {
-  let now = Date.now();
-
-  if (now - lastPopTime > POP_DELAY) {
-    localStorage.setItem("lastPopTime", now);
-
-    var s = document.createElement('script');
-    s.src = "https://pl29045564.profitablecpmratenetwork.com/34/cc/dd/34ccdd482cd03efacc64c3ebfc144ed8.js";
-    document.body.appendChild(s);
-  }
-}
-</script>
-  <script>
-document.addEventListener("click", function() {
-
-  if (
-    window.location.href.includes("index.html") &&
-    navigator.onLine
-  ) {
-    showPopunder();
-  }
-
-});
-</script>
 </body>
 </html>
