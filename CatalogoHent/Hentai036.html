@@ -285,7 +285,8 @@ const seriesId = 'Hentai036';
 const seriesData = {
   id: seriesId,
   title: 'Saimin Seishidou',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/vNoWpn2aosCAU7Rowg5rSC3qn3d.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/vNoWpn2aosCAU7Rowg5rSC3qn3d.jpg',
+  page: "CatalogoHent/Hentai036.html"
 };
 
 const episodes = [
@@ -357,7 +358,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
