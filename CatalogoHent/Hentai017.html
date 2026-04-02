@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Dokidoki Little Ooya-san',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/i5Zpvei9GsxznSeYVl8sJjeGTZt.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai017.html"
 };
 
 const episodes = [
@@ -358,7 +358,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
