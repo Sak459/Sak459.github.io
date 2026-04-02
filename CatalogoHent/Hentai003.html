@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Kaede to Suzu',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/fu19rN3cEKVillGJiNUGy7kr5L7.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai003.html"
 };
 
 const episodes = [
@@ -355,8 +355,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
