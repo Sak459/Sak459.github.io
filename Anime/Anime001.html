@@ -285,7 +285,8 @@ const seriesId = 'Anime001';
 const seriesData = {
   id: seriesId,
   title: 'Sousou no Frieren 2nd Season',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/cHhJzdUGcEBq6av4wr9jsIvUITH.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/cHhJzdUGcEBq6av4wr9jsIvUITH.jpg',
+  page: "Anime/Anime001.html"
 };
 
 const episodes = [
@@ -357,7 +358,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
