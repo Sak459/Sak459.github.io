@@ -285,7 +285,8 @@ const seriesId = 'Hentai034';
 const seriesData = {
   id: seriesId,
   title: 'Tiny Evil',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/2vGE26G8uUvkddamOuP3N8kUbrE.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/2vGE26G8uUvkddamOuP3N8kUbrE.jpg',
+  page: "CatalogoHent/Hentai034.html"
 };
 
 const episodes = [
@@ -355,7 +356,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
