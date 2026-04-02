@@ -285,7 +285,8 @@ const seriesId = 'Hentai041';
 const seriesData = {
   id: seriesId,
   title: 'Isekai Kita no de Special Skil',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/ypWFpMevUOjXakVyt1GJKX51sUo.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/ypWFpMevUOjXakVyt1GJKX51sUo.jpg',
+  page: "CatalogoHent/Hentai041.html"
 };
 
 const episodes = [
@@ -359,7 +360,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
