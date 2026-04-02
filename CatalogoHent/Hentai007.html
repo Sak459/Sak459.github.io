@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Real Eroge Situation! 2',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/6I4IHARjlDdrpw30K5svtbKCCUz.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai007.html"
 };
 
 const episodes = [
@@ -354,8 +354,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
