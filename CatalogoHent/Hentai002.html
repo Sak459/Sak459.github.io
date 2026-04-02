@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Sakusei Byoutou',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/o3KsbsHaFcDjulFzO1ZxBdzKJeL.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai002.html"
 };
 
 const episodes = [
@@ -362,8 +362,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
