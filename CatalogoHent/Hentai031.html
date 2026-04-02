@@ -285,7 +285,8 @@ const seriesId = 'Hentai031';
 const seriesData = {
   id: seriesId,
   title: 'Kyonyuu Dosukebe Gakuen',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/gWRh7Mgw5oZY2Ng4hVI2JU4WWzk.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/gWRh7Mgw5oZY2Ng4hVI2JU4WWzk.jpg',
+  page: "CatalogoHent/Hentai031.html"
 };
 
 const episodes = [
@@ -353,7 +354,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
