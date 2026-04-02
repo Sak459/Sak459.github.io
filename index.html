@@ -603,7 +603,7 @@ function showPopunder() {
     localStorage.setItem("lastPopTime", now);
 
     var s = document.createElement('script');
-    s.src = 'https://pl29045564.profitablecpmratenetwork.com/34/cc/dd/34ccdd482cd03efacc64c3ebfc144ed8.js';
+    s.src = "https://pl29045564.profitablecpmratenetwork.com/34/cc/dd/34ccdd482cd03efacc64c3ebfc144ed8.js";
     document.body.appendChild(s);
   }
 }
@@ -611,7 +611,10 @@ function showPopunder() {
   <script>
 document.addEventListener("click", function() {
 
-  if (window.location.href.includes("index.html")) {
+  if (
+    window.location.href.includes("index.html") &&
+    navigator.onLine
+  ) {
     showPopunder();
   }
 
