@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'FuriFure 2',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/3mzzH9kPVeU30kg9uKK9K3fcg1x.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai011.html"
 };
 
 const episodes = [
@@ -356,7 +356,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
