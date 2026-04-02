@@ -285,7 +285,8 @@ const seriesId = 'Hentai037';
 const seriesData = {
   id: seriesId,
   title: 'Kanpeki Ojou-sama',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/1mOpL3usOyVG9MkgrGHAfLYueRu.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/1mOpL3usOyVG9MkgrGHAfLYueRu.jpg',
+  page: "CatalogoHent/Hentai037.html"
 };
 
 const episodes = [
@@ -355,7 +356,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
