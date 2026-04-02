@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Mayohiga no Onee-san Latino',
   banner: 'https://image.tmdb.org/t/p/original/hBL5myXgA6dWJTadPfdsK5QcKKQ.jpg',
-  synopsis: ''
+  page: "HentaiLat/HenLa011.html"
 };
 
 const episodes = [
@@ -353,12 +353,8 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  if(window.Android && Android.enviarVideo){
-      Android.enviarVideo(url);
-  }else{
-      console.log("Video URL:", url);
-  }
-
+  Android.openEpisode(url);
+  
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
 }
