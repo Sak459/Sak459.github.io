@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Imouto Paradise! 3',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xyB8fHTQmLv7adtRkBUoQPAPf03.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai021.html"
 };
 
 const episodes = [
@@ -355,7 +355,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
