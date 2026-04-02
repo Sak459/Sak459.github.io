@@ -610,7 +610,11 @@ function showPopunder() {
 </script>
   <script>
 document.addEventListener("click", function() {
-  showPopunder();
+
+  if (window.location.href.includes("index.html")) {
+    showPopunder();
+  }
+
 });
 </script>
 </body>
