@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Toshidensetsu Series',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/mRgdv4AFe0ZIzGEcx8jkw1uBfAz.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai015.html"
 };
 
 const episodes = [
@@ -358,7 +358,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
