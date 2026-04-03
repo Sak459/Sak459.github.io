@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Enjo Kouhai',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/4DF930mCAMKU7ZCargwewwcoAwL.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai095.html"
 };
 
 const episodes = [
@@ -362,7 +362,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
