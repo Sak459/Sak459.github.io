@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Shigokare: Ecchi na Joshi',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xAdbW6YQRoAogsWlP0s7dM3vgYM.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai082.html"
 };
 
 const episodes = [
@@ -353,7 +353,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
