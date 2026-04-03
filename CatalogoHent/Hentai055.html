@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'JK to Ero Konbini',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/cmq2Ru9ua1KV1Qq4AMuuF7OvsfZ.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai055.html"
 };
 
 const episodes = [
@@ -358,7 +358,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
