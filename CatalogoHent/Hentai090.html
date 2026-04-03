@@ -285,7 +285,8 @@ const seriesId = 'Hentai090';
 const seriesData = {
   id: seriesId,
   title: 'Overflow',
-  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/4QZEWfL34hYW845iiJZCaj522WB.jpg'
+  banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/4QZEWfL34hYW845iiJZCaj522WB.jpg',
+  page: "CatalogoHent/Hentai090.html"
 };
 
 const episodes = [
@@ -359,7 +360,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
