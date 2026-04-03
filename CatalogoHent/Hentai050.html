@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Bitch Gakuen ga Seijun',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/pqfzwgYZ64fdpH76IofxQxds80N.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai050.html"
 };
 
 const episodes = [
@@ -354,7 +354,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
