@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Tsuma ga Kirei',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/8326Db0Jnq1faw8TDXhTMq2pEcB.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai059.html"
 };
 
 const episodes = [
@@ -354,7 +354,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
