@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Jitaku Keibiin',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/54bYpgZUYfFB5F1PkWykZX8TC0u.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai061.html"
 };
 
 const episodes = [
@@ -360,7 +360,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
