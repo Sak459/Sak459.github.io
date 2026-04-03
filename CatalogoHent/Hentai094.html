@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Tonari no Ie no Anette-san',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/y0KazkgTMxykAis17izK2879lv1.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai094.html"
 };
 
 const episodes = [
@@ -355,7 +355,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
