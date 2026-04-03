@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Hinagiku Virgin Lost',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/huIW79qCmT9o9NqjJTTfdNDfa3z.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai052.html"
 };
 
 const episodes = [
@@ -354,7 +354,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
