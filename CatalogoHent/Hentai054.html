@@ -286,7 +286,7 @@ const seriesData = {
   id: seriesId,
   title: 'Ero Konbini Tenchou',
   banner: 'https://media.themoviedb.org/t/p/w220_and_h330_face/tY7PfHYw2nUiFiIFYvLUFzC5XXx.jpg',
-  synopsis: ''
+  page: "CatalogoHent/Hentai054.html"
 };
 
 const episodes = [
@@ -356,7 +356,7 @@ function loadEpisode(i){
 
   const url = episodes[i].url;
 
-  window.open(url);
+  Android.openEpisode(url);
 
   localStorage.setItem(seriesId + '_lastEpisode', i);
   updateUI();
