@@ -593,23 +593,36 @@ src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97
     event.preventDefault();
   });
 </script>
-  <div style="width:70%; display:flex; justify-content:center;">
-  <div id="ad-container" style="width:70%; max-width:528px;">
-    <script>
-      var adWidth = window.innerWidth < 568 ? 320 : 528;
-      var adHeight = window.innerWidth < 568 ? 50 : 90;
+<div id="ad-wrapper" style="width:100%; display:flex; justify-content:center;"></div>
 
-      atOptions = {
-        'key' : 'ccb7d23a9f7a6eeca31298ea3d62a03f',
-        'format' : 'iframe',
-        'height' : adHeight,
-        'width' : adWidth,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js"></script>
-  </div>
-</div>
-<script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
+<script>
+function loadAd() {
+  var container = document.getElementById("ad-wrapper");
+  container.innerHTML = "";
+
+  var adWidth = window.innerWidth < 520 ? 320 : 500;
+  var adHeight = window.innerWidth < 520 ? 50 : 90;
+
+  var script1 = document.createElement("script");
+  script1.innerHTML = `
+    atOptions = {
+      'key' : 'ccb7d23a9f7a6eeca31298ea3d62a03f',
+      'format' : 'iframe',
+      'height' : ${adHeight},
+      'width' : ${adWidth},
+      'params' : {}
+    };
+  `;
+
+  var script2 = document.createElement("script");
+  script2.src = "https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js";
+
+  container.appendChild(script1);
+  container.appendChild(script2);
+}
+
+loadAd();
+window.addEventListener("resize", loadAd);
+</script>
 </body>
 </html>
