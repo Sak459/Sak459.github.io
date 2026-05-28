@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plantilla Anime Zone</title>
+<title>Rakuen Anime</title>
 
 <style>
 :root{
@@ -13,43 +13,83 @@
   --text:#fff;
 }
 
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+}
+
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
   background:var(--bg);
   color:var(--text);
   padding:5px;
+  min-height:100vh;
+  overflow-x:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
-  height:100vh;
-  overflow:hidden;
+  user-select:none;
 }
 
-/* HEADER */
+img{
+  -webkit-user-drag:none;
+  user-drag:none;
+}
+
 .header-fixed{
   width:100%;
   max-width:1000px;
-  position:relative;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* BANNER */
 .banner-top{
   width:100%;
-  height:85px;
+  height:205px;
   object-fit:cover;
-  border-radius:6px;
-  margin-bottom:10px;
+  border-radius:8px 8px 8px 8px;
 }
 
-/* ACCIONES */
+.poster{
+  width:150px;
+  border-radius:16px;
+  margin-top:-70px;
+  z-index:5;
+  position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+
+.anime-info{
+  width:95%;
+  max-width:1000px;
+  text-align:center;
+  margin-top:10px;
+}
+
+#animeTitle{
+  font-size:1.6rem;
+  margin:8px 0;
+}
+
+.meta{
+  color:#bbb;
+  font-size:.9rem;
+  margin-bottom:12px;
+}
+
+#animeDescription{
+  color:#ddd;
+  font-size:.95rem;
+  line-height:1.5;
+}
+
 .series-actions{
   display:flex;
   gap:24px;
-  margin-bottom:6px;
+  margin:16px 0;
 }
 
 .action-btn{
@@ -57,20 +97,14 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  width:90px;
-  padding:4px;
-  border-radius:12px;
+  width:95px;
+  padding:10px;
+  border-radius:14px;
   background:#111;
   cursor:pointer;
-  font-size:.75rem;
+  font-size:.8rem;
   color:#bbb;
   transition:.2s;
-}
-
-.action-btn svg{
-  width:22px;
-  height:22px;
-  fill:currentColor;
 }
 
 .action-btn.active{
@@ -78,53 +112,30 @@ body{
   color:#fff;
 }
 
-/* TEXTOS */
-header{
-  font-size:1.4rem;
-  font-weight:bold;
-  color:var(--accent);
-  margin-bottom:4px;
-  text-align:center;
-}
-
 #episodeTitle{
   font-size:1rem;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
-/* PLAYER */
-.player-container{
-  display:none;
-  width:100%;
-  max-width:1000px;
-  aspect-ratio:16/9;
-}
-
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-/* EPISODIOS */
 .scroll-episodes{
   width:100%;
   max-width:1000px;
   flex-grow:1;
   overflow-y:auto;
   padding:8px;
+  padding-bottom:20px;
 }
 
 .episode-list{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:8px;
 }
 
 .episode{
   background:var(--card);
   border-radius:14px;
-  min-height:40px;
+  min-height:50px;
   background-size:cover;
   background-position:center;
   cursor:pointer;
@@ -133,6 +144,7 @@ iframe{
   justify-content:center;
   font-weight:bold;
   position:relative;
+  overflow:hidden;
 }
 
 .episode::before{
@@ -140,12 +152,13 @@ iframe{
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.55);
-  border-radius:14px;
 }
 
 .episode span{
   position:relative;
   z-index:2;
+  padding:10px;
+  text-align:center;
 }
 
 .episode.active,
@@ -153,26 +166,76 @@ iframe{
   outline:2px solid var(--accent);
 }
 
-/* MODO LANDSCAPE */
-.landscape-mode{
-  position:fixed !important;
+/* Modal */
+.modal-overlay{
+  position:fixed;
   inset:0;
-  width:100vh !important;
-  height:100vw !important;
-  background:#000;
-  z-index:999999;
-
-  transform:
-    rotate(90deg)
-    translateY(-100%);
-
-  transform-origin:top left;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
 }
 
-/* IFRAME */
-.landscape-mode iframe{
-  width:100%;
-  height:100%;
+.modal-overlay.active{
+  opacity:1;
+  pointer-events:all;
+}
+
+.modal{
+  background:#1f1f1f;
+  border-radius:16px;
+  padding:35px 30px;
+  max-width:400px;
+  width:90%;
+  text-align:center;
+}
+
+.modal h2{
+  margin:0;
+  color:#ff4d4d;
+}
+
+.modal p{
+  color:#ccc;
+}
+
+.modal ul{
+  text-align:left;
+  color:#999;
+}
+
+.modal button{
+  margin-top:20px;
+  padding:12px 24px;
+  background:#ff4d4d;
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  opacity:.7;
+}
+
+/* Toast */
+.toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#28a745;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:16px;
+  opacity:0;
+  transition:.4s;
+  z-index:10000;
+}
+
+.toast.show{
+  opacity:1;
 }
 </style>
 </head>
@@ -181,321 +244,463 @@ iframe{
 
 <div class="header-fixed">
 
-  <img class="banner-top" src="https://image.tmdb.org/t/p/original/qpBiukaymRk7GmqU5ed6a3NA1Zt.jpg">
+  <img class="banner-top" src="" id="banner">
 
-  <div class="series-actions">
+  <img class="poster" id="poster">
 
-    <!-- FAVORITOS -->
-    <div class="action-btn" id="favoriteBtn">
-      ❤️
-      Favoritos
-    </div>
+  <div class="anime-info">
 
-    <!-- FINALIZADA -->
-    <div class="action-btn" id="watchedBtn">
-      ✔
-      Finalizada
-    </div>
+    <h1 id="animeTitle">Cargando...</h1>
+
+    <div class="meta" id="animeMeta"></div>
+
+    <p id="animeDescription">
+      Cargando información...
+    </p>
 
   </div>
 
-  <header>Overlord Movie 3: Sei Oukoku-hen</header>
+  <div class="series-actions">
+    <div class="action-btn" id="favoriteBtn">❤️ Favoritos</div>
+    <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
+  </div>
+
   <div id="episodeTitle">Selecciona un episodio</div>
-  <div class="player-container" id="player-container"></div>
+
 </div>
 
 <div class="scroll-episodes">
   <section class="episode-list" id="episodeList"></section>
 </div>
 
+<!-- Modal -->
+<div class="modal-overlay" id="connectionModal">
+  <div class="modal">
+    <h2>Sin conexión</h2>
+    <p>No se detecta acceso a Internet.</p>
+
+    <ul>
+      <li>Verifica tu Wi-Fi o datos móviles</li>
+      <li>Conéctate a una red disponible</li>
+      <li>Espera mientras se reconecta</li>
+    </ul>
+
+    <button disabled>Reconectando...</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  ✅ ¡Conexión restaurada!
+</div>
+
 <script>
-/* ================= CONFIG ================= */
-const seriesId = '1014505';
 
-const seriesData = {
-  id: seriesId,
-  title: 'Overlord Movie 3: Sei Oukoku-hen',
-  banner: 'https://image.tmdb.org/t/p/original/qpBiukaymRk7GmqU5ed6a3NA1Zt.jpg'
-};
+/* ================= TMDB ================= */
 
-const episodes = [
-  {
-    url:'https://rakuplayer.blogspot.com/?url=U2FsdGVkX19Lsrd%2FVKHVmSDs2gNIRFwqDVz6hFaR29mLYJ3tTJlfZ3ttMVTQTakrt4dB88aXQYqn58bnhJOedfbrETwmjcHb7%2B9%2FNA4roKJnjmpPA%2BnSpD1mIM6Q6bUf',
-    title:'Episodio 1',
-    thumbnail:'https://image.tmdb.org/t/p/original/hkJhGayONXn96CqIRM9GhWKnlCf.jpg'
-  },{
-    url:'https://ryderjet.com/embed/fvncfv9806dt',
-    title:'Episodio 1',
-    thumbnail:'https://image.tmdb.org/t/p/original/hkJhGayONXn96CqIRM9GhWKnlCf.jpg'
-  }
+const TMDB_API = "b6083b855479a79fd9acdb0a2789f126";
+
+/* Anime */
+const tmdbType = "tv";
+const tmdbId = 297313;
+
+/* Temporada */
+const seasonNumber = 1;
+
+/* ID local */
+const seriesId = "Anime007";
+
+/* Tus links de video */
+const videoLinks = [
+'https://cdn.hvidserv.com/m3u8/f1702923981a9cfef2d803ff093f9e3b',
+'https://cdn.hvidserv.com/m3u8/72a7fbac7d09c8e2afbbfbdde7f7ce0f',
+'https://cdn.hvidserv.com/m3u8/ebf02a44d00086018c8e651e2164b254'
 ];
 
 /* ================= ELEMENTOS ================= */
+
 const episodeList = document.getElementById('episodeList');
 const episodeTitle = document.getElementById('episodeTitle');
-const playerContainer = document.getElementById('player-container');
+
 const favBtn = document.getElementById('favoriteBtn');
 const watchedBtn = document.getElementById('watchedBtn');
+const currentPage = window.location.pathname;
+
+let episodes = [];
+let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
+
+currentEpisode = currentEpisode !== null
+  ? parseInt(currentEpisode)
+  : null;
 
 /* ================= STORAGE ================= */
-const getList = k => JSON.parse(localStorage.getItem(k)) || [];
-const saveList = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+const getList = k =>
+  JSON.parse(localStorage.getItem(k)) || [];
+
+const saveList = (k,v) =>
+  localStorage.setItem(k, JSON.stringify(v));
 
 /* ================= FAVORITOS ================= */
+
 function isFavorite(){
   return getList('favorites').some(s => s.id === seriesId);
 }
 
 function toggleFavorite(){
+
   let favs = getList('favorites');
+
   if(isFavorite()){
+
     favs = favs.filter(s => s.id !== seriesId);
+
     favBtn.classList.remove('active');
+
   }else{
-    favs.push(seriesData);
+
+    favs.push({
+     id: seriesId,
+     title:         document.getElementById("animeTitle").textContent,
+     banner: document.getElementById("poster").src,
+     page: currentPage
+    });
+
     favBtn.classList.add('active');
+
   }
+
   saveList('favorites', favs);
+
 }
 
 /* ================= FINALIZADA ================= */
+
 function toggleWatched(){
+
   let list = getList('watched');
+
   if(list.includes(seriesId)){
+
     list = list.filter(id => id !== seriesId);
+
     watchedBtn.classList.remove('active');
+
   }else{
+
     list.push(seriesId);
+
     watchedBtn.classList.add('active');
+
   }
+
   saveList('watched', list);
+
 }
 
-/* ================= EPISODIOS ================= */
-let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
-currentEpisode = currentEpisode !== null ? parseInt(currentEpisode) : null;
+/* ================= CARGAR ANIME ================= */
 
-episodes.forEach((ep,i)=>{
-  const div = document.createElement('div');
-  div.className='episode';
-  div.style.backgroundImage=`url(${ep.thumbnail})`;
-  div.innerHTML=`<span>${ep.title}</span>`;
-  div.onclick=()=>loadEpisode(i);
-  episodeList.appendChild(div);
-});
-
-function loadEpisode(i){
-  currentEpisode=i;
-  episodeTitle.textContent=episodes[i].title;
-  playerContainer.style.display='block';
-  playerContainer.innerHTML=`<iframe src="${episodes[i].url}" allowfullscreen></iframe>`;
-  localStorage.setItem(seriesId+'_lastEpisode',i);
-  updateUI();
-  enterLandscapeMode();
-}
-
-function updateUI(){
-  document.querySelectorAll('.episode').forEach((e,idx)=>{
-    e.classList.toggle('active',idx===currentEpisode);
-    e.classList.toggle('last-watched',idx===currentEpisode);
-  });
-}
-
-/* ================= FULLSCREEN ================= */
-function enterFullscreen(){
-  if(playerContainer.requestFullscreen) playerContainer.requestFullscreen();
-}
-
-document.addEventListener('fullscreenchange',()=>{
-  if(!document.fullscreenElement){
-    playerContainer.style.display='none';
-    playerContainer.innerHTML='';
-  }
-});
-
-/* ================= INIT ================= */
-if(isFavorite()) favBtn.classList.add('active');
-if(getList('watched').includes(seriesId)) watchedBtn.classList.add('active');
-
-favBtn.onclick = toggleFavorite;
-watchedBtn.onclick = toggleWatched;
-
-if(currentEpisode!==null && episodes[currentEpisode]){
-  episodeTitle.textContent=episodes[currentEpisode].title;
-  updateUI();
-  setTimeout(()=>{
-    document.querySelectorAll('.episode')[currentEpisode]
-      ?.scrollIntoView({behavior:'smooth',block:'center'});
-  },300);
-}
-</script>
-<script>
-/* BLOQUEAR POPUPS */
-window.open = function () {
-  return null;
-};
-
-/* BLOQUEAR REDIRECCIONES */
-const blockedDomains = [
-  "doubleclick.net",
-  "googlesyndication.com",
-  "adservice.google.com",
-  "popads.net",
-  "adsterra.com",
-  "propellerads.com"
-];
-
-function isBlocked(url) {
-  return blockedDomains.some(domain => url.includes(domain));
-}
-
-/* BLOQUEAR LINKS */
-document.addEventListener("click", e => {
-  const link = e.target.closest("a");
-
-  if (link && isBlocked(link.href)) {
-    e.preventDefault();
-    console.log("Anuncio bloqueado:", link.href);
-  }
-}, true);
-
-/* BLOQUEAR IFRAMES PUBLICITARIOS */
-const observer = new MutationObserver(() => {
-  document.querySelectorAll("iframe").forEach(frame => {
-    try {
-      const src = frame.src || "";
-
-      if (isBlocked(src)) {
-        frame.remove();
-        console.log("Iframe bloqueado:", src);
-      }
-    } catch(err){}
-  });
-});
-
-observer.observe(document.documentElement, {
-  childList: true,
-  subtree: true
-});
-</script>
-<script>
-/* =========================================
-   AUTO LANDSCAPE HTML PLAYER
-========================================= */
-
-async function enterPlayerMode(playerElement){
+async function loadAnime(){
 
   try{
 
-    /* FULLSCREEN */
-    if(playerElement.requestFullscreen){
-      await playerElement.requestFullscreen();
+    /* Obtener datos */
+
+    const detailsReq = await fetch(
+      `https://api.themoviedb.org/3/${tmdbType}/${tmdbId}?api_key=${TMDB_API}&language=es-ES`
+    );
+
+    const data = await detailsReq.json();
+
+    /* Banner */
+    document.getElementById("banner").src =
+      `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
+
+    /* Poster */
+    document.getElementById("poster").src =
+      `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+
+    /* Título */
+    document.getElementById("animeTitle").textContent =
+      data.name || data.title;
+
+    /* Sinopsis */
+    document.getElementById("animeDescription").textContent =
+      data.overview || "Sin descripción disponible.";
+
+    /* Géneros */
+    const genres = data.genres
+      .map(g => g.name)
+      .join(", ");
+
+    /* Año */
+    const year =
+      (data.first_air_date || data.release_date || "")
+      .split("-")[0];
+
+    /* Episodios o duración */
+
+    let extraInfo = "";
+
+    if(tmdbType === "tv"){
+
+      extraInfo =
+        `${data.number_of_episodes} Episodios`;
+
+    }else{
+
+      extraInfo =
+        `${data.runtime} Min`;
+
     }
 
-    /* GIRAR HORIZONTAL */
-    if(screen.orientation &&
-       screen.orientation.lock){
+    /* Datos */
+    document.getElementById("animeMeta").innerHTML =
+      `
+      ⭐ ${data.vote_average.toFixed(1)}
+      • ${year}
+      • ${genres}
+      • ${extraInfo}
+      `;
 
-      await screen.orientation
-        .lock("landscape");
+    /* ================= SERIES ================= */
+
+    if(tmdbType === "tv"){
+
+      const seasonReq = await fetch(
+        `https://api.themoviedb.org/3/tv/${tmdbId}/season/${seasonNumber}?api_key=${TMDB_API}&language=es-ES`
+      );
+
+      const seasonData = await seasonReq.json();
+
+      episodes = seasonData.episodes.map((ep,index)=>({
+
+        title:
+          `Episodio ${ep.episode_number} - ${ep.name}`,
+
+        url: videoLinks[index] || '',
+
+        thumbnail: ep.still_path
+          ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+          : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+      }));
+
     }
+
+    /* ================= PELÍCULAS ================= */
+
+    else{
+
+      episodes = [{
+
+        title: data.title,
+
+        url: videoLinks[0] || '',
+
+        thumbnail:
+          `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+      }];
+
+    }
+
+    renderEpisodes();
 
   }catch(err){
-    console.log("No compatible", err);
+
+    console.log(err);
+
+    showToast("❌ Error cargando TMDb", "#ff4444");
+
   }
 
 }
 
-/* =========================================
-   VOLVER A VERTICAL
-========================================= */
+/* ================= RENDER ================= */
 
-async function exitPlayerMode(){
+function renderEpisodes(){
 
-  try{
+  episodeList.innerHTML = '';
 
-    if(screen.orientation &&
-       screen.orientation.unlock){
+  episodes.forEach((ep,i)=>{
 
-      screen.orientation.unlock();
+    const div = document.createElement('div');
 
-    }else if(
-      screen.orientation &&
-      screen.orientation.lock
-    ){
+    div.className='episode';
 
-      await screen.orientation
-        .lock("portrait");
-    }
+    div.style.backgroundImage=`url(${ep.thumbnail})`;
 
-  }catch(err){}
+    div.innerHTML=`<span>${ep.title}</span>`;
+
+    div.onclick=()=>loadEpisode(i);
+
+    episodeList.appendChild(div);
+
+  });
+
+  updateUI();
+  
+  /* Scroll automático al último episodio visto */
+
+  if(currentEpisode !== null && episodes[currentEpisode]){
+
+    episodeTitle.textContent =
+      episodes[currentEpisode].title;
+
+    setTimeout(()=>{
+
+      document.querySelectorAll('.episode')[currentEpisode]
+        ?.scrollIntoView({
+          behavior:'smooth',
+          block:'center'
+        });
+
+    },2300);
+
+  }
 
 }
 
-/* =========================================
-   DETECTAR SALIDA FULLSCREEN
-========================================= */
+/* ================= REPRODUCIR ================= */
+
+function loadEpisode(i){
+
+  currentEpisode = i;
+
+  episodeTitle.textContent = episodes[i].title;
+
+  const url = episodes[i].url;
+
+  if(url){
+
+    Android.openEpisode(url);
+
+  }else{
+
+    showToast("❌ Episodio no disponible", "#ff4444");
+
+  }
+
+  localStorage.setItem(seriesId+'_lastEpisode', i);
+
+  updateUI();
+
+}
+
+/* ================= UI ================= */
+
+function updateUI(){
+
+  document.querySelectorAll('.episode')
+    .forEach((e,idx)=>{
+
+      e.classList.toggle(
+        'active',
+        idx===currentEpisode
+      );
+
+      e.classList.toggle(
+        'last-watched',
+        idx===currentEpisode
+      );
+
+    });
+
+}
+
+/* ================= INIT ================= */
+
+if(isFavorite())
+  favBtn.classList.add('active');
+
+if(getList('watched').includes(seriesId))
+  watchedBtn.classList.add('active');
+
+favBtn.onclick = toggleFavorite;
+
+watchedBtn.onclick = toggleWatched;
+
+loadAnime();
+
+/* ================= CONEXIÓN ================= */
+
+const modal = document.getElementById("connectionModal");
+
+let wasOffline = false;
+
+function updateConnectionStatus(){
+
+  if(!navigator.onLine){
+
+    modal.classList.add("active");
+
+    wasOffline = true;
+
+  }else{
+
+    modal.classList.remove("active");
+
+    if(wasOffline){
+
+      showToast("✅ ¡Conexión restaurada!");
+
+      wasOffline = false;
+
+    }
+
+  }
+
+}
+
+window.addEventListener(
+  "load",
+  updateConnectionStatus
+);
+
+window.addEventListener(
+  "offline",
+  updateConnectionStatus
+);
+
+window.addEventListener(
+  "online",
+  updateConnectionStatus
+);
+
+/* ================= TOAST ================= */
+
+function showToast(message, color="#28a745"){
+
+  const toast = document.getElementById("toast");
+
+  toast.style.background = color;
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+
+    toast.classList.remove("show");
+
+  },3500);
+
+}
+
+/* ================= BLOQUEOS ================= */
 
 document.addEventListener(
-  "fullscreenchange",
-  ()=>{
-
-    if(!document.fullscreenElement){
-
-      exitPlayerMode();
-
-    }
-
-  }
+  "dragstart",
+  e => e.preventDefault()
 );
-</script>
-<script>
-/* =====================================
-   ACTIVAR LANDSCAPE VISUAL
-===================================== */
-
-function enterLandscapeMode(){
-
-  playerContainer.classList.add(
-    "landscape-mode"
-  );
-
-  /* fullscreen */
-  if(playerContainer.requestFullscreen){
-    playerContainer.requestFullscreen()
-      .catch(()=>{});
-  }
-
-}
-
-/* =====================================
-   SALIR LANDSCAPE
-===================================== */
-
-function exitLandscapeMode(){
-
-  playerContainer.classList.remove(
-    "landscape-mode"
-  );
-
-}
-
-/* =====================================
-   DETECTAR SALIDA FULLSCREEN
-===================================== */
 
 document.addEventListener(
-  "fullscreenchange",
-  ()=>{
-
-    if(!document.fullscreenElement){
-
-      exitLandscapeMode();
-
-    }
-
-  }
+  "selectstart",
+  e => e.preventDefault()
 );
+
 </script>
+
 </body>
 </html>
