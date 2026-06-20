@@ -7,6 +7,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    
     body {
       background-color: #000000;
       color: white;
@@ -20,11 +25,12 @@
     }
 
     .container {
-       width: 100%;
-       max-width:1000px;
-       margin: auto;
-       position: relative;
-     }
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+      overflow-x: hidden;
+    }
 
     .category-title {
       margin-top: 1.5rem;
@@ -41,7 +47,7 @@
     }
 
     .series-card {
-      width: 130px;
+      width: 140px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
@@ -56,18 +62,18 @@
       display: block;
     }
     
-     /* === SOLO PARA RECIENTES === */
     .recientes .series-card {
-      width: 200px; /* más ancho */
+      width: 205px;
     }
 
     .recientes .series-card img {
-      height: 100px; /* thumbnail horizontal */
+      height: 120px;
       border-radius: 10px;
     }
 
     .recientes .series-title {
       font-size: 0.75rem;
+      font-weight: bold;
       text-align: left;
       padding: 4px 2px;
     }
@@ -79,6 +85,7 @@
 
     .series-title {
       font-size: 0.8rem;
+      font-weight: bold;
       text-align: center;
       margin-top: 5px;
       color: #ddd;
@@ -208,12 +215,43 @@
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation; /* clave */
+    touch-action: manipulation;
   }
 
   #ad-container * {
     -webkit-user-drag: none;
   }
+  
+.custom-ad-container{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  position:relative;
+  padding:0 8px;
+  box-sizing:border-box;
+  margin-bottom:25px;
+}
+
+/* imagen personalizada */
+.fake-banner{
+  width:100%;
+  display:block;
+  border-radius:14px;
+  pointer-events:none;
+}
+
+/* anuncio REAL */
+#ad-wrapper{
+  position:absolute;
+  top:0;
+  left:8px;
+  right:8px;
+  bottom:0;
+
+  z-index:5;
+
+  opacity:0.01;
+}
 </style>
 </head>
 <body>
@@ -381,7 +419,7 @@ src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.sv
       </div>
       <div class="series-card">
         <a href="CatalogoHent.html">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 20">
+          <img src="https://files.catbox.moe/w9b2lg.jpeg" alt="Serie 20">
           <div class="series-title">Ver Más</div>
         </a>
       </div>
@@ -446,7 +484,7 @@ src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97
       </div>
       <div class="series-card">
         <a href="HenLat.html">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 40">
+          <img src="https://files.catbox.moe/w9b2lg.jpeg" alt="Serie 40">
           <div class="series-title">Ver Más</div>
         </a>
       </div>
@@ -516,7 +554,7 @@ src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97
       </div>
       <div class="series-card">
         <a href="HenLat.html">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="Serie 40">
+          <img src="https://files.catbox.moe/w9b2lg.jpeg" alt="Serie 40">
           <div class="series-title">Ver Más</div>
         </a>
       </div>
@@ -594,17 +632,31 @@ src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97
     window.addEventListener('load', checkConnection);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<div id="ad-wrapper" style="width:100%; display:flex; justify-content:center;"></div>
+<div class="custom-ad-container">
+
+  <!-- imagen personalizada -->
+  <img
+    class="fake-banner"
+    src="https://files.catbox.moe/czvgya.png"
+    alt="Publicidad"
+  >
+
+  <!-- anuncio REAL transparente -->
+  <div id="ad-wrapper"></div>
+
+</div>
 
 <script>
 function loadAd() {
+
   var container = document.getElementById("ad-wrapper");
   container.innerHTML = "";
 
   var adWidth = window.innerWidth < 520 ? 320 : 500;
-  var adHeight = window.innerWidth < 520 ? 50 : 90;
+  var adHeight = window.innerWidth < 520 ? 55 : 80;
 
   var script1 = document.createElement("script");
+
   script1.innerHTML = `
     atOptions = {
       'key' : 'ccb7d23a9f7a6eeca31298ea3d62a03f',
@@ -616,7 +668,9 @@ function loadAd() {
   `;
 
   var script2 = document.createElement("script");
-  script2.src = "https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js";
+
+  script2.src =
+  "https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js";
 
   container.appendChild(script1);
   container.appendChild(script2);
@@ -626,18 +680,14 @@ loadAd();
 window.addEventListener("resize", loadAd);
 </script>
 <script>
-  // Bloquea el arrastre de imágenes y otros elementos
   document.addEventListener("dragstart", function(event) {
     event.preventDefault();
   });
 
-  // Bloquea la selección de texto
   document.addEventListener("selectstart", function(event) {
     event.preventDefault();
   });
 </script>
-
 <script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
-  
 </body>
 </html>
