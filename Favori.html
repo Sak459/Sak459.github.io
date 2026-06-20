@@ -217,6 +217,20 @@ header{
         grid-template-columns: 1fr; /* Una sola columna en móviles */
       }
     }
+    
+    /* Imagen cuando no hay favoritos */
+     .empty-favorites{
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       width:80%;
+     }
+
+     .empty-favorites img{
+       width:85%;
+       max-width:220px;
+       height:auto;
+     }
 </style>
 </head>
 
@@ -251,9 +265,23 @@ function loadFavorites(){
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
   if(favorites.length === 0){
-    grid.innerHTML = '<p>No tienes series guardadas.</p>';
-    return;
-  }
+  grid.innerHTML = `
+    <div class="empty-favorites">
+      <img src="https://files.catbox.moe/olkacg.jpeg" alt="Aún no tienes favoritos guardados">
+    </div>
+  `;
+
+  grid.style.display = "flex";
+  grid.style.justifyContent = "center";
+  grid.style.alignItems = "center";
+  grid.style.width = "100%";
+  grid.style.minHeight = "70vh";
+
+  return;
+}
+
+// Restaurar el grid cuando existan favoritos
+grid.style.display = "grid";
 
   favorites.forEach(series => {
     const card = document.createElement('div');
@@ -268,8 +296,14 @@ function loadFavorites(){
     // Clic en la tarjeta abre la serie
     card.onclick = () => {
   if(series.page){
-    window.location.href = series.page;
-  }
+
+  window.location.href = series.page;
+
+}else{
+
+  showToast("❌ Ruta no encontrada", "#ff4444");
+
+}
 };
 
     // Clic en botón ❌ quita de favoritos
