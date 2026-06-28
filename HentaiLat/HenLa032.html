@@ -515,7 +515,9 @@ async function loadAnime(){
 
     renderEpisodes();
 
-    hideLoading();
+    setTimeout(() => {
+     hideLoading();
+     }, 1000);
 
     return;
 
