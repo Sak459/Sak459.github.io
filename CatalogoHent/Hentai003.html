@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rakuen Anime</title>
+<title>Plantilla Movies</title>
 
 <style>
 :root{
@@ -78,6 +78,31 @@ img{
   color:#bbb;
   font-size:.9rem;
   margin-bottom:12px;
+}
+
+.synopsis{
+  color:#ddd;
+  font-size:.95rem;
+  line-height:1.7;
+  margin:15px auto 5px;
+  max-width:900px;
+  text-align:center;
+  white-space:pre-wrap;
+}
+
+#toggleSynopsis{
+  display:none;
+  margin:8px auto 15px;
+  color:var(--accent);
+  font-weight:bold;
+  cursor:pointer;
+  text-align:center;
+  user-select:none;
+  font-size:.9rem;
+}
+
+#toggleSynopsis:hover{
+  opacity:.8;
 }
 
 .series-actions{
@@ -296,6 +321,14 @@ img{
 
     <div class="meta" id="animeMeta"></div>
 
+    <p id="animeSynopsis" class="synopsis">
+    Cargando sinopsis...
+    </p>
+
+    <div id="toggleSynopsis">
+     Ver más
+     </div>
+
   </div>
 
   <div class="series-actions">
@@ -303,7 +336,7 @@ img{
     <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
-  <div id="episodeTitle">Selecciona un episodio</div>
+  <div id="episodeTitle">Selecciona un Episoddio</div>
 
 </div>
 
@@ -353,10 +386,11 @@ const seasonNumber = 1;
 const seriesId = "Hentai003";
 
 /* Tus links de video */
-const videoLinks = [  'https://gupload.xyz/data/e/hls/0bd15b46a268/720p.m3u8',
- 'https://gupload.xyz/data/e/hls/255afa317a92/720p.m3u8',  'https://gupload.xyz/data/e/hls/08c5c22dc7f3/720p.m3u8'
+const videoLinks = [  
+'https://cdn.hvidserv.com/m3u8/c71fcc3dec50f5ff2d0dd7b80afb08d3',
+'https://cdn.hvidserv.com/m3u8/a46fdea0d46622a395a417f2454efa12',
+'https://cdn.hvidserv.com/m3u8/5ec2862e18f4d66f70835cecbcc0a054'
 ];
-
 
 /* ================= ELEMENTOS ================= */
 
@@ -366,6 +400,12 @@ const episodeTitle = document.getElementById('episodeTitle');
 const favBtn = document.getElementById('favoriteBtn');
 const watchedBtn = document.getElementById('watchedBtn');
 const currentPage = window.location.pathname;
+
+const synopsis = document.getElementById("animeSynopsis");
+const toggleSynopsis = document.getElementById("toggleSynopsis");
+
+let fullSynopsis = "";
+let synopsisExpanded = false;
   
   const loadingScreen =
   document.getElementById("loadingScreen");
@@ -479,6 +519,29 @@ async function loadAnime(){
     /* Título personalizado */
 document.getElementById("animeTitle").textContent =
   customTitle || data.name || data.title;
+  
+  /* Sinopsis */
+  fullSynopsis = data.overview && data.overview.trim() !== ""
+    ? data.overview
+    : "No hay sinopsis disponible.";
+
+if(fullSynopsis.length > 150){
+
+    synopsis.textContent =
+        fullSynopsis.substring(0,150) + "...";
+
+    toggleSynopsis.style.display = "block";
+    toggleSynopsis.textContent = "Ver más";
+
+    synopsisExpanded = false;
+
+}else{
+
+    synopsis.textContent = fullSynopsis;
+
+    toggleSynopsis.style.display = "none";
+
+}
 
     /* Géneros */
     const genres = data.genres
@@ -550,14 +613,14 @@ episodes = episodiosDisponibles.map((ep, index) => ({
 
   episodes = [{
 
-    title: data.title,
+    title: "VER PELÍCULA",
 
     url: videoLinks[0] || '',
 
     thumbnail:
       `https://image.tmdb.org/t/p/original${data.backdrop_path}`
 
-  }];
+}];
 
 }
 
@@ -680,6 +743,28 @@ if(getList('watched').includes(seriesId))
 favBtn.onclick = toggleFavorite;
 
 watchedBtn.onclick = toggleWatched;
+
+/* Ver más / Ver menos de la sinopsis */
+
+toggleSynopsis.onclick = ()=>{
+
+    synopsisExpanded = !synopsisExpanded;
+
+    if(synopsisExpanded){
+
+        synopsis.textContent = fullSynopsis;
+        toggleSynopsis.textContent = "Ver menos";
+
+    }else{
+
+        synopsis.textContent =
+            fullSynopsis.substring(0,150) + "...";
+
+        toggleSynopsis.textContent = "Ver más";
+
+    }
+
+};
 
 loadAnime();
 
