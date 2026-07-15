@@ -213,2768 +213,961 @@ go:236994L
         grid-template-columns: 1fr; /* Una sola columna en móviles */
       }
     }
+    
+    .loading{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    transition:.3s;
+}
+
+.loading.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.spinner{
+    width:80px;
+    height:80px;
+    border:4px solid rgba(255,255,255,.2);
+    border-top:4px solid #ff375e;
+    border-radius:50%;
+    animation:giro 1s linear infinite;
+}
+
+@keyframes giro{
+    to{
+        transform:rotate(360deg);
+    }
+}
   </style>
 </head>
 <body>
-
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+  
   <header>
     <h1>Catálogo Hentai</h1>
   </header>
 
-  <div class="catalogo">
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai002.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/o3KsbsHaFcDjulFzO1ZxBdzKJeL.jpg" alt="Sakusei Byoutou The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Sakusei Byoutou The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai003.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fu19rN3cEKVillGJiNUGy7kr5L7.jpg" alt="Kaede to Suzu The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Kaede to Suzu The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai004.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gEajgDHjiBpqM2kx8RdFTWi7l9D.jpg" alt="Mama Katsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Mama Katsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai005.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/Bso0mfg2ohx8hO65WATccTbSQI.jpg" alt="Enkou JK Bitch Gal">
-        </a>
-      </div>
-      <div class="titulo-serie">Enkou JK Bitch Gal</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai006.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/yLDIp0RSIutDA2D8ZQI2DIxoboa.jpg" alt="Real Eroge Situation!">
-        </a>
-      </div>
-      <div class="titulo-serie">Real Eroge Situation!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai007.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6I4IHARjlDdrpw30K5svtbKCCUz.jpg" alt="Real Eroge Situation! 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Real Eroge Situation! 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai008.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jRwmCoKVgorXIRRWIP4f8JMNfwb.jpg" alt="Nariyuki: Papakatsu Girls!!">
-        </a>
-      </div>
-      <div class="titulo-serie">Nariyuki: Papakatsu Girls!!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai009.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v2TLOn7dvFGsG9B8Zjzik36OXGo.jpg" alt="Youkoso! Sukebe Elf no Mori e">
-        </a>
-      </div>
-      <div class="titulo-serie">Youkoso! Sukebe Elf no Mori e</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai010.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4zoq1qYD1rXAFgM8ZKCPScMPcZ1.jpg" alt="FuriFure">
-        </a>
-      </div>
-      <div class="titulo-serie">FuriFure</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai011.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3mzzH9kPVeU30kg9uKK9K3fcg1x.jpg" alt="Furifure 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Furifure 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai012.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v5xzOKqSnNBEuLDYnLDcU5BHzNg.jpg" alt="Nuresuke JK Amayadori Rape">
-        </a>
-      </div>
-      <div class="titulo-serie">Nuresuke JK Amayadori Rape</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai013.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wEIDSWajrZLs8QxFo30SQyJCMan.jpg" alt="Saimin ☆ Gakuen">
-        </a>
-      </div>
-      <div class="titulo-serie">Saimin ☆ Gakuen</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
+   <div class="catalogo">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Eroriman 2"
+     data-poster="https://image.tmdb.org/t/p/w220_and_h330_face/8OCs9oLfLYCfsPKuBFAUZWVtm6w.jpg">
+    <div class="poster">
         <a href="CatalogoHent/Hentai001.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8OCs9oLfLYCfsPKuBFAUZWVtm6w.jpg" alt="Eroriman 2">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Eroriman 2</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
+    <div class="serie"
+     data-id="124867"
+     data-tipo="tv"
+     data-nombre="Sakusei Byoutou The Animation">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai002.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158208"
+     data-tipo="tv"
+     data-nombre="Kaede to Suzu The Animation">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai003.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="212536"
+     data-tipo="tv"
+     data-nombre="Mama Katsu!">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai004.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="85134"
+     data-tipo="tv"
+     data-nombre="Enkou JK Bitch Gal: Oji-san to Nama Pako Seikatsu">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai005.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="77464"
+     data-tipo="tv"
+     data-nombre="Real Eroge Situation! The Animation">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai006.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="116830"
+     data-tipo="tv"
+     data-nombre="Real Eroge Situation! 2 The Animation">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai007.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="77462"
+     data-tipo="tv"
+     data-nombre="Nariyuki Papakatsu Girls!! The Animation">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai008.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="77465"
+     data-tipo="tv"
+     data-nombre="Youkoso! Sukebe Elf no Mori e">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai009.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="85148"
+     data-tipo="tv"
+     data-nombre="Furifure the Animation: Seifuku Datenshi no Kagai Jugyou">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai010.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="77713"
+     data-tipo="tv"
+     data-nombre="Furifure 2">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai011.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="97438"
+     data-tipo="tv"
+     data-nombre="Nuresuke JK Amayadori Rape">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai012.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="97614"
+     data-tipo="tv"
+     data-nombre="Saimin☆Gakuen">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai013.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Eroriman: Junjou Meikko o Loveho ni Tsurekonde Yaritai Houdai">
+    <div class="poster">
         <a href="CatalogoHent/Hentai014.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6WLm5aXHiSI495rBTCsc2mTO3Ih.jpg" alt="Eroriman">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Eroriman</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
+    <div class="serie"
+     data-id="95785"
+     data-tipo="tv"
+     data-nombre="Toshi Densetsu Series">
+    <div class="poster">
         <a href="CatalogoHent/Hentai015.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mRgdv4AFe0ZIzGEcx8jkw1uBfAz.jpg" alt="Toshidensetsu Series">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Toshidensetsu Series</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai016.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/l48F39mbYUyu4H6y7rmvciSYz8T.jpg" alt="Ore ga Kanojo o Okasu Wake">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Ore ga Kanojo o Okasu Wake</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai017.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/i5Zpvei9GsxznSeYVl8sJjeGTZt.jpg" alt="Dokidoki Little Ooya-san">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Dokidoki Little Ooya-san</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai018.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fpyaFlxqL35vNMeMskNoJV5mxXc.jpg" alt="Inkou Kyoushi 4 feat. Ero">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Inkou Kyoushi 4 feat. Ero</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai019.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ui0Cqdc4pfjzgWfpzUR1YpRHBwh.jpg" alt="Imouto Paradise!">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Imouto Paradise!</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai020.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8NYx8iWNIFAsrXYhV9uywlaONou.jpg" alt="Imouto Paradise! 2">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Imouto Paradise! 2</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai021.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xyB8fHTQmLv7adtRkBUoQPAPf03.jpg" alt="Imouto Paradise! 3">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Imouto Paradise! 3</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai022.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8NQaAG7pcZ6mdtS6O6RMCnwE4t5.jpg" alt="Muchi Muchi Kyousei">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Muchi Muchi Kyousei</div>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
 
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai023.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k6K34NwoUVM123bnH6bUhRyDKKf.jpg" alt="Ane Chijo Max Heart">
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
         </a>
-      </div>
-      <div class="titulo-serie">Ane Chijo Max Heart</div>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai024.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6PmquVlOE1hdktlMAvXlrCgOGD9.jpg" alt="Elf no Oshiego to Sensei">
-        </a>
-      </div>
-      <div class="titulo-serie">Elf no Oshiego to Sensei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai025.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jwbmwgxt3cUYxMJCyxjAMTDm4em.jpg" alt="Niizuma Koyomi">
-        </a>
-      </div>
-      <div class="titulo-serie">Niizuma Koyomi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai026.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3YfcPSEsZUSlaClf2tlXW45DRoS.jpg" alt="Hatsujou Switch">
-        </a>
-      </div>
-      <div class="titulo-serie">Hatsujou Switch</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai027.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7XsUsF4m80ijZfDFTGVn8zc3Q0Q.jpg" alt="Oyasumi Sex">
-        </a>
-      </div>
-      <div class="titulo-serie">Oyasumi Sex</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai028.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6qYRDJOwJUgjyS3rSYl9qRnnQNL.jpg" alt="Tinderbox">
-        </a>
-      </div>
-      <div class="titulo-serie">Tinderbox</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai029.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/x3ehSgtvmNVgajjBUij79FNjhT9.jpg" alt="Rape Gouhouka!!!">
-        </a>
-      </div>
-      <div class="titulo-serie">Rape Gouhouka!!!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai030.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hR9A0p0Bc3AjZxKvCPpAz4b8shj.jpg" alt="Boku to Nurse no Kenshuu">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku to Nurse no Kenshuu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai031.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gWRh7Mgw5oZY2Ng4hVI2JU4WWzk.jpg" alt="Kyonyuu Dosukebe Gakuen">
-        </a>
-      </div>
-      <div class="titulo-serie">Kyonyuu Dosukebe Gakuen</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai032.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3KfM0jDVrOYmIVY0UBZFSEJXZYD.jpg" alt="Muma no Machi Cornelica">
-        </a>
-      </div>
-      <div class="titulo-serie">Muma no Machi Cornelica</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai033.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/q6hJQAgSEQ3xWb7nJDG58qohNy9.jpg" alt="Rune’s Pharmacy">
-        </a>
-      </div>
-      <div class="titulo-serie">Rune’s Pharmacy</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai034.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2vGE26G8uUvkddamOuP3N8kUbrE.jpg" alt="Tiny Evil">
-        </a>
-      </div>
-      <div class="titulo-serie">Tiny Evil</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai035.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8vG8ibRy7pW5RRZRiF6TYraOfWX.jpg" alt="Maken no Hime wa Ero">
-        </a>
-      </div>
-      <div class="titulo-serie">Maken no Hime wa Ero</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai036.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vNoWpn2aosCAU7Rowg5rSC3qn3d.jpg" alt="Saimin Seishidou">
-        </a>
-      </div>
-      <div class="titulo-serie">Saimin Seishidou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai037.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1mOpL3usOyVG9MkgrGHAfLYueRu.jpg" alt="Kanpeki Ojou-sama">
-        </a>
-      </div>
-      <div class="titulo-serie">Kanpeki Ojou-sama</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai038.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/70QTLK9pQ7oONUbMyUHM6YU43OK.jpg" alt="Gaki ni Modotte Yarinaoshi">
-        </a>
-      </div>
-      <div class="titulo-serie">Gaki ni Modotte Yarinaoshi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai039.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3OeACDOfj8Rnjmb1taHh2cRsONr.jpg" alt="Venus Blood: Brave">
-        </a>
-      </div>
-      <div class="titulo-serie">Venus Blood: Brave</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai040.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gHj2tCS2kGJAlGIejKdJRxnZi8V.jpg" alt="Seikatsu Shuukan The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Seikatsu Shuukan The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai041.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ypWFpMevUOjXakVyt1GJKX51sUo.jpg" alt="Isekai Kita no de Special Skill">
-        </a>
-      </div>
-      <div class="titulo-serie">Isekai Kita no de Special Skill</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai042.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4TLu0Ue26R1ZhXdYi065SlCASEI.jpg" alt="Imouto wa Gal Kawaii">
-        </a>
-      </div>
-      <div class="titulo-serie">Imouto wa Gal Kawaii</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai043.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/yadvq7vcBnxxNlLqKGfVZOLIEc0.jpg" alt="Boku no Risou no Isekai">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku no Risou no Isekai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai044.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/n9WABT7Md23wMJLXGsRoNOU4619.jpg" alt="Tsun M! Gyutto">
-        </a>
-      </div>
-      <div class="titulo-serie">Tsun M! Gyutto</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai045.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bagcUVB4tYOhwQG0l2uYiCTOapC.jpg" alt="Kunoichi Botan">
-        </a>
-      </div>
-      <div class="titulo-serie">Kunoichi Botan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai046.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/l3TSQxiHqg32amEQEt9glzofRT1.jpg" alt="Juvenile Pornography">
-        </a>
-      </div>
-      <div class="titulo-serie">Juvenile Pornography</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai047.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/c25f6RZ2IerLkp5pZmnvnqc1w6f.jpg" alt="Kimi Omou Koi">
-        </a>
-      </div>
-      <div class="titulo-serie">Kimi Omou Koi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai048.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/o796V1phETNVWY6OxZLEjCu94f6.jpg" alt="Natural Vacation">
-        </a>
-      </div>
-      <div class="titulo-serie">Natural Vacation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai049.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k9BNdj6bSBcm4Jtl6ZrCLL6L6u2.jpg" alt="Jewelry The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Jewelry The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai050.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/pqfzwgYZ64fdpH76IofxQxds80N.jpg" alt="Bitch Gakuen ga Seijun">
-        </a>
-      </div>
-      <div class="titulo-serie">Bitch Gakuen ga Seijun</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai051.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/WZq05xXcx4iAa4eGiMXq34Qu6n.jpg" alt="Toriko no Shizuku">
-        </a>
-      </div>
-      <div class="titulo-serie">Toriko no Shizuku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai052.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/huIW79qCmT9o9NqjJTTfdNDfa3z.jpg" alt="Hinagiku Virgin Lost">
-        </a>
-      </div>
-      <div class="titulo-serie">Hinagiku Virgin Lost</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai053.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/yEt6ugULBjVfLl8DjrktxCMfIh2.jpg" alt="Wagaya no Liliana-san">
-        </a>
-      </div>
-      <div class="titulo-serie">Wagaya no Liliana-san</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai054.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tY7PfHYw2nUiFiIFYvLUFzC5XXx.jpg" alt="Ero Konbini Tenchou">
-        </a>
-      </div>
-      <div class="titulo-serie">Ero Konbini Tenchou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/cmq2Ru9ua1KV1Qq4AMuuF7OvsfZ.jpg" alt="JK to Ero Konbini">
-        </a>
-      </div>
-      <div class="titulo-serie">JK to Ero Konbini</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai056.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v5gLrIcsGDUasy911XJH7rqVudp.jpg" alt="Ano Danchi no Tsuma">
-        </a>
-      </div>
-      <div class="titulo-serie">Ano Danchi no Tsuma</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai057.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/glanHgKKxRS3GQDeJeoM0iGXwDU.jpg" alt="Aikagi The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Aikagi The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai058.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wNXvSsdQCuEuclYmUy4PdcrpGpl.jpg" alt="Sansha Mendan">
-        </a>
-      </div>
-      <div class="titulo-serie">Sansha Mendan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai059.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8326Db0Jnq1faw8TDXhTMq2pEcB.jpg" alt="Tsuma ga Kirei">
-        </a>
-      </div>
-      <div class="titulo-serie">Tsuma ga Kirei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai060.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/zJV6P32y22X0xNpdeZctOHAbw7B.jpg" alt="Megane no Megami">
-        </a>
-      </div>
-      <div class="titulo-serie">Megane no Megami</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai061.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/54bYpgZUYfFB5F1PkWykZX8TC0u.jpg" alt="Jitaku Keibiin">
-        </a>
-      </div>
-      <div class="titulo-serie">Jitaku Keibiin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai062.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/iq861aePG5hJYShosy96RXzdbIm.jpg" alt="Jitaku Keibiin 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Jitaku Keibiin 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai063.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/rsyBljVavX6qDMkfu9Rsh4FzVhs.jpg" alt="Master Piece">
-        </a>
-      </div>
-      <div class="titulo-serie">Master Piece</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai064.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6LFTNEqK8zvRBf6pFdN6Q5KuIAT.jpg" alt="Shishunki Sex">
-        </a>
-      </div>
-      <div class="titulo-serie">Shishunki Sex</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai065.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/79Jxhm4tyQpV5wroriNgD74X7kl.jpg" alt="Onna Maou Melissa">
-        </a>
-      </div>
-      <div class="titulo-serie">Onna Maou Melissa</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai066.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tO52uaD5zxHMsNR7NROYx5STlFU.jpg" alt="Hime-sama Love Life!">
-        </a>
-      </div>
-      <div class="titulo-serie">Hime-sama Love Life!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai067.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sm4dKEDsm8pGtNcvBCdSvKYElfQ.jpg" alt="Sakuramiya Shimai">
-        </a>
-      </div>
-      <div class="titulo-serie">Sakuramiya Shimai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai068.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/5dLnFcwBwgzl5cWxvbItGaPC7ux.jpg" alt="Ecchi na Onee-chan">
-        </a>
-      </div>
-      <div class="titulo-serie">Ecchi na Onee-chan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai069.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/cVuh6hnRQrSuCwvKeZAt2vXgkPx.jpg" alt="Tenioha! 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Tenioha! 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai070.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/y9CI1Ep77N98GTIWwFx34yQs0fg.jpg" alt="Shakuen no Eris">
-        </a>
-      </div>
-      <div class="titulo-serie">Shakuen no Eris</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai071.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8lBHphvzIpXEcdqWb1zYXlZJ2vh.jpg" alt="Shoujo Kyouiku">
-        </a>
-      </div>
-      <div class="titulo-serie">Shoujo Kyouiku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai072.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ttW9ipL3ddENaGf42NCHLiy5kTh.jpg" alt="Shoujo Kyouiku RE">
-        </a>
-      </div>
-      <div class="titulo-serie">Shoujo Kyouiku RE</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai073.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bnR0SXLc4HYTgh8pMmpoGHs2UTa.jpg" alt="Ochi Mono RPG">
-        </a>
-      </div>
-      <div class="titulo-serie">Ochi Mono RPG</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai074.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wSi67OgQpXwkLV8bKCENuZkRONj.jpg" alt="Naedoko Demon’s Ground">
-        </a>
-      </div>
-      <div class="titulo-serie">Naedoko Demon’s Ground</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai075.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wRPEQq3dygNcTyZ0FY3kn3OvYlo.jpg" alt="Soshite Watashi wa Ojisan">
-        </a>
-      </div>
-      <div class="titulo-serie">Soshite Watashi wa Ojisan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai076.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nPlN6uXRkY9vWmcYPtrNHDSMdT0.jpg" alt="Soshite Watashi wa Sensei">
-        </a>
-      </div>
-      <div class="titulo-serie">Soshite Watashi wa Sensei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai077.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uOkawvslTcgwU4CJsubDDB49EQN.jpg" alt="Joshi Luck!">
-        </a>
-      </div>
-      <div class="titulo-serie">Joshi Luck!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai078.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/522IBAYU0Vuf7Oy0NDVEpAQZvZh.jpg" alt="Subarashiki Kokka">
-        </a>
-      </div>
-      <div class="titulo-serie">Subarashiki Kokka</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai079.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/5N1d3tNzcfvKmmdn8EHcKvkZvyu.jpg" alt="Boku to Sensei">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku to Sensei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai080.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kWeMjJPGfN36olhCetJNsWjzGG4.jpg" alt="Kutsujoku">
-        </a>
-      </div>
-      <div class="titulo-serie">Kutsujoku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai081.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4lDSfz7vtQ58fLkxiTimqP3LS7J.jpg" alt="Kutsujoku 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Kutsujoku 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai082.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xAdbW6YQRoAogsWlP0s7dM3vgYM.jpg" alt="Shigokare: Ecchi na Joshi">
-        </a>
-      </div>
-      <div class="titulo-serie">Shigokare: Ecchi na Joshi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai083.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/x8QgwokySpB1usGg9kR0gjj8AON.jpg" alt="Lovely Heart">
-        </a>
-      </div>
-      <div class="titulo-serie">Lovely Heart</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai084.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oMrPBkPee7CCAPLAB08OdNhytcz.jpg" alt="Love x Holic">
-        </a>
-      </div>
-      <div class="titulo-serie">Love x Holic</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai085.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aSbDLFeD2UGJdOGByXDbCnCcV6R.jpg" alt="Hitozuma, Mitsu to Niku">
-        </a>
-      </div>
-      <div class="titulo-serie">Hitozuma, Mitsu to Niku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai086.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aW9aWFNhaUcceW8Tk8PZI8vUeoj.jpg" alt="Aibeya The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Aibeya The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai087.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vdTybmKS4tVN0CbqaLKTzym5KDN.jpg" alt="Boku to Joi no Shinsatsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku to Joi no Shinsatsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai088.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k62VYgrOeOZLNQzcPSVPCaV532u.jpg" alt="Kiss Hug">
-        </a>
-      </div>
-      <div class="titulo-serie">Kiss Hug</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai089.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nieeeGFCq1xmjwFxeX4wc3nDtl1.jpg" alt="Nozoki Kanojo">
-        </a>
-      </div>
-      <div class="titulo-serie">Nozoki Kanojo</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai090.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4QZEWfL34hYW845iiJZCaj522WB.jpg" alt="Overflow">
-        </a>
-      </div>
-      <div class="titulo-serie">Overflow</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai091.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tbEm8nUL3B1efcP7N5CARBZMLED.jpg" alt="Fukai ni Nemuru Oujo">
-        </a>
-      </div>
-      <div class="titulo-serie">Fukai ni Nemuru Oujo</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai092.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/18PCwmPg3pWvgKCTXj93qwI5D8q.jpg" alt="Niplheim no Karyuudo">
-        </a>
-      </div>
-      <div class="titulo-serie">Niplheim no Karyuudo</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai093.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2GOkcmkOF80NLQoqOu4CxKU04nZ.jpg" alt="Chii-chan Kaihatsu Nikki">
-        </a>
-      </div>
-      <div class="titulo-serie">Chii-chan Kaihatsu Nikki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai094.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/y0KazkgTMxykAis17izK2879lv1.jpg" alt="Tonari no Ie no Anette-san">
-        </a>
-      </div>
-      <div class="titulo-serie">Tonari no Ie no Anette-san</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai095.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4DF930mCAMKU7ZCargwewwcoAwL.jpg" alt="Enjo Kouhai">
-        </a>
-      </div>
-      <div class="titulo-serie">Enjo Kouhai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai096.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3q60p7Q7JhIOeTLGohwHZExf4NE.jpg" alt="Youma Shoukan e Youkoso">
-        </a>
-      </div>
-      <div class="titulo-serie">Youma Shoukan e Youkoso</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai097.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/shx6BEqlLRw5SWxqLTZzhlTJhKo.jpg" alt="Meltys Quest">
-        </a>
-      </div>
-      <div class="titulo-serie">Meltys Quest</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai098.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/eit8VD15iZKimN5FHIFu2Oe4JHt.jpg" alt="Aisei Tenshi Love Mary">
-        </a>
-      </div>
-      <div class="titulo-serie">Aisei Tenshi Love Mary</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai099.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mlDvr6JlR5jtXv8mdS7Fh7RyT3H.jpg" alt="Shikijou Kyoudan">
-        </a>
-      </div>
-      <div class="titulo-serie">Shikijou Kyoudan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai100.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k9vWrMWYxIKWuets7ayQvpQnd44.jpg" alt="Onii-chan, Asa made Zutto">
-        </a>
-      </div>
-      <div class="titulo-serie">Onii-chan, Asa made Zutto</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai101.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3mkGaWMOa6JLMGIrYsHkEdLWovr.jpg" alt="Inmou">
-        </a>
-      </div>
-      <div class="titulo-serie">Inmou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai102.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/afR99eW2j4c263qNvtrynuUvQFF.jpg" alt="Kyonyuu Princess Saimin">
-        </a>
-      </div>
-      <div class="titulo-serie">Kyonyuu Princess Saimin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai103.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aZoqPUUsYDrLL8Zs6eb2Nb6IiLO.jpg" alt="Ore no Yubi de Midarero">
-        </a>
-      </div>
-      <div class="titulo-serie">Ore no Yubi de Midarero</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai104.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4r6qoKHN6qLt3V0uGXSP5znfPpQ.jpg" alt="Ushichichi Tabehoudai!">
-        </a>
-      </div>
-      <div class="titulo-serie">Ushichichi Tabehoudai!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai105.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/46Cc31JzFRFCjDDtjfTLVNoY1R5.jpg" alt="Haritsuke">
-        </a>
-      </div>
-      <div class="titulo-serie">Haritsuke</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai106.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mbry8TKtYrQS7ewsFMPsdulfsCD.jpg" alt="Suketto Sanjou!!">
-        </a>
-      </div>
-      <div class="titulo-serie">Suketto Sanjou!!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai107.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8Se5vrT6cPLxoNbPtOiShV2mcs0.jpg" alt="Sotsugyou Chikan Densha">
-        </a>
-      </div>
-      <div class="titulo-serie">Sotsugyou Chikan Densha</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai108.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7ifAeznSn82hBeIqlivzkSd7pHq.jpg" alt="Chiisana Tsubomi no Sono Oku ni">
-        </a>
-      </div>
-      <div class="titulo-serie">Chiisana Tsubomi no Sono Oku ni</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai109.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/h3dH6m9uIMG4WWS8JfEwsfiSuqt.jpg" alt="Sefure Gakuen">
-        </a>
-      </div>
-      <div class="titulo-serie">Sefure Gakuen</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai110.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ml42CfYsbRJswc1tnCEoeSwX6Hm.jpg" alt="Hajimete no Hitozuma">
-        </a>
-      </div>
-      <div class="titulo-serie">Hajimete no Hitozuma</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai111.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4S0Z7KJdm0zbVPpcYMxckz5c753.jpg" alt="Yarichin Kateikyoushi">
-        </a>
-      </div>
-      <div class="titulo-serie">Yarichin Kateikyoushi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai112.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/t5hPL0gOoTyBFPvzdefPcqEeHx3.jpg" alt="Ane wa Yan Mama">
-        </a>
-      </div>
-      <div class="titulo-serie">Ane wa Yan Mama</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai113.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/afFoY1DJ0diRG4qTHsR2UxvI6Aq.jpg" alt="Shihai no Kyoudan">
-        </a>
-      </div>
-      <div class="titulo-serie">Shihai no Kyoudan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai114.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/F1zuXSJtkp1WOdjtt889OYzlVV.jpg" alt="Soukou Seiki Ysphere">
-        </a>
-      </div>
-      <div class="titulo-serie">Soukou Seiki Ysphere</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai115.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/cEPR61mQ7OYTchelGoqsJncZuax.jpg" alt="Muramata-san no Himitsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Muramata-san no Himitsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai116.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/QHko5gbTa6ZwKl0MMH15CynEg0.jpg" alt="Natsu ga Owaru made">
-        </a>
-      </div>
-      <div class="titulo-serie">Natsu ga Owaru made</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai118.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/9Jozql4tXEA27V5mZpJrXWu8tL2.jpg" alt="Kohaku-iro no Hunter">
-        </a>
-      </div>
-      <div class="titulo-serie">Kohaku-iro no Hunter</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai119.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/lGsN3Vt5Dl2jx0GziC1FVoJvOnM.jpg" alt="Mesu Kyoushi 4">
-        </a>
-      </div>
-      <div class="titulo-serie">Mesu Kyoushi 4</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai120.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ivmen2owd5GzfpYdKX8Y2t19rpY.jpg" alt="Shikiyoku Infinite">
-        </a>
-      </div>
-      <div class="titulo-serie">Shikiyoku Infinite</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai121.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/efBhU2iUofuPGhIueo8D9pdWBiY.jpg" alt="Succubus Stayed Life">
-        </a>
-      </div>
-      <div class="titulo-serie">Succubus Stayed Life</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai122.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uV0alMSwqTh5OM98KDi4uOtEiPd.jpg" alt="Oujo & Onna Kishi W Dogehin">
-        </a>
-      </div>
-      <div class="titulo-serie">Oujo & Onna Kishi W Dogehin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai123.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hVKJjG9yy0ZxlmyPsCujzret9vo.jpg" alt="Zoku Oujo & Onna Kishi W Dogehin">
-        </a>
-      </div>
-      <div class="titulo-serie">Zoku Oujo & Onna Kishi W Dogehin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai124.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/j3aO6Ku1lEekPjaTfZLz3L8WdQp.jpg" alt="Kanojo ga Yatsu ni Dakaretahi">
-        </a>
-      </div>
-      <div class="titulo-serie">Kanojo ga Yatsu ni Dakaretahi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai125.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jqxSsFb9OVSMtO0O5p5TVMdYjIY.jpg" alt="Uwaki to Honki">
-        </a>
-      </div>
-      <div class="titulo-serie">Uwaki to Honki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai126.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oWObNyDPZyhqXo7YRnN122Sk5Vf.jpg" alt="Shikkoku no Shaga">
-        </a>
-      </div>
-      <div class="titulo-serie">Shikkoku no Shaga</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai127.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oXWvtgV0v64UsrFPyrr33qRldeZ.jpg" alt="Aku no Onna Kanbu">
-        </a>
-      </div>
-      <div class="titulo-serie">Aku no Onna Kanbu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai128.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/foXTuYBMdbYaZEAba9dspMjbNIR.jpg" alt="Yuutousei Ayaka no Uraomote">
-        </a>
-      </div>
-      <div class="titulo-serie">Yuutousei Ayaka no Uraomote</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai129.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wpu1T8xP7W8iKsTvEWfBk9p7LT5.jpg" alt="Taimanin Yukikaze">
-        </a>
-      </div>
-      <div class="titulo-serie">Taimanin Yukikaze</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai130.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uaUnLyAIm5MX9jQqenHLC2PlxOk.jpg" alt="Knight of Erin">
-        </a>
-      </div>
-      <div class="titulo-serie">Knight of Erin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai131.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8rv5zLy0GwZGIaqetVoHuxSoSpY.jpg" alt="Toromitsu Musume no Hitou">
-        </a>
-      </div>
-      <div class="titulo-serie">Toromitsu Musume no Hitou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai132.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ePFTuxNMHmKLg0iXGobvlFwutYk.jpg" alt="Toshoshitsu no Kanojo">
-        </a>
-      </div>
-      <div class="titulo-serie">Toshoshitsu no Kanojo</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai133.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/cdM4DgsSnGsdaYrJQJpqok23kkf.jpg" alt="Kaa-chan no Tomodachi">
-        </a>
-      </div>
-      <div class="titulo-serie">Kaa-chan no Tomodachi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai134.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/su0ZQPrVmbvqFpZCv0Gl7uLyFEu.jpg" alt="Shikoyaka naru Toki">
-        </a>
-      </div>
-      <div class="titulo-serie">Shikoyaka naru Toki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai135.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dIOwjbGmmBfrPm76u2dKxMDkYZH.jpg" alt="One → Shota ← One The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">One → Shota ← One The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai136.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/i1lDeQiaTKMPUzFrReXN0dA0H63.jpg" alt="White Blue">
-        </a>
-      </div>
-      <div class="titulo-serie">White Blue</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai137.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bEAGCBBY6xSTbKZ2uqyAj9hTY6b.jpg" alt="Hajimete no Orusuban">
-        </a>
-      </div>
-      <div class="titulo-serie">Hajimete no Orusuban</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai138.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/d0oVrbrUE59ci13FFfNJMmbTe1w.jpg" alt="Ano Ko no Kawari ni Suki">
-        </a>
-      </div>
-      <div class="titulo-serie">Ano Ko no Kawari ni Suki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai139.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/UNKlfpazTWF25Iz3aJQzEAF86N.jpg" alt="Himawari ga Yoru ni Saku">
-        </a>
-      </div>
-      <div class="titulo-serie">Himawari wa Yoru ni Saku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai140.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kLClJeh9GDsqhLEpDihDD6oFGaC.jpg" alt="Ajisai no Chiru Koro ni">
-        </a>
-      </div>
-      <div class="titulo-serie">Ajisai no Chiru Koro ni</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai141.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/pqjVgNBI41IJrzATxs8wpF3lKEa.jpg" alt="Kimi ga Suki The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Kimi ga Suki The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai142.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/5uEuTpLOcPGl4m8H5uz9ZXWeLna.jpg" alt="Ijirare: Fukushuu Saimin">
-        </a>
-      </div>
-      <div class="titulo-serie">Ijirare: Fukushuu Saimin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai143.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/g2RSO3VjlhnFqueDGMHRQQwo71h.jpg" alt="Haitoku no Kyoukai">
-        </a>
-      </div>
-      <div class="titulo-serie">Haitoku no Kyoukai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai144.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kN2FWlaVg2zPsxqUSXYiLQnjayg.jpg" alt="Toilet no Hanako-san vs Kukkyou Taimashi">
-        </a>
-      </div>
-      <div class="titulo-serie">Toilet no Hanako-san vs Kukkyou Taimashi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai145.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kgsLtGDL3ItWcV8YW4gN5DjmCGT.jpg" alt="Rikujoubu Joshi wa Ore">
-        </a>
-      </div>
-      <div class="titulo-serie">Rikujoubu Joshi wa Ore</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai146.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/j26etCfYOEK2ktY8Q2ruHd9dx4L.jpg" alt="S-ke ni Totsuida M-jou">
-        </a>
-      </div>
-      <div class="titulo-serie">S-ke ni Totsuida M-jou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai147.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kzcjRPa4ecBT9BnNXCporygf9ik.jpg" alt="Tooi Kimi ni, Boku wa">
-        </a>
-      </div>
-      <div class="titulo-serie">Tooi Kimi ni, Boku wa</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai148.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sxGVHDpvHY1nPfuhcTFN1wnMckh.jpg" alt="JK Fuuzoku Gakuensai">
-        </a>
-      </div>
-      <div class="titulo-serie">JK Fuuzoku Gakuensai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai149.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/woLcpkODXcryqR0zgnFzJkWme89.jpg" alt="JK Bitch Ni Shiboraretai">
-        </a>
-      </div>
-      <div class="titulo-serie">JK Bitch Ni Shiboraretai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai150.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vEGBekLA1o8RLJRfrKGySbxk5bG.jpg" alt="Bitch na Inane-sama">
-        </a>
-      </div>
-      <div class="titulo-serie">Bitch na Inane-sama</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai151.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7yHLs8NZUIlUUXJnvQCCKf81pc2.jpg" alt="Shidoukan Day After The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Shidoukan Day After The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai152.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/5kdFJzQpFErFKF5sjO9slXo24j6.jpg" alt="Uchi no Otouto">
-        </a>
-      </div>
-      <div class="titulo-serie">Uchi no Otouto</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai153.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oe8k3B36tVfC20eCtcWvD6FXmH6.jpg" alt="Hyakkiya Tantei Jimusho">
-        </a>
-      </div>
-      <div class="titulo-serie">Hyakkiya Tantei Jimusho</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai154.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vOrTCcd973pJAVNL0PbPNAFFzM4.jpg" alt="Kazoku: Haha to Shimai">
-        </a>
-      </div>
-      <div class="titulo-serie">Kazoku: Haha to Shimai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai155.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8HTEoKGoonoFUw6icOerVM92ckN.jpg" alt="Netokano">
-        </a>
-      </div>
-      <div class="titulo-serie">Netokano</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai156.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4vjs3ygyJmCyFaVX2SBueATCO22.jpg" alt="Netosis">
-        </a>
-      </div>
-      <div class="titulo-serie">Netosis</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai157.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bv8uuPrTMd8WvwxydzIMHz35no.jpg" alt="Eroge de Subete wa Kaiketsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Eroge de Subete wa Kaiketsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai158.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/j0vae4x7S6KkWuXhQSEigGrD6Pw.jpg" alt="Mako-chan Kaihatsu Nikki">
-        </a>
-      </div>
-      <div class="titulo-serie">Mako-chan Kaihatsu Nikki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai159.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v4qHgnRvB5KS4h9gyCJ4Z3BkSVM.jpg" alt="Chizuru-chan Kaihatsu Nikki">
-        </a>
-      </div>
-      <div class="titulo-serie">Chizuru-chan Kaihatsu Nikki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai160.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/i2IIMMfEwyDinhHigGRRJy3oAyO.jpg" alt="Succubus Appli: Gakuen Saimin">
-        </a>
-      </div>
-      <div class="titulo-serie">Succubus Appli: Gakuen Saimin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai161.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ayaWTYXJJCWecV3RlHOm9EvI9Bs.jpg" alt="Anette-san to Liliana-san">
-        </a>
-      </div>
-      <div class="titulo-serie">Anette-san to Liliana-san</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai162.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/djS2xXYAeGQLhbNtb8mvmsjTr62.jpg" alt="Imaizumin-chi wa Douyara">
-        </a>
-      </div>
-      <div class="titulo-serie">Imaizumin-chi wa Douyara</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai163.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/yI5Ji6MIIsOc7bKrVdGYimZVA8s.jpg" alt="Shiawase nara Niku o Morou!">
-        </a>
-      </div>
-      <div class="titulo-serie">Shiawase nara Niku o Morou!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai164.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/qNzxUNxdW5Pb9EWPOveVdBrj1Dc.jpg" alt="Usamimi Boukentan: Sekuhara">
-        </a>
-      </div>
-      <div class="titulo-serie">Usamimi Boukentan: Sekuhara</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai165.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gDQ6IOoCBP2cOk90lIRNMJOtM1J.jpg" alt="Kuroinu II The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Kuroinu II The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai166.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tG5a9hphwr1EyGPpS3hqamEFGvj.jpg" alt="Jashin Shoukan: Inran Kyonyuu">
-        </a>
-      </div>
-      <div class="titulo-serie">Jashin Shoukan: Inran Kyonyuu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai167.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6qeE1MjDRouibXIs8olgG5UJLmH.jpg" alt="Kono Kaisha… Nanika Okashii!">
-        </a>
-      </div>
-      <div class="titulo-serie">Kono Kaisha… Nanika Okashii!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai168.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sv02LaOcW5PJ5m5jMBmFz6bMIU3.jpg" alt="Torokase Orgasm The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Torokase Orgasm The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai169.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/l0kbK7aRdRZ8bXdtkejhdXg63An.jpg" alt="Onaho Kyoushitsu: Joshi Zen`in">
-        </a>
-      </div>
-      <div class="titulo-serie">Onaho Kyoushitsu: Joshi Zen`in</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai170.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/zasmrUNc6eL2Yl8XLR59VnQwgPz.jpg" alt="Mama x Holic: Miwaku no Mama">
-        </a>
-      </div>
-      <div class="titulo-serie">Mama x Holic: Miwaku no Mama</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai171.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/txjNP4mt2fs4dpincAaKls7wE88.jpg" alt="Cosplay Change: Pure-kei">
-        </a>
-      </div>
-      <div class="titulo-serie">Cosplay Change: Pure-kei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai172.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nD3ERkLJXTMTkwLFyKqJRTJS1nX.jpg" alt="Shishunki no Obenkyou">
-        </a>
-      </div>
-      <div class="titulo-serie">Shishunki no Obenkyou</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai173.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/y7UFgjSe7MITiFEhKjAM0sxWVCm.jpg" alt="Anehame: Ore No Hatsukoi">
-        </a>
-      </div>
-      <div class="titulo-serie">Anehame: Ore No Hatsukoi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai174.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uEd99Q8X2OHtHDoF6JCXGKRS5zH.jpg" alt="Konbini Shoujo Z">
-        </a>
-      </div>
-      <div class="titulo-serie">Konbini Shoujo Z</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai175.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4e0B78HQFPrtrjZigjEMPZfuXUA.jpg" alt="Girls Rush The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Girls Rush The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai176.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/g9KK7PD9D8P7OKCniphc2VpKlWu.jpg" alt="Kyonyuu Elf Oyako Saimin">
-        </a>
-      </div>
-      <div class="titulo-serie">Kyonyuu Elf Oyako Saimin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai177.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/eoSe1h69hB9tp95Sz5oXpqRGwWz.jpg" alt="Papa Katsu!">
-        </a>
-      </div>
-      <div class="titulo-serie">Papa Katsu!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai178.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hzZ1DzQOxltkhNd47UReIVDueh.jpg" alt="Akane wa Tsumare Somerareru">
-        </a>
-      </div>
-      <div class="titulo-serie">Akane wa Tsumare Somerareru</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai179.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kiVdium3XoTScip35pSskBe00t7.jpg" alt="Yamitsuki Pheromone">
-        </a>
-      </div>
-      <div class="titulo-serie">Yamitsuki Pheromone</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai180.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2d67644CXEkiBa96AlR8Y8BdUI4.jpg" alt="Himitsu no Kichi">
-        </a>
-      </div>
-      <div class="titulo-serie">Himitsu no Kichi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai181.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uZTw6m0AS4PBXYjyLNVkOtpsbZ9.jpg" alt="Sei Dorei Gakuen 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Sei Dorei Gakuen 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai182.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gC0HRKECXKUEnc3lEBBpJW3OQB7.jpg" alt="Kimi wa Yasashiku Netorareru">
-        </a>
-      </div>
-      <div class="titulo-serie">Kimi wa Yasashiku Netorareru</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai183.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8rwmNsfvSRk5PIYUpHdzbrMxFe3.jpg" alt="Abandon: 100 Nuki Shinai">
-        </a>
-      </div>
-      <div class="titulo-serie">Abandon: 100 Nuki Shinai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai184.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k43udprv8bHWy9oxbpKq5DgRxqZ.jpg" alt="Inkou Kyoushi no Saimin">
-        </a>
-      </div>
-      <div class="titulo-serie">Inkou Kyoushi no Saimin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai185.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1qlZKleRrl20mR5zoVHLUk6V5sw.jpg" alt="Yamitsuki Mura: Melty Limit">
-        </a>
-      </div>
-      <div class="titulo-serie">Yamitsuki Mura: Melty Limit</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai186.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/su89DaQSNNNCvPSH5uW0lOZLivx.jpg" alt="Isekai Yarisaa">
-        </a>
-      </div>
-      <div class="titulo-serie">Isekai Yarisaa</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai187.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/22NtTsrtP0Cbu1oeVOFndvG0Tdu.jpg" alt="Harem Cult">
-        </a>
-      </div>
-      <div class="titulo-serie">Harem Cult</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai188.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/18HyXar9h3V32hxwhc05w8WsEy3.jpg" alt="Kyonyuu Onna Senshi">
-        </a>
-      </div>
-      <div class="titulo-serie">Kyonyuu Onna Senshi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai189.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/rLmJHm61YpT8BiGTYPE3ZycKMhO.jpg" alt="Pandemic">
-        </a>
-      </div>
-      <div class="titulo-serie">Pandemic</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai190.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ySmVjDxDb0Giw8lMMCw1e6i7DzW.jpg" alt="Otome wa Boku ni Koi Shiteru">
-        </a>
-      </div>
-      <div class="titulo-serie">Otome wa Boku ni Koi Shiteru</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai191.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nVcBsBRpbVSQIoMVz6UnukVckdw.jpg" alt="JK Genkai Koubi: Goui Sounyuu">
-        </a>
-      </div>
-      <div class="titulo-serie">JK Genkai Koubi: Goui Sounyuu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai192.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aCcZHsd9jvZ3xF57SzI6XcXwOnV.jpg" alt="#Ima Made de Ichiban">
-        </a>
-      </div>
-      <div class="titulo-serie">#Ima Made de Ichiban</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai193.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/eHS3LIkjk7jljVPTL04IB9ycSWI.jpg" alt="Seika Jogakuin Kounin">
-        </a>
-      </div>
-      <div class="titulo-serie">Seika Jogakuin Kounin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai194.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/eUPru78leylNslc4C6fsnUDlEMf.jpg" alt="Natsuyasumi Ake no Kanojo wa…">
-        </a>
-      </div>
-      <div class="titulo-serie">Natsuyasumi Ake no Kanojo wa…</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai195.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/k3m0ssAcejysq5gTrhSpXQAO0di.jpg" alt="Summer: Inaka no Seikatsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Summer: Inaka no Seikatsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai196.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/w8HHWPcF3wJFYEr6KTFlkGqRsvH.jpg" alt="Sleepless: A Midsummer Night’s">
-        </a>
-      </div>
-      <div class="titulo-serie">Sleepless: A Midsummer Night’s</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai197.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/f32oB4NIGysr02LDZMLZwiURJLO.jpg" alt="SLEEPLESS Nocturne">
-        </a>
-      </div>
-      <div class="titulo-serie">SLEEPLESS Nocturne</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai198.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/fzbvTWMui82qehcSxXtg5aIb3uz.jpg" alt="Doukyuusei Remake">
-        </a>
-      </div>
-      <div class="titulo-serie">Doukyuusei Remake</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai199.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sUanNOTNUte8FI0SqPI6MlVOZsn.jpg" alt="Boku wa Chiisana Succubus">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku wa Chiisana Succubus</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai200.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2or3tmuNAPUR3NEn8A5oPHKASpB.jpg" alt="Haji+ Shinchishin">
-        </a>
-      </div>
-      <div class="titulo-serie">Haji+ Shinchishin</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai201.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/d22nZQLl2qTFP1znKKNejEEcPca.jpg" alt="Kitsune Musume no Ecchi">
-        </a>
-      </div>
-      <div class="titulo-serie">Kitsune Musume no Ecchi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai202.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/o6U6A7sM8xZuk7jfCOM687V4XIO.jpg" alt="Iinchou wa Saimin Appli">
-        </a>
-      </div>
-      <div class="titulo-serie">Iinchou wa Saimin Appli</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai203.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/eiKFRqgoind7pLjU96qlu9XbXL3.jpg" alt="Korashime 2: Kyouikuteki">
-        </a>
-      </div>
-      <div class="titulo-serie">Korashime 2: Kyouikuteki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai204.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dM7GVbKUe8BfdNTZqvZTDZIKvk1.jpg" alt="Renseijutsushi Colette no H">
-        </a>
-      </div>
-      <div class="titulo-serie">Renseijutsushi Colette no H</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai205.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gbxG4pbrsmOsBrbXfTFoGfpv8hJ.jpg" alt="Boku ni Sefure ga Dekita Riyuu">
-        </a>
-      </div>
-      <div class="titulo-serie">Boku ni Sefure ga Dekita Riyuu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai206.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hy9uJkzkAiK2dxCPWdFyZgfQwK3.jpg" alt="Delivery Chinko o Tanomitai">
-        </a>
-      </div>
-      <div class="titulo-serie">Delivery Chinko o Tanomitai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai207.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8LqExlhalexwcqwcSty80sKFMHw.jpg" alt="Raikou Shinki Igis Magia">
-        </a>
-      </div>
-      <div class="titulo-serie">Raikou Shinki Igis Magia</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai208.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sudOBvSoi73NLSUn4I8IXuOB2De.jpg" alt="Succubus Yondara Haha ga Kita!?">
-        </a>
-      </div>
-      <div class="titulo-serie">Succubus Yondara Haha ga Kita!?</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai209.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vjWR4QIzcfpUV25Ps6GbJ7K8ZGk.jpg" alt="Mesudachi The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Mesudachi The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai210.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/9gzHfl5riwff5zUXOBeokxzY5Dh.jpg" alt="Roshutsu-kei Mahou Joshidaisei">
-        </a>
-      </div>
-      <div class="titulo-serie">Roshutsu-kei Mahou Joshidaisei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai211.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xjiZHTfeNffOuCryRNgYYQUoLfW.jpg" alt="Otogibanashi no Onigokko">
-        </a>
-      </div>
-      <div class="titulo-serie">Otogibanashi no Onigokko</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai212.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8g0yVQb0pRHQRyqB1U5xiz2Xa7C.jpg" alt="3 Piece The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">3 Piece The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai213.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3f65awmQllWqLbVOkN6lRyddyUH.jpg" alt="Yari Agari">
-        </a>
-      </div>
-      <div class="titulo-serie">Yari Agari</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai214.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/19l6d3uVfwQJcopoW2k6A5utaRp.jpg" alt="Aoharu Snatch">
-        </a>
-      </div>
-      <div class="titulo-serie">Aoharu Snatch</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai215.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/os4vEDx1rWEazEXEw2bVVBD71Et.jpg" alt="Majo wa Kekkyoku Sono Kyaku to…">
-        </a>
-      </div>
-      <div class="titulo-serie">Majo wa Kekkyoku Sono Kyaku to…</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai216.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/8Fetav9glQhI2IpTLIjSJu5W3vI.jpg" alt="Class de Otoko wa Boku Hitori!?">
-        </a>
-      </div>
-      <div class="titulo-serie">Class de Otoko wa Boku Hitori!?</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai217.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/lA8tcnYr7xjnuLOi6YM8nTKbKSa.jpg" alt="Bonyuu-chan wa Dashitai">
-        </a>
-      </div>
-      <div class="titulo-serie">Bonyuu-chan wa Dashitai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai218.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dz3pToWPJLUfPalFsN8WMgqoJNc.jpg" alt="Goblin no Suana">
-        </a>
-      </div>
-      <div class="titulo-serie">Goblin no Suana</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai219.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dPggNYTbsZy2NjtvwcDyLpPJO55.jpg" alt="Tsurupeta Shugo Kishi Elfina">
-        </a>
-      </div>
-      <div class="titulo-serie">Tsurupeta Shugo Kishi Elfina</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai220.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ORKYTxRdkcngVn0iiyY4EILBiL.jpg" alt="Kokuhaku……">
-        </a>
-      </div>
-      <div class="titulo-serie">Kokuhaku……</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai221.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/i2JnCulm6sIgW4pdHbQBQyr4Dzw.jpg" alt="Rakuen Shinshoku">
-        </a>
-      </div>
-      <div class="titulo-serie">Rakuen Shinshoku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai222.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/zTtU3R1ZUFo5DAUPjK3ExsF5XCH.jpg" alt="Fushigi no Kuni no Succubus">
-        </a>
-      </div>
-      <div class="titulo-serie">Fushigi no Kuni no Succubus</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai223.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6diy4AlgnF4ZmNVaig0dKpgRvc3.jpg" alt="Maid Kyouiku. Botsuraku Kizoku">
-        </a>
-      </div>
-      <div class="titulo-serie">Maid Kyouiku. Botsuraku Kizoku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai224.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/a6nejVJNxvHYpzNzXxvx9KJ55Dj.jpg" alt="Nightmare x Deathscythe">
-        </a>
-      </div>
-      <div class="titulo-serie">Nightmare x Deathscythe</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai225.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1dnjI4RnNuyVls2GvZoazWU7RyF.jpg" alt="Sukebe Elf Tanbouki">
-        </a>
-      </div>
-      <div class="titulo-serie">Sukebe Elf Tanbouki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai226.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kVZhLvKamPtNFWeKEzia17VaEnh.jpg" alt="Tanetsuke Ojisan to NTR Hitozuma Sex">
-        </a>
-      </div>
-      <div class="titulo-serie">Tanetsuke Ojisan to NTR Hitozuma Sex</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai227.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/sGggFfa6s80uDviZgsErulNJEBM.jpg" alt="Tanetsuke Ojisan to Papakko JD">
-        </a>
-      </div>
-      <div class="titulo-serie">Tanetsuke Ojisan to Papakko JD</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai228.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/iNrPo8j7EFMMbvTP8C5SroVUOYv.jpg" alt="1LDK + JK Ikinari Doukyo Micchaku">
-        </a>
-      </div>
-      <div class="titulo-serie">1LDK + JK Ikinari Doukyo Micchaku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai229.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/pjyuP3KjUabPPdMfGpIfLmhdB14.jpg" alt="Okusama no Kaifukujutsu">
-        </a>
-      </div>
-      <div class="titulo-serie">Okusama no Kaifukujutsu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai230.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/cirOKfZ79bxoU6OfG3faaHSAm1r.jpg" alt="Kunoichi Ryoujokuden Ajisai">
-        </a>
-      </div>
-      <div class="titulo-serie">Kunoichi Ryoujokuden Ajisai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai231.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/v9BM8QnVraDu2g5JujoMV5i6nx2.jpg" alt="JK to Ero Giin Sensei">
-        </a>
-      </div>
-      <div class="titulo-serie">JK to Ero Giin Sensei</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai232.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/dTPfLOrok7dS7TNl84V2LY6NB8Y.jpg" alt="My Mother The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">My Mother The Animation</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai233.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6AnKjbLlwwyXvdXfcYEkQLo1zK8.jpg" alt="Discipline">
-        </a>
-      </div>
-      <div class="titulo-serie">Discipline</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai234.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mFYdR6m8rlGzcVjLmTiYoVRHwCL.jpg" alt="Discipline Zero">
-        </a>
-      </div>
-      <div class="titulo-serie">Discipline Zero</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai235.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/wTG5pkgweDj8rPgl9ILwwV4bpHP.jpg" alt="Maid In Heaven Supers">
-        </a>
-      </div>
-      <div class="titulo-serie">Maid In Heaven Supers</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai236.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nsmb44khs2IpoelokdU1HwEAp3.jpg" alt="Sora no Iro, Mizu no Iro">
-        </a>
-      </div>
-      <div class="titulo-serie">Sora no Iro, Mizu no Iro</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai237.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/iP8Mq4Ed02Uy4o9Hf2KgBduHB2d.jpg" alt="Megachu! Megami-sama">
-        </a>
-      </div>
-      <div class="titulo-serie">Megachu! Megami-sama</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai238.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6j05A1gjyQcD4Lh5u6jabKd6knC.jpg" alt="Lover in Law">
-        </a>
-      </div>
-      <div class="titulo-serie">Lover in Law</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai239.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/omdsg4O13UMMGpc3Lqwqg9broB0.jpg" alt="Fault">
-        </a>
-      </div>
-      <div class="titulo-serie">Fault</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai240.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/jEIE9IgXlZBG6SXgRDrcu4Crvpn.jpg" alt="Fault!! Service Aratanaru Rival">
-        </a>
-      </div>
-      <div class="titulo-serie">Fault!! Service Aratanaru Rival</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai241.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6mkpoVNbubpOfuH9b1H82Q3drks.jpg" alt="Aki Sora">
-        </a>
-      </div>
-      <div class="titulo-serie">Aki Sora</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai242.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tzZJy8v6plN32HNg7JgbVkHD5xU.jpg" alt="Diabolus: Kikoku">
-        </a>
-      </div>
-      <div class="titulo-serie">Diabolus: Kikoku</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai243.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7diesoa8fxrzjdWo81nngnjNyzl.jpg" alt="Oni chichi">
-        </a>
-      </div>
-      <div class="titulo-serie">Oni chichi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai244.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/hKKobVxUXdYnPii31tuE7RKn45q.jpg" alt="Oni Chichi 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Oni Chichi 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai245.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uTJi49Ot1YBAVhVsiEG7oVUGfjr.jpg" alt="Princess Lover!">
-        </a>
-      </div>
-      <div class="titulo-serie">Princess Lover!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai246.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/kq64IUwC4BmwBzpTZZn1dob8DH2.jpg" alt="Sweet Home H na Oneesan">
-        </a>
-      </div>
-      <div class="titulo-serie">Sweet Home H na Oneesan</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai247.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/be2vpUChnOpWsDtBWvVw85MTkY4.jpg" alt="HHH Triple Ecchi">
-        </a>
-      </div>
-      <div class="titulo-serie">HHH Triple Ecchi</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai248.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4DKuGKIoEYolC0zXs7Tt1baMzn2.jpg" alt="Yume Kui: Tsurumiku Shiki Game">
-        </a>
-      </div>
-      <div class="titulo-serie">Yume Kui: Tsurumiku Shiki Game</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai249.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3vSoEiltkHHdWpF4R6O3i0FyiUT.jpg" alt="Eroge! H mo Game mo Kaihatsu Zanmai">
-        </a>
-      </div>
-      <div class="titulo-serie">Eroge! H mo Game mo Kaihatsu Zanmai</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai250.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vfRd4iFgAwOrZ8pscAQbBalKxnT.jpg" alt="Wizard Girl Ambitious">
-        </a>
-      </div>
-      <div class="titulo-serie">Wizard Girl Ambitious</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai251.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/2HfzSQKmVmBQp91yypoCStEvhiS.jpg" alt="Shocking Pink">
-        </a>
-      </div>
-      <div class="titulo-serie">Shocking Pink</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai252.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/3wP80yUk2b4cySHjFfyh3GbIGw1.jpg" alt="Bloods: Inraku no Ketsuzoku 2">
-        </a>
-      </div>
-      <div class="titulo-serie">Bloods: Inraku no Ketsuzoku 2</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai253.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/e43aYobz6GiTef2g2EGnNWJqYVM.jpg" alt="Ore wa kanojo o shinjiteru">
-        </a>
-      </div>
-      <div class="titulo-serie">Ore wa kanojo o shinjiteru</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai254.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xvr5NEWti5oNkJj0rcinAiEVQDA.jpg" alt="Menkui!">
-        </a>
-      </div>
-      <div class="titulo-serie">Menkui!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai255.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mS7eX3qbOFsjfsGMruSDdYTG7tH.jpg" alt="Euphoria">
-        </a>
-      </div>
-      <div class="titulo-serie">Euphoria</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai256.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oPQlRyC3lzetMhtMPYoiIVOJshV.jpg" alt="Please Rape Me!">
-        </a>
-      </div>
-      <div class="titulo-serie">Please Rape Me!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai257.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aJGcrNfkuof2ZlZK4fD9JNotxV2.jpg" alt="Oppai Heart Kanojo">
-        </a>
-      </div>
-      <div class="titulo-serie">Oppai Heart Kanojo</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai258.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/1FJmR86xTcAros7rQZU9sjqNsZu.jpg" alt="Otome Dori">
-        </a>
-      </div>
-      <div class="titulo-serie">Otome Dori</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai259.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/5OKElp2HsHgQqDj4vwekTcdxrtW.jpg" alt="Brandish">
-        </a>
-      </div>
-      <div class="titulo-serie">Brandish</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai260.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/vsIdQwkL6Gwr5TA03T7cqoZReWR.jpg" alt="Ane Summer!">
-        </a>
-      </div>
-      <div class="titulo-serie">Ane Summer!</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai261.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/g5ctsrZHZBRAI8tW6dxqg4z7quZ.jpg" alt="Ane Haramix">
-        </a>
-      </div>
-      <div class="titulo-serie">Ane Haramix</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai262.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/l0TrYqvNrHQY5Mj9Lll6iYjQKrR.jpg" alt="Maki-chan to Nau">
-        </a>
-      </div>
-      <div class="titulo-serie">Maki-chan to Nau</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai263.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6wERu42QfC1jvmgR7M2C9dAhx5F.jpg" alt="Papa Love">
-        </a>
-      </div>
-      <div class="titulo-serie">Papa Love</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai264.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7YbXrd9TIk8ckWf6EOH7YrdKxCj.jpg" alt="Tsun Tsun Maid wa Ero Ero Desu">
-        </a>
-      </div>
-      <div class="titulo-serie">Tsun Tsun Maid wa Ero Ero Desu</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai265.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/z3nurpkdj0V3NaZPRbvid2QoYmT.jpg" alt="Tsugou no Yoi SexFriend">
-        </a>
-      </div>
-      <div class="titulo-serie">Tsugou no Yoi SexFriend</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai266.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/uyuFP1w4FEozYU8AidHit3yD7x9.jpg" alt="Joshikousei no Koshitsuki">
-        </a>
-      </div>
-      <div class="titulo-serie">Joshikousei no Koshitsuki</div>
-    </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai267.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/oCI7i9LbJjioJt6Qxc7fFaNkIma.jpg" alt="Kakushi Dere">
-        </a>
-      </div>
-      <div class="titulo-serie">Kakushi Dere</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai268.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/g8MBtZpu0glNTh8hqMkj9mjnHSo.jpg" alt="Mesu Nochi Torare">
-        </a>
-      </div>
-      <div class="titulo-serie">Mesu Nochi Torare</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai269.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/6glKRSXRQ0dBq0qSQmQ9WxfHeEb.jpg" alt="Nuki Doki Tenshi to Akuma">
-        </a>
-      </div>
-      <div class="titulo-serie">Nuki Doki Tenshi to Akuma</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai270.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/4gnDm4O8mHQXpgYeAWuoiHEiCqm.jpg" alt="Nuki Doki Tenshi to Akuma">
-        </a>
-      </div>
-      <div class="titulo-serie">Nuki Doki Tenshi to Akuma</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai271.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/tBE1T4UoLbD4hav291ey51bG3BZ.jpg" alt="Koikishi Purely Kiss">
-        </a>
-      </div>
-      <div class="titulo-serie">Koikishi Purely Kiss</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai272.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/lJS7U7Wu1yd3rUhJEjUZmKfOLo6.jpg" alt="Waisetsu Missile The Animation">
-        </a>
-      </div>
-      <div class="titulo-serie">Waisetsu Missile The Animation</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai273.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gZ8I7EDT4xMdsEudGI2rBJTCio6.jpg" alt="Dorei Usagi to Anthony">
-        </a>
-      </div>
-      <div class="titulo-serie">Dorei Usagi to Anthony</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai274.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/mfyO17ofCCpS6aSkawGfOTpijOB.jpg" alt="Tenioha Onnanoko Datte Honto">
-        </a>
-      </div>
-      <div class="titulo-serie">Tenioha Onnanoko Datte Honto</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai275.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/zVugyLKvTUJsAycUQqWK1SvZ8F0.jpg" alt="Chichi-iro Toiki">
-        </a>
-      </div>
-      <div class="titulo-serie">Chichi-iro Toiki</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai276.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/nXLoeiGH8BUmmySAtQDnOmZ0bay.jpg" alt="Fuzzy Lips">
-        </a>
-      </div>
-      <div class="titulo-serie">Fuzzy Lips</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai277.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/g2K1l8lb5Cl7h5EUhkRCagBOIDe.jpg" alt="Mou Hasamazu ni wa Irarenai">
-        </a>
-      </div>
-      <div class="titulo-serie">Mou Hasamazu ni wa Irarenai</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai278.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/gcP4ROTTWbv6bdKYKxMVo2IBNpf.jpg" alt="Fela Pure: Mitarashi-san">
-        </a>
-      </div>
-      <div class="titulo-serie">Fela Pure: Mitarashi-san</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai279.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="Itadaki! Seieki">
-        </a>
-      </div>
-      <div class="titulo-serie">Itadaki! Seieki</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai280.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/aaw7ujMxggbZllWR09GTZcqaeIH.jpg" alt="Ane Kyun! Joshi ga Ie ni Kita!">
-        </a>
-      </div>
-      <div class="titulo-serie">Ane Kyun! Joshi ga Ie ni Kita!</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai281.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/pksGb4nlVAKzYFYMXESB84Fi4K4.jpg" alt="Fechikano!">
-        </a>
-      </div>
-      <div class="titulo-serie">Fechikano!</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai282.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/b1DCpeEM2ymTtokLsTShaWQIAOF.jpg" alt="Idol Sister">
-        </a>
-      </div>
-      <div class="titulo-serie">Idol Sister</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai283.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/xbf8cBeZ9ukifr7snVeo0pzfntn.jpg" alt="Rance Hikari o Motomete">
-        </a>
-      </div>
-      <div class="titulo-serie">Rance Hikari o Motomete</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai284.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/m9Tv4UPEKjzKyt2uN4FIAFSJx7R.jpg" alt="Koi Maguwai">
-        </a>
-      </div>
-      <div class="titulo-serie">Koi Maguwai</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai285.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ceDIRqmPN0pcfTjP9HuyeS6bBGD.jpg" alt="Otome Hime">
-        </a>
-      </div>
-      <div class="titulo-serie">Otome Hime</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai286.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/auNiWg5flI7mdnV3AiXclmmxfmi.jpg" alt="Menhera Ayuri no Yamanai Onedari">
-        </a>
-      </div>
-      <div class="titulo-serie">Menhera Ayuri no Yamanai Onedari</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai287.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/7daZ0s3FfWdUkkzHMRgoKI7Kw9g.jpg" alt="Boy Meets Harem">
-        </a>
-      </div>
-      <div class="titulo-serie">Boy Meets Harem</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai288.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/ynMs0u6d5ZeDFXYXsuASdoxrj9j.jpg" alt="Fukubiki! Triangle">
-        </a>
-      </div>
-      <div class="titulo-serie">Fukubiki! Triangle</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai289.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/bNQjSh66AG0uaXDMKb8X9YEWcoK.jpg" alt="Kanojo ga Nekomimi ni Kigaetara">
-        </a>
-      </div>
-      <div class="titulo-serie">Kanojo ga Nekomimi ni Kigaetara</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai290.html">
-          <img src="https://media.themoviedb.org/t/p/w220_and_h330_face/qhuFtLReqHi9P4CUwBfkCusSvyL.jpg" alt="Mankitsu Happening">
-        </a>
-      </div>
-      <div class="titulo-serie">Mankitsu Happening</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
-
-    <div class="serie">
-      <div class="poster">
-        <a href="CatalogoHent/Hentai055.html">
-          <img src="https" alt="Serie">
-        </a>
-      </div>
-      <div class="titulo-serie">Serie</div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
     </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
+
+    <div class="serie"
+     data-id="158206"
+     data-tipo="tv"
+     data-nombre="Super">
+    <div class="poster">
+        <a href="CatalogoHent/Hentai001.html">
+            <img>
+        </a>
+    </div>
+    <div class="titulo-serie"></div>
+   </div>
   </div>
 
 <!-- Modal si no hay conexión -->
@@ -2993,6 +1186,115 @@ go:236994L
 
 <!-- Toast: conexión restaurada -->
 <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
+
+<script>
+const loading = document.getElementById("loading");
+
+const API_KEY = "b6083b855479a79fd9acdb0a2789f126";
+const TMDB = "https://api.themoviedb.org/3";
+const IMG = "https://image.tmdb.org/t/p/w500";
+
+function hideLoading(){
+    loading.classList.add("hide");
+}
+
+async function cargarPeliculas(){
+
+    const tarjetas = document.querySelectorAll(".serie");
+
+    const promesas = [];
+
+    tarjetas.forEach(tarjeta=>{
+
+        const id = tarjeta.dataset.id;
+        const tipo = tarjeta.dataset.tipo;
+
+        if(!id || !tipo) return;
+
+        const p = fetch(
+            `${TMDB}/${tipo}/${id}?api_key=${API_KEY}&language=es-ES`
+        )
+        .then(r=>r.json())
+        .then(datos=>{
+
+            // Nombre personalizado (si existe)
+const tituloManual = tarjeta.dataset.nombre?.trim();
+
+// Si no existe, usar el de TMDB
+const titulo =
+    tituloManual ||
+    datos.title ||
+    datos.name ||
+    "Sin título";
+
+// Mostrar un título recortado
+const tituloMostrar =
+    titulo.length > 30
+        ? titulo.substring(0, 30).trim() + "..."
+        : titulo;
+
+tarjeta.querySelector(".titulo-serie").textContent = tituloMostrar;
+
+// Póster obtenido desde TMDB
+const img = tarjeta.querySelector("img");
+
+// Poster personalizado (si existe)
+const posterManual = tarjeta.dataset.poster?.trim();
+
+img.src =
+    posterManual ||
+    (datos.poster_path ? IMG + datos.poster_path : "");
+
+img.alt = titulo;
+
+        })
+        .catch(console.error);
+
+        promesas.push(p);
+
+    });
+
+    await Promise.all(promesas);
+
+}
+
+(async()=>{
+
+    await cargarPeliculas();
+
+    const imagenes = document.querySelectorAll(".poster img");
+
+    let cargadas = 0;
+
+    function comprobar(){
+
+        cargadas++;
+
+        if(cargadas === imagenes.length){
+
+            setTimeout(hideLoading,500);
+
+        }
+
+    }
+
+    imagenes.forEach(img=>{
+
+        if(img.complete){
+
+            comprobar();
+
+        }else{
+
+            img.onload = comprobar;
+            img.onerror = comprobar;
+
+        }
+
+    });
+
+})();
+</script>
 
 <script>
   const modal = document.getElementById("connectionModal");
