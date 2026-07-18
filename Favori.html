@@ -287,11 +287,16 @@ grid.style.display = "grid";
     const card = document.createElement('div');
     card.className = 'card';
 
-    card.innerHTML = `
-      <img src="${series.banner}" alt="${series.title}">
-      <div class="card-title">${series.title}</div>
-      <button class="remove-btn">×</button>
-    `;
+    const tituloMostrar =
+    series.title.length > 30
+        ? series.title.substring(0, 30).trim() + "..."
+        : series.title;
+
+card.innerHTML = `
+  <img src="${series.banner}" alt="${series.title}">
+  <div class="card-title">${tituloMostrar}</div>
+  <button class="remove-btn">×</button>
+`;
 
     // Clic en la tarjeta abre la serie
     card.onclick = () => {
@@ -355,5 +360,6 @@ function showToast(message, color = "#28a745") {
 document.addEventListener("dragstart", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 </script>
+<script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
 </body>
 </html>
