@@ -377,7 +377,14 @@ const tmdbId = 228358;
 /* Título personalizado */
 const customTitle = "Tanetsuke Oji-san to NTR Hitozuma Sex The Animation";
 
+/* Poster personalizado */
 const customPoster = "";
+
+/* Backdrop personalizado */
+const customBackdrop = "";
+
+/* Sinopsis personalizada */
+const customSynopsis = "";
 
 /* Temporada de TMDB */
 const seasonNumber = 1;
@@ -513,7 +520,8 @@ async function loadAnime(){
 
     /* Banner */
     document.getElementById("banner").src =
-      `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
+  customBackdrop ||
+  `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
 
     /* Poster */
     document.getElementById("poster").src =
@@ -524,9 +532,14 @@ document.getElementById("animeTitle").textContent =
   customTitle || data.name || data.title;
   
   /* Sinopsis */
-  fullSynopsis = data.overview && data.overview.trim() !== ""
-    ? data.overview
-    : "No hay sinopsis disponible.";
+fullSynopsis =
+  customSynopsis && customSynopsis.trim() !== ""
+    ? customSynopsis
+    : (
+        data.overview && data.overview.trim() !== ""
+          ? data.overview
+          : "No hay sinopsis disponible."
+      );
 
 if(fullSynopsis.length > 150){
 
