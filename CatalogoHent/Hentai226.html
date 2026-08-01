@@ -379,8 +379,12 @@ const customTitle = "Tanetsuke Oji-san to NTR Hitozuma Sex The Animation";
 
 const customPoster = "";
 
-/* Temporada */
+/* Temporada de TMDB */
 const seasonNumber = 1;
+
+/* Episodios que quieres mostrar */
+const firstEpisode = 1;
+const lastEpisode = 1;
 
 /* ID local */
 const seriesId = "Hentai226";
@@ -562,29 +566,37 @@ if(fullSynopsis.length > 150){
     ? seasonData.air_date.split("-")[0]
     : "";
 
+const displayedEpisodes =
+  Math.min(
+    seasonData.episodes.length,
+    lastEpisode
+  ) - firstEpisode + 1;
+
 document.getElementById("animeMeta").innerHTML =
 `
 ⭐ ${data.vote_average.toFixed(1)}
 • ${seasonYear}
 • ${genres}
-• ${seasonData.episodes.length} Episodios
+• ${displayedEpisodes} Episodios
 `;
 
-      const episodiosDisponibles = seasonData.episodes.filter((ep, index) => {
-
-  return (
-    videoLinks[index] &&
+      const episodiosDisponibles = seasonData.episodes
+  .slice(firstEpisode - 1, lastEpisode)
+  .map((ep, index) => ({
+    ...ep,
+    video: videoLinks[index]
+  }))
+  .filter(ep =>
+    ep.video &&
     ep.air_date &&
     new Date(ep.air_date) <= new Date()
   );
 
-});
-
 episodes = episodiosDisponibles.map((ep, index) => ({
 
-  title: `Episodio ${ep.episode_number}`,
+  title: `Episodio ${firstEpisode + index}`,
 
-  url: videoLinks[index],
+  url: ep.video,
 
   thumbnail: ep.still_path
     ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
