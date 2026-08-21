@@ -255,7 +255,7 @@ go:236994L
     <h1>Catálogo Hentai</h1>
   </header>
 
-   <div class="catalogo">
+   <div class="catalogo" id="catalogo">
     <div class="serie"
      data-id="158206"
      data-tipo="tv"
@@ -263,7 +263,7 @@ go:236994L
      data-poster="https://image.tmdb.org/t/p/w500/8OCs9oLfLYCfsPKuBFAUZWVtm6w.jpg">
     <div class="poster">
         <a href="CatalogoHent/Hentai001.html">
-            <img>
+            <img decoding="async">
         </a>
     </div>
     <div class="titulo-serie"></div>
@@ -275,7 +275,7 @@ go:236994L
      data-nombre="Sakusei Byoutou The Animation">
     <div class="poster">
         <a href="CatalogoHent/Hentai002.html">
-            <img>
+            <img decoding="async">
         </a>
     </div>
     <div class="titulo-serie"></div>
@@ -287,7 +287,7 @@ go:236994L
      data-nombre="Kaede to Suzu The Animation">
     <div class="poster">
         <a href="CatalogoHent/Hentai003.html">
-            <img>
+            <img decoding="async">
         </a>
     </div>
     <div class="titulo-serie"></div>
@@ -4565,114 +4565,611 @@ go:236994L
 <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
 
 <script>
+
 const loading = document.getElementById("loading");
 
 const API_KEY = "b6083b855479a79fd9acdb0a2789f126";
 const TMDB = "https://api.themoviedb.org/3";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
+
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+/*
+   Cantidad de portadas que se cargarán inmediatamente.
+   
+   Las siguientes utilizarán Lazy Loading.
+*/
+const PORTADAS_INICIALES = 20;
+
+
+/*
+   Tiempo de duración de la caché.
+
+   30 días.
+*/
+const CACHE_DURATION =
+    30 * 24 * 60 * 60 * 1000;
+
+
+/*
+   Versión de la caché.
+
+   Si algún día cambias la estructura de los datos,
+   puedes cambiar v1 por v2 y se creará una caché nueva.
+*/
+const CACHE_VERSION = "v1";
+
+const CACHE_KEY =
+    "rakuen_ver_mas_tmdb_" + CACHE_VERSION;
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
 function hideLoading(){
+
     loading.classList.add("hide");
-}
-
-async function cargarPeliculas(){
-
-    const tarjetas = document.querySelectorAll(".serie");
-
-    const promesas = [];
-
-    tarjetas.forEach(tarjeta=>{
-
-        const id = tarjeta.dataset.id;
-        const tipo = tarjeta.dataset.tipo;
-
-        if(!id || !tipo) return;
-
-        const p = fetch(
-            `${TMDB}/${tipo}/${id}?api_key=${API_KEY}&language=es-ES`
-        )
-        .then(r=>r.json())
-        .then(datos=>{
-
-            // Nombre personalizado (si existe)
-const tituloManual = tarjeta.dataset.nombre?.trim();
-
-// Si no existe, usar el de TMDB
-const titulo =
-    tituloManual ||
-    datos.title ||
-    datos.name ||
-    "Sin título";
-
-// Mostrar un título recortado
-const tituloMostrar =
-    titulo.length > 30
-        ? titulo.substring(0, 30).trim() + "..."
-        : titulo;
-
-tarjeta.querySelector(".titulo-serie").textContent = tituloMostrar;
-
-// Póster obtenido desde TMDB
-const img = tarjeta.querySelector("img");
-
-// Poster personalizado (si existe)
-const posterManual = tarjeta.dataset.poster?.trim();
-
-img.src =
-    posterManual ||
-    (datos.poster_path ? IMG + datos.poster_path : "");
-
-img.alt = titulo;
-
-        })
-        .catch(console.error);
-
-        promesas.push(p);
-
-    });
-
-    await Promise.all(promesas);
 
 }
 
-(async()=>{
 
-    await cargarPeliculas();
+/* =====================================================
+   OBTENER CACHÉ
+===================================================== */
 
-    const imagenes = document.querySelectorAll(".poster img");
+function obtenerCache(){
 
-    let cargadas = 0;
+    try{
 
-    function comprobar(){
+        return JSON.parse(
+            localStorage.getItem(CACHE_KEY)
+        ) || {};
 
-        cargadas++;
+    }catch(error){
 
-        if(cargadas === imagenes.length){
+        console.log(
+            "❌ Error leyendo caché:",
+            error
+        );
 
-            setTimeout(hideLoading,500);
-
-        }
+        return {};
 
     }
 
-    imagenes.forEach(img=>{
+}
 
-        if(img.complete){
 
-            comprobar();
+/* =====================================================
+   GUARDAR CACHÉ
+===================================================== */
 
-        }else{
+function guardarCache(cache){
 
-            img.onload = comprobar;
-            img.onerror = comprobar;
+    try{
+
+        localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify(cache)
+        );
+
+    }catch(error){
+
+        console.log(
+            "❌ Error guardando caché:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   APLICAR DATOS DE TMDB
+===================================================== */
+
+function aplicarDatosTMDB(tarjeta, datos){
+
+    if(!datos) return;
+
+
+    /*
+       Nombre manual.
+
+       Si data-nombre existe, tendrá prioridad
+       sobre el nombre de TMDB.
+    */
+
+    const tituloManual =
+        tarjeta.dataset.nombre?.trim();
+
+
+    const titulo =
+        tituloManual ||
+        datos.title ||
+        datos.name ||
+        "Sin título";
+
+
+    /*
+       Título mostrado.
+    */
+
+    const tituloMostrar =
+        titulo.length > 30
+            ? titulo.substring(0,30).trim() + "..."
+            : titulo;
+
+
+    const tituloElemento =
+        tarjeta.querySelector(".titulo-serie");
+
+
+    if(tituloElemento){
+
+        tituloElemento.textContent =
+            tituloMostrar;
+
+    }
+
+
+    /*
+       Poster.
+    */
+
+    const img =
+        tarjeta.querySelector("img");
+
+
+    if(!img) return;
+
+
+    /*
+       Poster manual si existe.
+    */
+
+    const posterManual =
+        tarjeta.dataset.poster?.trim();
+
+
+    /*
+       Poster de TMDB.
+    */
+
+    const posterTMDB =
+        datos.poster_path
+            ? IMG + datos.poster_path
+            : "";
+
+
+    const urlImagen =
+        posterManual || posterTMDB;
+
+
+    if(!urlImagen) return;
+
+
+    /*
+       Guardamos la URL en data-src.
+    */
+
+    img.dataset.src =
+        urlImagen;
+
+
+    img.alt = titulo;
+
+
+    /*
+       Las primeras 20 imágenes se cargan
+       inmediatamente.
+
+       Las demás utilizan Lazy Loading.
+    */
+
+    const numero =
+        Number(tarjeta.dataset.numero);
+
+
+    if(numero <= PORTADAS_INICIALES){
+
+        cargarImagenInmediata(img);
+
+    }else{
+
+        cargarImagenLazy(img);
+
+    }
+
+}
+
+
+/* =====================================================
+   CARGAR IMAGEN INMEDIATAMENTE
+===================================================== */
+
+function cargarImagenInmediata(img){
+
+    if(!img) return;
+
+
+    if(img.dataset.src){
+
+        img.src =
+            img.dataset.src;
+
+        delete img.dataset.src;
+
+    }
+
+}
+
+
+/* =====================================================
+   LAZY LOADING
+===================================================== */
+
+function cargarImagenLazy(img){
+
+    if(!img) return;
+
+
+    /*
+       Si el navegador/WebView soporta
+       IntersectionObserver.
+    */
+
+    if("IntersectionObserver" in window){
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if(!entry.isIntersecting)
+                            return;
+
+
+                        const imagen =
+                            entry.target;
+
+
+                        if(imagen.dataset.src){
+
+                            imagen.src =
+                                imagen.dataset.src;
+
+                            delete imagen.dataset.src;
+
+                        }
+
+
+                        observer.unobserve(imagen);
+
+                    });
+
+                },
+                {
+                    /*
+                       Comienza a cargar la portada
+                       unos 300px antes de que aparezca.
+                    */
+                    rootMargin:"300px"
+                }
+            );
+
+
+        observer.observe(img);
+
+
+    }else{
+
+        /*
+           Compatibilidad con WebView antiguos.
+        */
+
+        cargarImagenInmediata(img);
+
+    }
+
+}
+
+
+/* =====================================================
+   CARGAR TMDB
+===================================================== */
+
+async function cargarPeliculas(){
+
+    const tarjetas =
+        Array.from(
+            document.querySelectorAll(".serie")
+        );
+
+
+    /*
+       Asignar número a cada tarjeta.
+
+       Esto permite determinar cuáles son
+       las primeras 20.
+    */
+
+    tarjetas.forEach(
+        (tarjeta, indice) => {
+
+            tarjeta.dataset.numero =
+                indice + 1;
+
+        }
+    );
+
+
+    const cache =
+        obtenerCache();
+
+
+    const nuevasPeticiones = [];
+
+
+    /*
+       Revisamos cada serie.
+    */
+
+    tarjetas.forEach(tarjeta => {
+
+        const id =
+            tarjeta.dataset.id;
+
+
+        const tipo =
+            tarjeta.dataset.tipo;
+
+
+        if(!id || !tipo)
+            return;
+
+
+        const cacheId =
+            `${tipo}_${id}`;
+
+
+        const almacenado =
+            cache[cacheId];
+
+
+        /*
+          =================================================
+          CACHÉ VÁLIDA
+          =================================================
+        */
+
+        if(
+            almacenado &&
+            almacenado.timestamp &&
+            (
+                Date.now() -
+                almacenado.timestamp
+            ) < CACHE_DURATION
+        ){
+
+            /*
+               Aplicamos los datos inmediatamente.
+
+               NO hacemos petición a TMDB.
+            */
+
+            aplicarDatosTMDB(
+                tarjeta,
+                almacenado.data
+            );
+
+
+            return;
 
         }
 
+
+        /*
+          =================================================
+          SERIE NUEVA
+          =================================================
+        */
+
+        nuevasPeticiones.push({
+
+            tarjeta,
+            id,
+            tipo,
+            cacheId
+
+        });
+
     });
 
-})();
-</script>
 
+    /*
+       Si no existen series nuevas,
+       terminamos aquí.
+
+       Esto hace que la segunda visita
+       sea muchísimo más rápida.
+    */
+
+    if(nuevasPeticiones.length === 0){
+
+        console.log(
+            "✅ Todas las series fueron cargadas desde caché"
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        `🔄 ${nuevasPeticiones.length} series nuevas`
+    );
+
+
+    /*
+       Número de peticiones simultáneas.
+    */
+
+    const TAMANO_GRUPO = 8;
+
+
+    /*
+       Procesamos las nuevas series
+       en grupos.
+    */
+
+    for(
+        let i = 0;
+        i < nuevasPeticiones.length;
+        i += TAMANO_GRUPO
+    ){
+
+        const grupo =
+            nuevasPeticiones.slice(
+                i,
+                i + TAMANO_GRUPO
+            );
+
+
+        await Promise.all(
+
+            grupo.map(
+                async item => {
+
+                    const {
+                        tarjeta,
+                        id,
+                        tipo,
+                        cacheId
+                    } = item;
+
+
+                    const url =
+                        `${TMDB}/${tipo}/${id}?api_key=${API_KEY}&language=es-ES`;
+
+
+                    try{
+
+                        const respuesta =
+                            await fetch(url);
+
+
+                        if(!respuesta.ok){
+
+                            throw new Error(
+                                `TMDB HTTP ${respuesta.status}`
+                            );
+
+                        }
+
+
+                        const datos =
+                            await respuesta.json();
+
+
+                        /*
+                           Guardar en caché.
+                        */
+
+                        cache[cacheId] = {
+
+                            timestamp:
+                                Date.now(),
+
+                            data:
+                                datos
+
+                        };
+
+
+                        /*
+                           Mostrar inmediatamente
+                           los datos obtenidos.
+                        */
+
+                        aplicarDatosTMDB(
+                            tarjeta,
+                            datos
+                        );
+
+
+                    }catch(error){
+
+                        console.log(
+                            `❌ Error TMDB ${id}:`,
+                            error
+                        );
+
+                    }
+
+                }
+            )
+
+        );
+
+
+        /*
+           Guardar después de cada grupo.
+
+           Así no perdemos todo si el usuario
+           cierra la aplicación.
+        */
+
+        guardarCache(cache);
+
+    }
+
+
+    console.log(
+        "✅ Carga TMDB finalizada"
+    );
+
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+(async()=>{
+
+    /*
+       Mostramos loader.
+    */
+
+    loading.classList.remove("hide");
+
+
+    /*
+       Cargamos TMDB o caché.
+    */
+
+    await cargarPeliculas();
+
+
+    /*
+       Ya tenemos los títulos y las URLs
+       de las imágenes.
+
+       No necesitamos esperar a que todas
+       las portadas terminen de descargar.
+    */
+
+    hideLoading();
+
+})();
+
+</script>
 <script>
   const modal = document.getElementById("connectionModal");
   const toast = document.getElementById("toast");
@@ -4701,7 +5198,6 @@ img.alt = titulo;
   window.addEventListener("offline", updateConnectionStatus);
   window.addEventListener("online", updateConnectionStatus);
 </script>
-
 <script>
   // Bloquea el arrastre de imágenes y otros elementos
   document.addEventListener("dragstart", function(event) {
@@ -4713,8 +5209,6 @@ img.alt = titulo;
     event.preventDefault();
   });
 </script>
-  
   <script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
-
 </body>
 </html>
