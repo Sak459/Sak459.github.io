@@ -629,7 +629,7 @@ document.getElementById("animeMeta").innerHTML =
 • ${displayedEpisodes} Episodios
 `;
 
-/* ================= EPISODIOS TEMPORADA 2 ================= */
+/* ================= EPISODIOS TEMPORADA ================= */
 
 const episodiosDisponibles = [];
 
@@ -643,28 +643,9 @@ for(let numero = firstEpisode; numero <= lastEpisode; numero++){
     continue;
   }
 
-  /*
-   * =====================================================
-   * CORRESPONDENCIA CON LOS ENLACES
-   * =====================================================
-   *
-   * Episodio global 1  → videoLinks[0]
-   * Episodio global 2  → videoLinks[1]
-   * ...
-   * Episodio global 29 → videoLinks[28]
-   * Episodio global 30 → videoLinks[29]
-   * ...
-   * Episodio global 38 → videoLinks[37]
-   *
-   * Así evitamos volver al episodio 1 cuando comienza
-   * la segunda temporada.
-   */
 
   const videoIndex = numero - 1;
 
-  /*
-   * No mostrar episodios futuros.
-   */
   if(
     !ep.air_date ||
     new Date(ep.air_date) > new Date()
@@ -672,9 +653,6 @@ for(let numero = firstEpisode; numero <= lastEpisode; numero++){
     continue;
   }
 
-  /*
-   * Comprobar que existe el enlace correspondiente.
-   */
   if(!videoLinks[videoIndex]){
     console.log(
       "❌ No existe video para episodio:",
@@ -694,28 +672,12 @@ for(let numero = firstEpisode; numero <= lastEpisode; numero++){
 
   episodiosDisponibles.push({
 
-    /*
-     * Número que verá el usuario.
-     *
-     * TMDB 29 → Episodio 1
-     * TMDB 30 → Episodio 2
-     * ...
-     */
     title: `Episodio ${numero - firstEpisode + 1}`,
 
-    /*
-     * Número real del episodio.
-     */
     tmdbEpisode: numero,
 
-    /*
-     * URL CORRECTA.
-     */
     url: videoLinks[videoIndex],
 
-    /*
-     * Miniatura.
-     */
     thumbnail:
       ep.still_path
         ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
