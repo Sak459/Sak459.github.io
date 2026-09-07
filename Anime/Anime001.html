@@ -629,29 +629,65 @@ document.getElementById("animeMeta").innerHTML =
 • ${displayedEpisodes} Episodios
 `;
 
-      const episodiosDisponibles = seasonData.episodes
-  .slice(firstEpisode - 1, lastEpisode)
-  .map((ep, index) => ({
-    ...ep,
-    video: videoLinks[index]
-  }))
-  .filter(ep =>
-    ep.video &&
-    ep.air_date &&
-    new Date(ep.air_date) <= new Date()
+/* ================= EPISODIOS TEMPORADA ================= */
+
+const episodiosDisponibles = [];
+
+for(let numero = firstEpisode; numero <= lastEpisode; numero++){
+
+  const ep = seasonData.episodes.find(
+    e => e.episode_number === numero
   );
 
-episodes = episodiosDisponibles.map((ep, index) => ({
+  if(!ep){
+    continue;
+  }
 
-  title: `Episodio ${index + 1}`,
 
-  url: ep.video,
+  const videoIndex = numero - 1;
 
-  thumbnail: ep.still_path
-    ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
-    : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+  if(
+    !ep.air_date ||
+    new Date(ep.air_date) > new Date()
+  ){
+    continue;
+  }
 
-}));
+  if(!videoLinks[videoIndex]){
+    console.log(
+      "❌ No existe video para episodio:",
+      numero,
+      "índice:",
+      videoIndex
+    );
+
+    continue;
+  }
+
+  console.log(
+    "🎬 Episodio:",
+    numero,
+    "→ videoLinks[" + videoIndex + "]"
+  );
+
+  episodiosDisponibles.push({
+
+    title: `Episodio ${numero - firstEpisode + 1}`,
+
+    tmdbEpisode: numero,
+
+    url: videoLinks[videoIndex],
+
+    thumbnail:
+      ep.still_path
+        ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+        : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+  });
+
+}
+
+episodes = episodiosDisponibles;
 
     }
 
@@ -749,26 +785,50 @@ function renderEpisodes(){
 
 function loadEpisode(i){
 
+  const episodio = episodes[i];
+
+  if(!episodio){
+    showToast(
+      "❌ Episodio no disponible",
+      "#ff4444"
+    );
+    return;
+  }
+
   currentEpisode = i;
 
-  episodeTitle.textContent = episodes[i].title;
+  episodeTitle.textContent = episodio.title;
 
-  const url = episodes[i].url;
+  const url = episodio.url;
+
+  console.log("================================");
+  console.log("▶ EPISODIO SELECCIONADO");
+  console.log("Episodio mostrado:", episodio.title);
+  console.log("Episodio global TMDB:", episodio.tmdbEpisode);
+  console.log("Índice local:", i);
+  console.log("URL:", url);
+  console.log("================================");
 
   if(url){
 
-    Android.openEpisode(url);
+    Android.openEpisode(String(url));
 
   }else{
 
-    showToast("❌ Episodio no disponible", "#ff4444");
+    showToast(
+      "❌ Episodio no disponible",
+      "#ff4444"
+    );
 
+    return;
   }
 
-  localStorage.setItem(seriesId+'_lastEpisode', i);
+  localStorage.setItem(
+    seriesId + '_lastEpisode',
+    String(i)
+  );
 
   updateUI();
-
 }
 
 /* ================= UI ================= */
