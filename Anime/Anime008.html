@@ -629,29 +629,37 @@ document.getElementById("animeMeta").innerHTML =
 • ${displayedEpisodes} Episodios
 `;
 
-      const episodiosDisponibles = seasonData.episodes
+      /* ================= EPISODIOS SELECCIONADOS ================= */
+
+const episodiosDisponibles = seasonData.episodes
   .slice(firstEpisode - 1, lastEpisode)
-  .map((ep, index) => ({
-    ...ep,
-    video: videoLinks[index]
-  }))
   .filter(ep =>
-    ep.video &&
     ep.air_date &&
     new Date(ep.air_date) <= new Date()
   );
 
-episodes = episodiosDisponibles.map((ep, index) => ({
 
-  title: `Episodio ${index + 1}`,
+episodes = episodiosDisponibles.map((ep, index) => {
 
-  url: ep.video,
+  return {
 
-  thumbnail: ep.still_path
-    ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
-    : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+    /* Número que verá el usuario */
+    title: `Episodio ${index + 1}`,
 
-}));
+    /* Número original de TMDB */
+    tmdbEpisode: ep.episode_number,
+
+    /* URL correspondiente */
+    url: videoLinks[index] || '',
+
+    /* Imagen */
+    thumbnail: ep.still_path
+      ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+      : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+  };
+
+});
 
     }
 
@@ -749,23 +757,60 @@ function renderEpisodes(){
 
 function loadEpisode(i){
 
+  const episodio = episodes[i];
+
+  if(!episodio){
+
+    showToast(
+      "❌ Episodio no disponible",
+      "#ff4444"
+    );
+
+    return;
+  }
+
+
   currentEpisode = i;
 
-  episodeTitle.textContent = episodes[i].title;
 
-  const url = episodes[i].url;
+  episodeTitle.textContent =
+    episodio.title;
+
+
+  const url =
+    episodio.url;
+
 
   if(url){
+
+    console.log(
+      "▶ Reproduciendo:",
+      episodio.title,
+      "| TMDB:",
+      episodio.tmdbEpisode,
+      "| índice:",
+      i,
+      "| URL:",
+      url
+    );
 
     Android.openEpisode(url);
 
   }else{
 
-    showToast("❌ Episodio no disponible", "#ff4444");
+    showToast(
+      "❌ Episodio no disponible",
+      "#ff4444"
+    );
 
   }
 
-  localStorage.setItem(seriesId+'_lastEpisode', i);
+
+  localStorage.setItem(
+    seriesId + '_lastEpisode',
+    i
+  );
+
 
   updateUI();
 
