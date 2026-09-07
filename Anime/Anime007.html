@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rakuen Anime</title>
+<title>Plantilla Movies</title>
 
 <style>
 :root{
@@ -80,10 +80,29 @@ img{
   margin-bottom:12px;
 }
 
-#animeDescription{
+.synopsis{
   color:#ddd;
   font-size:.95rem;
-  line-height:1.5;
+  line-height:1.7;
+  margin:15px auto 5px;
+  max-width:900px;
+  text-align:center;
+  white-space:pre-wrap;
+}
+
+#toggleSynopsis{
+  display:none;
+  margin:8px auto 15px;
+  color:var(--accent);
+  font-weight:bold;
+  cursor:pointer;
+  text-align:center;
+  user-select:none;
+  font-size:.9rem;
+}
+
+#toggleSynopsis:hover{
+  opacity:.8;
 }
 
 .series-actions{
@@ -237,10 +256,58 @@ img{
 .toast.show{
   opacity:1;
 }
+
+/* Loading Screen */
+
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
+  transition:opacity .4s ease;
+}
+
+#loadingScreen.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.spinner{
+  width:70px;
+  height:70px;
+  border:4px solid rgba(255,255,255,.15);
+  border-top:4px solid var(--accent);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+.loading-text{
+  margin-top:15px;
+  color:#fff;
+  font-size:1.5rem;
+}
+
+@keyframes spin{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
 </style>
 </head>
 
 <body>
+
+<div id="loadingScreen">
+  <div class="spinner"></div>
+  <div class="loading-text">Cargando...</div>
+</div>
 
 <div class="header-fixed">
 
@@ -254,9 +321,13 @@ img{
 
     <div class="meta" id="animeMeta"></div>
 
-    <p id="animeDescription">
-      Cargando información...
+    <p id="animeSynopsis" class="synopsis">
+    Cargando sinopsis...
     </p>
+
+    <div id="toggleSynopsis">
+     Ver más
+     </div>
 
   </div>
 
@@ -265,7 +336,7 @@ img{
     <div class="action-btn" id="watchedBtn">✔ Finalizada</div>
   </div>
 
-  <div id="episodeTitle">Selecciona un episodio</div>
+  <div id="episodeTitle">Selecciona un Episoddio</div>
 
 </div>
 
@@ -301,8 +372,12 @@ img{
 const TMDB_API = "b6083b855479a79fd9acdb0a2789f126";
 
 /* Anime */
-const tmdbType = "tv";
-const tmdbId = 297313;
+const tmdbType = "movie";
+const tmdbId = 1311031;
+/* Título personalizado */
+const customTitle = "Kimetsu no Yaiba Movie 1: Mugenjou-hen Latino";
+
+const customPoster = "https://image.tmdb.org/t/p/w500/qjyWDOYokheTTWLMzwJAuvSJeYg.jpg";
 
 /* Temporada */
 const seasonNumber = 1;
@@ -311,10 +386,8 @@ const seasonNumber = 1;
 const seriesId = "Anime007";
 
 /* Tus links de video */
-const videoLinks = [
-'https://cdn.hvidserv.com/m3u8/f1702923981a9cfef2d803ff093f9e3b',
-'https://cdn.hvidserv.com/m3u8/72a7fbac7d09c8e2afbbfbdde7f7ce0f',
-'https://ryderjet.com/embed/yh2h12wrsxey'
+const videoLinks = [  
+'https://cdn.krilin.to/m3u8/52d83600f7c02643227ecca50e0ec739'
 ];
 
 /* ================= ELEMENTOS ================= */
@@ -325,6 +398,27 @@ const episodeTitle = document.getElementById('episodeTitle');
 const favBtn = document.getElementById('favoriteBtn');
 const watchedBtn = document.getElementById('watchedBtn');
 const currentPage = window.location.pathname;
+
+const synopsis = document.getElementById("animeSynopsis");
+const toggleSynopsis = document.getElementById("toggleSynopsis");
+
+let fullSynopsis = "";
+let synopsisExpanded = false;
+  
+  const loadingScreen =
+  document.getElementById("loadingScreen");
+
+function hideLoading(){
+
+  if(!loadingScreen) return;
+
+  loadingScreen.classList.add("hide");
+
+  setTimeout(()=>{
+    loadingScreen?.remove();
+  },400);
+
+}
 
 let episodes = [];
 let currentEpisode = localStorage.getItem(seriesId+'_lastEpisode');
@@ -418,50 +512,39 @@ async function loadAnime(){
 
     /* Poster */
     document.getElementById("poster").src =
-      `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+  customPoster || `https://image.tmdb.org/t/p/w500${data.poster_path}`;
 
-    /* Título */
-    document.getElementById("animeTitle").textContent =
-      data.name || data.title;
+    /* Título personalizado */
+document.getElementById("animeTitle").textContent =
+  customTitle || data.name || data.title;
+  
+  /* Sinopsis */
+  fullSynopsis = data.overview && data.overview.trim() !== ""
+    ? data.overview
+    : "No hay sinopsis disponible.";
 
-    /* Sinopsis */
-    document.getElementById("animeDescription").textContent =
-      data.overview || "Sin descripción disponible.";
+if(fullSynopsis.length > 150){
+
+    synopsis.textContent =
+        fullSynopsis.substring(0,150) + "...";
+
+    toggleSynopsis.style.display = "block";
+    toggleSynopsis.textContent = "Ver más";
+
+    synopsisExpanded = false;
+
+}else{
+
+    synopsis.textContent = fullSynopsis;
+
+    toggleSynopsis.style.display = "none";
+
+}
 
     /* Géneros */
     const genres = data.genres
-      .map(g => g.name)
-      .join(", ");
-
-    /* Año */
-    const year =
-      (data.first_air_date || data.release_date || "")
-      .split("-")[0];
-
-    /* Episodios o duración */
-
-    let extraInfo = "";
-
-    if(tmdbType === "tv"){
-
-      extraInfo =
-        `${data.number_of_episodes} Episodios`;
-
-    }else{
-
-      extraInfo =
-        `${data.runtime} Min`;
-
-    }
-
-    /* Datos */
-    document.getElementById("animeMeta").innerHTML =
-      `
-      ⭐ ${data.vote_average.toFixed(1)}
-      • ${year}
-      • ${genres}
-      • ${extraInfo}
-      `;
+  .map(g => g.name)
+  .join(", ");
 
     /* ================= SERIES ================= */
 
@@ -472,19 +555,41 @@ async function loadAnime(){
       );
 
       const seasonData = await seasonReq.json();
+      
+      const seasonYear =
+  seasonData.air_date
+    ? seasonData.air_date.split("-")[0]
+    : "";
 
-      episodes = seasonData.episodes.map((ep,index)=>({
+document.getElementById("animeMeta").innerHTML =
+`
+⭐ ${data.vote_average.toFixed(1)}
+• ${seasonYear}
+• ${genres}
+• ${seasonData.episodes.length} Episodios
+`;
 
-        title:
-          `Episodio ${ep.episode_number} - ${ep.name}`,
+      const episodiosDisponibles = seasonData.episodes.filter((ep, index) => {
 
-        url: videoLinks[index] || '',
+  return (
+    videoLinks[index] &&
+    ep.air_date &&
+    new Date(ep.air_date) <= new Date()
+  );
 
-        thumbnail: ep.still_path
-          ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
-          : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+});
 
-      }));
+episodes = episodiosDisponibles.map((ep, index) => ({
+
+  title: `Episodio ${ep.episode_number}`,
+
+  url: videoLinks[index],
+
+  thumbnail: ep.still_path
+    ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+    : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+}));
 
     }
 
@@ -492,24 +597,40 @@ async function loadAnime(){
 
     else{
 
-      episodes = [{
+  const year =
+    (data.release_date || "")
+      .split("-")[0];
 
-        title: data.title,
+  document.getElementById("animeMeta").innerHTML =
+  `
+  ⭐ ${data.vote_average.toFixed(1)}
+  • ${year}
+  • ${genres}
+  • ${data.runtime} Min
+  `;
 
-        url: videoLinks[0] || '',
+  episodes = [{
 
-        thumbnail:
-          `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+    title: "VER PELICULA",
 
-      }];
+    url: videoLinks[0] || '',
 
-    }
+    thumbnail:
+      `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+
+}];
+
+}
 
     renderEpisodes();
+    
+    hideLoading();
 
   }catch(err){
 
     console.log(err);
+    
+    hideLoading();
 
     showToast("❌ Error cargando TMDb", "#ff4444");
 
@@ -556,7 +677,7 @@ function renderEpisodes(){
           block:'center'
         });
 
-    },2300);
+    },1500);
 
   }
 
@@ -620,6 +741,28 @@ if(getList('watched').includes(seriesId))
 favBtn.onclick = toggleFavorite;
 
 watchedBtn.onclick = toggleWatched;
+
+/* Ver más / Ver menos de la sinopsis */
+
+toggleSynopsis.onclick = ()=>{
+
+    synopsisExpanded = !synopsisExpanded;
+
+    if(synopsisExpanded){
+
+        synopsis.textContent = fullSynopsis;
+        toggleSynopsis.textContent = "Ver menos";
+
+    }else{
+
+        synopsis.textContent =
+            fullSynopsis.substring(0,150) + "...";
+
+        toggleSynopsis.textContent = "Ver más";
+
+    }
+
+};
 
 loadAnime();
 
