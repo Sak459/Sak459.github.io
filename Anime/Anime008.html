@@ -644,18 +644,26 @@ for(let numero = firstEpisode; numero <= lastEpisode; numero++){
   }
 
   /*
-   * La posición del episodio dentro de nuestra
-   * temporada comienza siempre desde 0.
+   * =====================================================
+   * CORRESPONDENCIA CON LOS ENLACES
+   * =====================================================
    *
-   * TMDB 29 → videoLinks[0]
-   * TMDB 30 → videoLinks[1]
-   * TMDB 31 → videoLinks[2]
+   * Episodio global 1  → videoLinks[0]
+   * Episodio global 2  → videoLinks[1]
+   * ...
+   * Episodio global 29 → videoLinks[28]
+   * Episodio global 30 → videoLinks[29]
+   * ...
+   * Episodio global 38 → videoLinks[37]
+   *
+   * Así evitamos volver al episodio 1 cuando comienza
+   * la segunda temporada.
    */
 
-  const videoIndex = numero - firstEpisode;
+  const videoIndex = numero - 1;
 
   /*
-   * No mostrar episodios futuros
+   * No mostrar episodios futuros.
    */
   if(
     !ep.air_date ||
@@ -665,20 +673,49 @@ for(let numero = firstEpisode; numero <= lastEpisode; numero++){
   }
 
   /*
-   * Si no existe enlace, no lo mostramos.
+   * Comprobar que existe el enlace correspondiente.
    */
   if(!videoLinks[videoIndex]){
+    console.log(
+      "❌ No existe video para episodio:",
+      numero,
+      "índice:",
+      videoIndex
+    );
+
     continue;
   }
 
+  console.log(
+    "🎬 Episodio:",
+    numero,
+    "→ videoLinks[" + videoIndex + "]"
+  );
+
   episodiosDisponibles.push({
 
-    title: `Episodio ${videoIndex + 1}`,
+    /*
+     * Número que verá el usuario.
+     *
+     * TMDB 29 → Episodio 1
+     * TMDB 30 → Episodio 2
+     * ...
+     */
+    title: `Episodio ${numero - firstEpisode + 1}`,
 
+    /*
+     * Número real del episodio.
+     */
     tmdbEpisode: numero,
 
+    /*
+     * URL CORRECTA.
+     */
     url: videoLinks[videoIndex],
 
+    /*
+     * Miniatura.
+     */
     thumbnail:
       ep.still_path
         ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
@@ -789,7 +826,10 @@ function loadEpisode(i){
   const episodio = episodes[i];
 
   if(!episodio){
-    showToast("❌ Episodio no disponible", "#ff4444");
+    showToast(
+      "❌ Episodio no disponible",
+      "#ff4444"
+    );
     return;
   }
 
@@ -801,19 +841,14 @@ function loadEpisode(i){
 
   console.log("================================");
   console.log("▶ EPISODIO SELECCIONADO");
-  console.log("ÍNDICE:", i);
-  console.log("TÍTULO:", episodio.title);
-  console.log("TMDB:", episodio.tmdbEpisode);
+  console.log("Episodio mostrado:", episodio.title);
+  console.log("Episodio global TMDB:", episodio.tmdbEpisode);
+  console.log("Índice local:", i);
   console.log("URL:", url);
   console.log("================================");
 
   if(url){
 
-    /*
-     * IMPORTANTE:
-     * Enviamos directamente la URL correspondiente
-     * al índice seleccionado.
-     */
     Android.openEpisode(String(url));
 
   }else{
