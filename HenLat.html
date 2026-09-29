@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seccion Ver Mas</title>
+  <title>Buscador</title>
   <style>
+    :root {
+      --bg-color: #0e0e0e;
+      --card-color: #000000;
+      --text-color: #f0f0f0;
+      --highlight-color: #ff375e;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,23 +20,71 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #000000;
-      color: #ddd;
+      color: var(--text-color);
       min-height: 100vh;
     }
 
     header {
       background-color: #000000;
-      color: #fff;
+      color: var(--text-color);
       text-align: center;
-      padding: 1.5rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      padding: 2rem 1rem 1rem;
+      box-shadow: var(--shadow);
     }
 
     header h1 {
-      font-size: 1.5rem;
-      font-weight: 500;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .buscador {
+      margin-bottom: 1rem;
+    }
+
+    .buscador input {
+      padding: 12px 15px;
+      width: 420px;
+      max-width: 90%;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      color: var(--text-color);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .buscador input:focus {
+      border-color: var(--highlight-color);
+      box-shadow: 0 0 8px var(--highlight-color);
+    }
+
+    .filtro-letras {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .filtro-letras button {
+      background-color: #222;
+      border: 1px solid #333;
+      color: var(--text-color);
+      padding: 7px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .filtro-letras button:hover,
+    .filtro-letras button.activa {
+      background-color: var(--highlight-color);
+      color: white;
     }
 
     .catalogo {
@@ -47,12 +103,13 @@
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s ease;
     }
 
     .poster a {
       display: block;
       width: 100%;
-      height: 185px;
+      height: 185px; /* Mantener la altura fija */
       overflow: hidden;
     }
 
@@ -61,7 +118,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
     .poster img:hover {
@@ -69,127 +126,178 @@
     }
 
     .titulo-serie {
-      padding: 5px;
+      padding: 6px;
       text-align: center;
       background-color: #000000;
       color: #ffffff;
       font-size: 0.6rem;
+      font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
+    #mensaje-vacio {
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 2rem;
+      color: #aaa;
+      display: none;
+    }
+
     .modal-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
 
-.modal-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
 
-.modal {
-  background: #1f1f1f;
-  border-radius: 16px;
-  padding: 35px 30px;
-  max-width: 400px;
-  width: 90%;
+    .modal {
+      background: #1f1f1f;
+      border-radius: 16px;
+      padding: 35px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: #ff4d4d;
+      font-size: 22px;
+    }
+
+    .modal p {
+      font-size: 16px;
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .modal ul {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .modal button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Quita resaltado azul y menú táctil */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    /* Bloqueo de selección y arrastre */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+  
+  .ordenar {
   text-align: center;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  transform: translateY(30px);
-  opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  margin-bottom: 1rem;
 }
 
-.modal-overlay.active .modal {
-  transform: translateY(0);
-  opacity: 1;
+.ordenar button {
+  background-color: #222;
+  border: 1px solid #333;
+  color: var(--text-color);
+  padding: 6px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
 }
 
-.modal h2 {
-  margin: 0;
-  color: #ff4d4d;
-  font-size: 22px;
-}
-
-.modal p {
-  font-size: 16px;
-  margin: 15px 0;
-  color: #ccc;
-}
-
-.modal ul {
-  text-align: left;
-  margin: 10px 0 0 0;
-  padding-left: 20px;
-  color: #999;
-  font-size: 14px;
-}
-
-.modal button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background-color: #ff4d4d;
+.ordenar button:hover,
+.ordenar button.activo {
+  background-color: var(--highlight-color);
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
-/* Toast Notification */
-.toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #28a745;
+#btnReset {
+  background-color: #222;
+  border: 1px solid #333;
+  color: var(--text-color);
+  padding: 6px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+#btnReset:hover {
+  background-color: var(--highlight-color);
   color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 10000;
-}
-go:236994L
-.toast.show {
-  opacity: 1;
-  pointer-events: auto;
 }
 
-/* Quita resaltado azul y menú táctil */
-* {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-}
-
-/* Bloqueo de selección y arrastre */
-  body {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE10+/Edge */
-    user-select: none;         /* Estándar */
-  }
-
-  img {
-    -webkit-user-drag: none; /* Safari */
-    user-drag: none;         /* Estándar */
-    pointer-events: none;    /* Opcional: evita interacción con arrastrar imágenes */
-  }
-      /* Media Queries para pantallas más pequeñas */
+    /* Media Queries para pantallas más pequeñas */
     @media (max-width: 788px) {
       .catalogo {
         grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
@@ -208,13 +316,14 @@ go:236994L
       }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 00px) {
       .catalogo {
         grid-template-columns: 1fr; /* Una sola columna en móviles */
       }
     }
     
-    .loading{
+    /* LOADER */
+#loading{
     position:fixed;
     inset:0;
     background:#000;
@@ -222,24 +331,24 @@ go:236994L
     justify-content:center;
     align-items:center;
     z-index:99999;
-    transition:.3s;
+    transition:opacity .35s ease;
 }
 
-.loading.hide{
+#loading.hide{
     opacity:0;
-    visibility:hidden;
+    pointer-events:none;
 }
 
-.spinner{
+.loader{
     width:80px;
     height:80px;
-    border:4px solid rgba(255,255,255,.2);
+    border:4px solid rgba(255,255,255,.15);
     border-top:4px solid #ff375e;
     border-radius:50%;
-    animation:giro 1s linear infinite;
+    animation:girar .8s linear infinite;
 }
 
-@keyframes giro{
+@keyframes girar{
     to{
         transform:rotate(360deg);
     }
@@ -247,15 +356,26 @@ go:236994L
   </style>
 </head>
 <body>
-  <div id="loading" class="loading">
-    <div class="spinner"></div>
+<div id="loading">
+  <div class="loader"></div>
 </div>
-  
-  <header>
-    <h1>Catálogo Hentai</h1>
-  </header>
+<header>
+  <div class="buscador">
+    <input type="text" id="inputBusqueda" placeholder="Busca o Filtra tu Contenido....">
+  </div>
+  <div class="filtro-letras" id="filtroLetras">
+    <!-- Botones A-Z y # generados por JS -->
+  </div>
+  <div class="ordenar">
+  <button id="ordenAsc">Orden A-Z ↑</button>
+  <button id="ordenDesc">Orden Z-A ↓</button>
+  <button id="btnReset">⟲ Reset</button>
+</div>
+</header>
 
-   <div class="catalogo" id="catalogo">
+<div id="mensaje-vacio">No se encontraron series.</div>
+
+<div class="catalogo" id="catalogo">
     <div class="serie"
      data-id="104602"
      data-tipo="tv"
@@ -712,12 +832,12 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="227643"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
+     data-nombre="Kono Koi ni Kizuite The Animation Audio Latino"
      data-poster="">
     <div class="poster">
-        <a href="HentaiLat/HenLa002.html">
+        <a href="HentaiLat/HenLa036.html">
             <img src="" decoding="async">
         </a>
     </div>
@@ -725,12 +845,12 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="82175"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
+     data-nombre="Hasande Ageru Audio Latino"
      data-poster="">
     <div class="poster">
-        <a href="HentaiLat/HenLa002.html">
+        <a href="HentaiLat/HenLa037.html">
             <img src="" decoding="async">
         </a>
     </div>
@@ -738,12 +858,12 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="74254"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
+     data-nombre="Oideyo! Mizuryu Kei Land Audio Latino"
      data-poster="">
     <div class="poster">
-        <a href="HentaiLat/HenLa002.html">
+        <a href="HentaiLat/HenLa038.html">
             <img src="" decoding="async">
         </a>
     </div>
@@ -751,12 +871,12 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="97433"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
+     data-nombre="Muttsuri Do Sukebe Ro Gibo Shimai no Honshitsu Minuite Sex Zanmai Audio Latino"
      data-poster="">
     <div class="poster">
-        <a href="HentaiLat/HenLa002.html">
+        <a href="HentaiLat/HenLa039.html">
             <img src="" decoding="async">
         </a>
     </div>
@@ -764,12 +884,12 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="92226"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
+     data-nombre="Aikagi: The Animation Audio Latino"
      data-poster="">
     <div class="poster">
-        <a href="HentaiLat/HenLa002.html">
+        <a href="HentaiLat/HenLa040.html">
             <img src="" decoding="async">
         </a>
     </div>
@@ -777,10 +897,10 @@ go:236994L
   </div>
   
    <div class="serie"
-     data-id="319738"
+     data-id="77718"
      data-tipo="tv"
-     data-nombre="Itadaki! Seieki Audio Latino"
-     data-poster="">
+     data-nombre="Baka na Imouto o Rikou ni Suru no wa Ore no XX Dake na Ken Audio Latino"
+     data-poster="https://image.tmdb.org/t/p/w500/mRvMvpABX8Ux8w51eDL4beJVSXv.jpg">
     <div class="poster">
         <a href="HentaiLat/HenLa002.html">
             <img src="" decoding="async">
@@ -894,7 +1014,6 @@ go:236994L
   </div>
  </div>
 
-<!-- Modal si no hay conexión -->
 <div class="modal-overlay" id="connectionModal">
   <div class="modal">
     <h2>Sin conexión</h2>
@@ -908,65 +1027,31 @@ go:236994L
   </div>
 </div>
 
-<!-- Toast: conexión restaurada -->
 <div class="toast" id="toast">✅ ¡Conexión restaurada!</div>
-
 <script>
-
-const loading = document.getElementById("loading");
-
 const API_KEY = "b6083b855479a79fd9acdb0a2789f126";
 const TMDB = "https://api.themoviedb.org/3";
 const IMG = "https://image.tmdb.org/t/p/w500";
+const inputBusqueda = document.getElementById("inputBusqueda");
+const series = Array.from(document.querySelectorAll(".serie"));
+const mensajeVacio = document.getElementById("mensaje-vacio");
+const filtroLetras = document.getElementById("filtroLetras");
+const catalogo = document.getElementById("catalogo");
+const loading = document.getElementById("loading");
 
+/* ================= CACHÉ TMDB ================= */
 
-/* =====================================================
-   CONFIGURACIÓN
-===================================================== */
-
-/*
-   Cantidad de portadas que se cargarán inmediatamente.
-   
-   Las siguientes utilizarán Lazy Loading.
-*/
-const PORTADAS_INICIALES = 20;
-
-
-/*
-   Tiempo de duración de la caché.
-
-   30 días.
-*/
-const CACHE_DURATION =
-    30 * 24 * 60 * 60 * 1000;
-
-
-/*
-   Versión de la caché.
-
-   Si algún día cambias la estructura de los datos,
-   puedes cambiar v1 por v2 y se creará una caché nueva.
-*/
 const CACHE_VERSION = "v1";
+const CACHE_KEY = "rakuen_tmbd_cache_" + CACHE_VERSION;
 
-const CACHE_KEY =
-    "rakuen_ver_mas_tmdb_" + CACHE_VERSION;
-
-
-/* =====================================================
-   LOADER
-===================================================== */
-
-function hideLoading(){
-
-    loading.classList.add("hide");
-
-}
+/*
+  Tiempo que consideramos válida la información
+  de TMDB.
+*/
+const CACHE_DURATION = 30 * 24 * 60 * 60 * 1000;
 
 
-/* =====================================================
-   OBTENER CACHÉ
-===================================================== */
+/* Obtener caché */
 
 function obtenerCache(){
 
@@ -976,12 +1061,9 @@ function obtenerCache(){
             localStorage.getItem(CACHE_KEY)
         ) || {};
 
-    }catch(error){
+    }catch(e){
 
-        console.log(
-            "❌ Error leyendo caché:",
-            error
-        );
+        console.log("Error leyendo caché:", e);
 
         return {};
 
@@ -990,9 +1072,7 @@ function obtenerCache(){
 }
 
 
-/* =====================================================
-   GUARDAR CACHÉ
-===================================================== */
+/* Guardar caché */
 
 function guardarCache(cache){
 
@@ -1003,21 +1083,211 @@ function guardarCache(cache){
             JSON.stringify(cache)
         );
 
-    }catch(error){
+    }catch(e){
 
-        console.log(
-            "❌ Error guardando caché:",
-            error
-        );
+        console.log("Error guardando caché:", e);
 
     }
 
 }
 
 
-/* =====================================================
-   APLICAR DATOS DE TMDB
-===================================================== */
+/* ================= CARGAR TMDB ================= */
+
+async function cargarTMDB(){
+
+    const tarjetas =
+        Array.from(document.querySelectorAll(".serie"));
+
+    const cache = obtenerCache();
+
+    const nuevasPeticiones = [];
+
+    /*
+      Primero procesamos todas las tarjetas.
+
+      Las que ya están en caché se muestran
+      inmediatamente sin consultar TMDB.
+    */
+
+    tarjetas.forEach(tarjeta => {
+
+        const id = tarjeta.dataset.id;
+        const tipo = tarjeta.dataset.tipo;
+
+        if(!id || !tipo) return;
+
+
+        const cacheId = `${tipo}_${id}`;
+
+        const almacenado = cache[cacheId];
+
+
+        /* ================= CACHE VÁLIDA ================= */
+
+        if(
+            almacenado &&
+            almacenado.timestamp &&
+            (Date.now() - almacenado.timestamp)
+                < CACHE_DURATION
+        ){
+
+            aplicarDatosTMDB(
+                tarjeta,
+                almacenado.data
+            );
+
+            return;
+
+        }
+
+
+        /* ================= NUEVA PETICIÓN ================= */
+
+        nuevasPeticiones.push({
+            tarjeta,
+            id,
+            tipo,
+            cacheId
+        });
+
+    });
+
+
+    /*
+      Si todas las series estaban en caché,
+      no necesitamos consultar TMDB.
+    */
+
+    if(nuevasPeticiones.length === 0){
+
+        console.log(
+            "✅ Todas las series fueron cargadas desde caché"
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        `🔄 ${nuevasPeticiones.length} series nuevas necesitan TMDB`
+    );
+
+
+    /*
+      Procesamos las nuevas series en grupos.
+      
+      Esto evita lanzar cientos de peticiones
+      simultáneamente.
+    */
+
+    const TAMANO_GRUPO = 8;
+
+
+    for(
+        let i = 0;
+        i < nuevasPeticiones.length;
+        i += TAMANO_GRUPO
+    ){
+
+        const grupo =
+            nuevasPeticiones.slice(
+                i,
+                i + TAMANO_GRUPO
+            );
+
+
+        await Promise.all(
+
+            grupo.map(async item => {
+
+                const {
+                    tarjeta,
+                    id,
+                    tipo,
+                    cacheId
+                } = item;
+
+
+                const url =
+                    `${TMDB}/${tipo}/${id}?api_key=${API_KEY}&language=es-ES`;
+
+
+                try{
+
+                    const respuesta =
+                        await fetch(url);
+
+
+                    if(!respuesta.ok){
+
+                        throw new Error(
+                            `TMDB HTTP ${respuesta.status}`
+                        );
+
+                    }
+
+
+                    const datos =
+                        await respuesta.json();
+
+
+                    /*
+                      Guardar datos de TMDB
+                    */
+
+                    cache[cacheId] = {
+
+                        timestamp: Date.now(),
+
+                        data: datos
+
+                    };
+
+
+                    /*
+                      Aplicar inmediatamente
+                    */
+
+                    aplicarDatosTMDB(
+                        tarjeta,
+                        datos
+                    );
+
+
+                }catch(error){
+
+                    console.log(
+                        `❌ Error TMDB ${id}:`,
+                        error
+                    );
+
+                }
+
+            })
+
+        );
+
+
+        /*
+          Guardamos el caché después de cada grupo.
+          
+          Si la aplicación se cierra durante la carga,
+          no perdemos todo lo que ya se descargó.
+        */
+
+        guardarCache(cache);
+
+    }
+
+
+    console.log("✅ Carga TMDB finalizada");
+
+}
+
+
+/* ================= APLICAR DATOS ================= */
 
 function aplicarDatosTMDB(tarjeta, datos){
 
@@ -1025,10 +1295,7 @@ function aplicarDatosTMDB(tarjeta, datos){
 
 
     /*
-       Nombre manual.
-
-       Si data-nombre existe, tendrá prioridad
-       sobre el nombre de TMDB.
+      Nombre personalizado
     */
 
     const tituloManual =
@@ -1043,7 +1310,15 @@ function aplicarDatosTMDB(tarjeta, datos){
 
 
     /*
-       Título mostrado.
+      Guardamos el nombre completo
+      para buscador y orden.
+    */
+
+    tarjeta.dataset.nombre = titulo;
+
+
+    /*
+      Título mostrado
     */
 
     const tituloMostrar =
@@ -1065,7 +1340,7 @@ function aplicarDatosTMDB(tarjeta, datos){
 
 
     /*
-       Poster.
+      ================= POSTER =================
     */
 
     const img =
@@ -1076,16 +1351,12 @@ function aplicarDatosTMDB(tarjeta, datos){
 
 
     /*
-       Poster manual si existe.
+      Poster manual si existe.
     */
 
     const posterManual =
         tarjeta.dataset.poster?.trim();
 
-
-    /*
-       Poster de TMDB.
-    */
 
     const posterTMDB =
         datos.poster_path
@@ -1093,72 +1364,68 @@ function aplicarDatosTMDB(tarjeta, datos){
             : "";
 
 
-    const urlImagen =
+    const posterURL =
         posterManual || posterTMDB;
 
 
-    if(!urlImagen) return;
+    /*
+      Obtenemos la posición de la serie
+      dentro del catálogo original.
+    */
+
+    const posicion =
+        series.indexOf(tarjeta);
 
 
     /*
-       Guardamos la URL en data-src.
+      ================= PRIMERAS 30 =================
+      
+      Estas imágenes se cargan inmediatamente.
     */
 
-    img.dataset.src =
-        urlImagen;
+    if(posicion < 50){
 
+        img.loading = "eager";
+        img.decoding = "async";
 
-    img.alt = titulo;
+        img.src = posterURL;
+
+        /*
+          No usamos IntersectionObserver
+          para las primeras 30.
+        */
+
+        return;
+
+    }
 
 
     /*
-       Las primeras 20 imágenes se cargan
-       inmediatamente.
-
-       Las demás utilizan Lazy Loading.
+      ================= RESTO =================
+      
+      Desde la portada 31 usamos lazy loading.
     */
 
-    const numero =
-        Number(tarjeta.dataset.numero);
+    img.loading = "lazy";
+    img.decoding = "async";
 
 
-    if(numero <= PORTADAS_INICIALES){
+    /*
+      Guardamos la URL temporalmente.
+    */
 
-        cargarImagenInmediata(img);
-
-    }else{
-
-        cargarImagenLazy(img);
-
-    }
-
-}
+    img.dataset.src = posterURL;
 
 
-/* =====================================================
-   CARGAR IMAGEN INMEDIATAMENTE
-===================================================== */
+    /*
+      Cargar mediante IntersectionObserver.
+    */
 
-function cargarImagenInmediata(img){
-
-    if(!img) return;
-
-
-    if(img.dataset.src){
-
-        img.src =
-            img.dataset.src;
-
-        delete img.dataset.src;
-
-    }
+    cargarImagenLazy(img);
 
 }
 
-
-/* =====================================================
-   LAZY LOADING
-===================================================== */
+/* ================= LAZY LOAD ================= */
 
 function cargarImagenLazy(img){
 
@@ -1166,8 +1433,9 @@ function cargarImagenLazy(img){
 
 
     /*
-       Si el navegador/WebView soporta
-       IntersectionObserver.
+      Si el navegador soporta IntersectionObserver,
+      esperamos a que la imagen se acerque
+      a la pantalla.
     */
 
     if("IntersectionObserver" in window){
@@ -1202,10 +1470,6 @@ function cargarImagenLazy(img){
 
                 },
                 {
-                    /*
-                       Comienza a cargar la portada
-                       unos 300px antes de que aparezca.
-                    */
                     rootMargin:"300px"
                 }
             );
@@ -1213,309 +1477,167 @@ function cargarImagenLazy(img){
 
         observer.observe(img);
 
-
     }else{
 
         /*
-           Compatibilidad con WebView antiguos.
+          Compatibilidad con WebView antiguos.
         */
 
-        cargarImagenInmediata(img);
+        if(img.dataset.src){
+
+            img.src =
+                img.dataset.src;
+
+            delete img.dataset.src;
+
+        }
 
     }
 
 }
 
-
-/* =====================================================
-   CARGAR TMDB
-===================================================== */
-
-async function cargarPeliculas(){
-
-    const tarjetas =
-        Array.from(
-            document.querySelectorAll(".serie")
-        );
-
-
-    /*
-       Asignar número a cada tarjeta.
-
-       Esto permite determinar cuáles son
-       las primeras 20.
-    */
-
-    tarjetas.forEach(
-        (tarjeta, indice) => {
-
-            tarjeta.dataset.numero =
-                indice + 1;
-
-        }
-    );
-
-
-    const cache =
-        obtenerCache();
-
-
-    const nuevasPeticiones = [];
-
-
-    /*
-       Revisamos cada serie.
-    */
-
-    tarjetas.forEach(tarjeta => {
-
-        const id =
-            tarjeta.dataset.id;
-
-
-        const tipo =
-            tarjeta.dataset.tipo;
-
-
-        if(!id || !tipo)
-            return;
-
-
-        const cacheId =
-            `${tipo}_${id}`;
-
-
-        const almacenado =
-            cache[cacheId];
-
-
-        /*
-          =================================================
-          CACHÉ VÁLIDA
-          =================================================
-        */
-
-        if(
-            almacenado &&
-            almacenado.timestamp &&
-            (
-                Date.now() -
-                almacenado.timestamp
-            ) < CACHE_DURATION
-        ){
-
-            /*
-               Aplicamos los datos inmediatamente.
-
-               NO hacemos petición a TMDB.
-            */
-
-            aplicarDatosTMDB(
-                tarjeta,
-                almacenado.data
-            );
-
-
-            return;
-
-        }
-
-
-        /*
-          =================================================
-          SERIE NUEVA
-          =================================================
-        */
-
-        nuevasPeticiones.push({
-
-            tarjeta,
-            id,
-            tipo,
-            cacheId
-
-        });
-
-    });
-
-
-    /*
-       Si no existen series nuevas,
-       terminamos aquí.
-
-       Esto hace que la segunda visita
-       sea muchísimo más rápida.
-    */
-
-    if(nuevasPeticiones.length === 0){
-
-        console.log(
-            "✅ Todas las series fueron cargadas desde caché"
-        );
-
-        return;
-
-    }
-
-
-    console.log(
-        `🔄 ${nuevasPeticiones.length} series nuevas`
-    );
-
-
-    /*
-       Número de peticiones simultáneas.
-    */
-
-    const TAMANO_GRUPO = 8;
-
-
-    /*
-       Procesamos las nuevas series
-       en grupos.
-    */
-
-    for(
-        let i = 0;
-        i < nuevasPeticiones.length;
-        i += TAMANO_GRUPO
-    ){
-
-        const grupo =
-            nuevasPeticiones.slice(
-                i,
-                i + TAMANO_GRUPO
-            );
-
-
-        await Promise.all(
-
-            grupo.map(
-                async item => {
-
-                    const {
-                        tarjeta,
-                        id,
-                        tipo,
-                        cacheId
-                    } = item;
-
-
-                    const url =
-                        `${TMDB}/${tipo}/${id}?api_key=${API_KEY}&language=es-ES`;
-
-
-                    try{
-
-                        const respuesta =
-                            await fetch(url);
-
-
-                        if(!respuesta.ok){
-
-                            throw new Error(
-                                `TMDB HTTP ${respuesta.status}`
-                            );
-
-                        }
-
-
-                        const datos =
-                            await respuesta.json();
-
-
-                        /*
-                           Guardar en caché.
-                        */
-
-                        cache[cacheId] = {
-
-                            timestamp:
-                                Date.now(),
-
-                            data:
-                                datos
-
-                        };
-
-
-                        /*
-                           Mostrar inmediatamente
-                           los datos obtenidos.
-                        */
-
-                        aplicarDatosTMDB(
-                            tarjeta,
-                            datos
-                        );
-
-
-                    }catch(error){
-
-                        console.log(
-                            `❌ Error TMDB ${id}:`,
-                            error
-                        );
-
-                    }
-
-                }
-            )
-
-        );
-
-
-        /*
-           Guardar después de cada grupo.
-
-           Así no perdemos todo si el usuario
-           cierra la aplicación.
-        */
-
-        guardarCache(cache);
-
-    }
-
-
-    console.log(
-        "✅ Carga TMDB finalizada"
-    );
-
+function showLoading() {
+    loading.classList.remove("hide");
+}
+
+function hideLoading() {
+    loading.classList.add("hide");
 }
 
 
-/* =====================================================
-   INICIO
-===================================================== */
+const LIMITE_INICIAL = 640;
+let modoInicial = true;
+let filtroLetraActiva = '';
+let ordenActual = '';
 
+// ================== FILTRO A-Z ==================
+const letras = ['#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
+
+letras.forEach(letra => {
+  const btn = document.createElement('button');
+  btn.textContent = letra;
+  btn.dataset.letra = letra;
+
+  btn.addEventListener('click', () => {
+    modoInicial = false;
+    filtroLetraActiva = letra;
+
+    document.querySelectorAll('.filtro-letras button')
+      .forEach(b => b.classList.remove('activa'));
+    btn.classList.add('activa');
+
+    aplicarFiltros();
+  });
+
+  filtroLetras.appendChild(btn);
+});
+
+// ================== BUSCADOR ==================
+inputBusqueda.addEventListener("input", () => {
+  modoInicial = false;
+  aplicarFiltros();
+});
+
+// ================== ORDEN ==================
+const btnAsc = document.getElementById('ordenAsc');
+const btnDesc = document.getElementById('ordenDesc');
+const btnReset = document.getElementById('btnReset');
+
+btnAsc.addEventListener('click', () => {
+  modoInicial = false;
+  ordenActual = 'asc';
+  btnAsc.classList.add('activo');
+  btnDesc.classList.remove('activo');
+  aplicarFiltros();
+});
+
+btnDesc.addEventListener('click', () => {
+  modoInicial = false;
+  ordenActual = 'desc';
+  btnDesc.classList.add('activo');
+  btnAsc.classList.remove('activo');
+  aplicarFiltros();
+});
+
+btnReset.addEventListener('click', () => {
+  modoInicial = true;
+  filtroLetraActiva = '';
+  ordenActual = '';
+  inputBusqueda.value = '';
+
+  document.querySelectorAll('.filtro-letras button')
+    .forEach(b => b.classList.remove('activa'));
+
+  btnAsc.classList.remove('activo');
+  btnDesc.classList.remove('activo');
+
+  aplicarFiltros();
+});
+
+// ================== FUNCIÓN PRINCIPAL ==================
+function aplicarFiltros() {
+  const texto = inputBusqueda.value.toLowerCase();
+  let visibles = 0;
+
+  let lista = [...series];
+
+  // Ordenar
+  if (ordenActual === 'asc') {
+    lista.sort((a, b) => a.dataset.nombre.localeCompare(b.dataset.nombre));
+  }
+  if (ordenActual === 'desc') {
+    lista.sort((a, b) => b.dataset.nombre.localeCompare(a.dataset.nombre));
+  }
+
+  catalogo.innerHTML = '';
+
+  lista.forEach(serie => {
+    const nombre = serie.dataset.nombre;
+    const nombreLower = nombre.toLowerCase();
+    const letraInicial = nombre.trim().charAt(0).toUpperCase();
+
+    const coincideBusqueda = nombreLower.includes(texto);
+    const coincideLetra =
+      filtroLetraActiva === '' ||
+      (filtroLetraActiva === '#' ? !/[A-Z]/.test(letraInicial) : letraInicial === filtroLetraActiva);
+
+    if (coincideBusqueda && coincideLetra) {
+      if (modoInicial && visibles >= LIMITE_INICIAL) return;
+
+      serie.style.display = "flex";
+      catalogo.appendChild(serie);
+      visibles++;
+    }
+  });
+
+  mensajeVacio.style.display = visibles === 0 ? "block" : "none";
+}
+
+// ================== CARGA INICIAL ==================
 (async()=>{
 
+    showLoading();
+
     /*
-       Mostramos loader.
+      Cargamos TMDB o caché.
     */
 
-    loading.classList.remove("hide");
-
+    await cargarTMDB();
 
     /*
-       Cargamos TMDB o caché.
+      Mostramos el catálogo inmediatamente.
     */
 
-    await cargarPeliculas();
-
+    aplicarFiltros();
 
     /*
-       Ya tenemos los títulos y las URLs
-       de las imágenes.
-
-       No necesitamos esperar a que todas
-       las portadas terminen de descargar.
+      Ya no esperamos a que todas las
+      imágenes terminen de descargar.
     */
 
     hideLoading();
 
 })();
-
 </script>
 <script>
   const modal = document.getElementById("connectionModal");
