@@ -8214,14 +8214,7 @@ const PLACEHOLDER = "https://appassets.androidplatform.net/assets/images/placeho
 const CACHE_VERSION = "v1";
 const CACHE_KEY = "rakuen_tmbd_cache_" + CACHE_VERSION;
 
-/*
-  Tiempo que consideramos válida la información
-  de TMDB.
-*/
 const CACHE_DURATION = 30 * 24 * 60 * 60 * 1000;
-
-
-/* Obtener caché */
 
 function obtenerCache(){
 
@@ -8241,8 +8234,6 @@ function obtenerCache(){
 
 }
 
-
-/* Guardar caché */
 
 function guardarCache(cache){
 
@@ -8273,12 +8264,6 @@ async function cargarTMDB(){
 
     const nuevasPeticiones = [];
 
-    /*
-      Primero procesamos todas las tarjetas.
-
-      Las que ya están en caché se muestran
-      inmediatamente sin consultar TMDB.
-    */
 
     tarjetas.forEach(tarjeta => {
 
@@ -8324,11 +8309,6 @@ async function cargarTMDB(){
     });
 
 
-    /*
-      Si todas las series estaban en caché,
-      no necesitamos consultar TMDB.
-    */
-
     if(nuevasPeticiones.length === 0){
 
         console.log(
@@ -8345,14 +8325,7 @@ async function cargarTMDB(){
     );
 
 
-    /*
-      Procesamos las nuevas series en grupos.
-      
-      Esto evita lanzar cientos de peticiones
-      simultáneamente.
-    */
-
-    const TAMANO_GRUPO = 8;
+    const TAMANO_GRUPO = 10;
 
 
     for(
@@ -8402,11 +8375,6 @@ async function cargarTMDB(){
                     const datos =
                         await respuesta.json();
 
-
-                    /*
-                      Guardar datos de TMDB
-                    */
-
                     cache[cacheId] = {
 
                         timestamp: Date.now(),
@@ -8414,11 +8382,6 @@ async function cargarTMDB(){
                         data: datos
 
                     };
-
-
-                    /*
-                      Aplicar inmediatamente
-                    */
 
                     aplicarDatosTMDB(
                         tarjeta,
@@ -8440,13 +8403,6 @@ async function cargarTMDB(){
         );
 
 
-        /*
-          Guardamos el caché después de cada grupo.
-          
-          Si la aplicación se cierra durante la carga,
-          no perdemos todo lo que ya se descargó.
-        */
-
         guardarCache(cache);
 
     }
@@ -8464,10 +8420,6 @@ function aplicarDatosTMDB(tarjeta, datos){
     if(!datos) return;
 
 
-    /*
-      Nombre personalizado
-    */
-
     const tituloManual =
         tarjeta.dataset.nombre?.trim();
 
@@ -8479,17 +8431,8 @@ function aplicarDatosTMDB(tarjeta, datos){
         "Sin título";
 
 
-    /*
-      Guardamos el nombre completo
-      para buscador y orden.
-    */
-
     tarjeta.dataset.nombre = titulo;
 
-
-    /*
-      Título mostrado
-    */
 
     const tituloMostrar =
         titulo.length > 30
@@ -8517,9 +8460,6 @@ const img = tarjeta.querySelector("img");
 
 if(!img) return;
 
-
-/* Poster manual si existe */
-
 const posterManual =
     tarjeta.dataset.poster?.trim();
 
@@ -8534,11 +8474,6 @@ const posterURL =
     posterManual || posterTMDB;
 
 
-/*
-  Si no existe ningún póster,
-  conservamos el placeholder.
-*/
-
 if(!posterURL){
 
     img.removeAttribute("src");
@@ -8547,12 +8482,6 @@ if(!posterURL){
     return;
 
 }
-
-
-/*
-  Obtenemos la posición de la serie
-  dentro del catálogo original.
-*/
 
 const posicion = series.indexOf(tarjeta);
 
@@ -8590,10 +8519,6 @@ img.loading = "lazy";
 img.decoding = "async";
 
 
-/*
-  Controlar errores de carga.
-*/
-
 img.onerror = function(){
 
     this.removeAttribute("src");
@@ -8606,11 +8531,6 @@ img.onerror = function(){
 };
 
 
-/*
-  Guardamos la URL para cargarla
-  cuando la imagen se acerque a pantalla.
-*/
-
 img.dataset.src = posterURL;
 
 cargarImagenLazy(img);
@@ -8622,13 +8542,6 @@ cargarImagenLazy(img);
 function cargarImagenLazy(img){
 
     if(!img) return;
-
-
-    /*
-      Si el navegador soporta IntersectionObserver,
-      esperamos a que la imagen se acerque
-      a la pantalla.
-    */
 
     if("IntersectionObserver" in window){
 
@@ -8671,10 +8584,6 @@ function cargarImagenLazy(img){
 
     }else{
 
-        /*
-          Compatibilidad con WebView antiguos.
-        */
-
         if(img.dataset.src){
 
             img.src =
@@ -8697,7 +8606,7 @@ function hideLoading() {
 }
 
 
-const LIMITE_INICIAL = 640;
+const LIMITE_INICIAL = 250;
 let modoInicial = true;
 let filtroLetraActiva = '';
 let ordenActual = '';
@@ -8810,22 +8719,9 @@ function aplicarFiltros() {
 
     showLoading();
 
-    /*
-      Cargamos TMDB o caché.
-    */
-
     await cargarTMDB();
 
-    /*
-      Mostramos el catálogo inmediatamente.
-    */
-
     aplicarFiltros();
-
-    /*
-      Ya no esperamos a que todas las
-      imágenes terminen de descargar.
-    */
 
     hideLoading();
 
