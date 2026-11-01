@@ -123,7 +123,7 @@
 
     /* Imagen provisional local */
       background-color: #111;
-      background-image: url("assets/images/placeholder.jpeg");
+      background-image: url("https://appassets.androidplatform.net/assets/images/placeholder.jpeg");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -8207,6 +8207,7 @@ const mensajeVacio = document.getElementById("mensaje-vacio");
 const filtroLetras = document.getElementById("filtroLetras");
 const catalogo = document.getElementById("catalogo");
 const loading = document.getElementById("loading");
+const PLACEHOLDER = "https://appassets.androidplatform.net/assets/images/placeholder.jpeg";
 
 /* ================= CACHÉ TMDB ================= */
 
@@ -8567,12 +8568,10 @@ if(posicion < 50){
 
     img.onerror = function(){
 
-        /*
-          Si falla la imagen real,
-          mostramos nuevamente el placeholder.
-        */
-
         this.removeAttribute("src");
+
+        this.style.backgroundImage =
+            `url("${PLACEHOLDER}")`;
 
     };
 
@@ -8598,7 +8597,11 @@ img.decoding = "async";
 img.onerror = function(){
 
     this.removeAttribute("src");
+
     delete this.dataset.src;
+
+    this.style.backgroundImage =
+        `url("${PLACEHOLDER}")`;
 
 };
 
@@ -8611,8 +8614,6 @@ img.onerror = function(){
 img.dataset.src = posterURL;
 
 cargarImagenLazy(img);
-
-}
 
 /* ================= LAZY LOAD ================= */
 
