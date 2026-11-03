@@ -118,15 +118,19 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: none;
-      transform: none;
 
-    /* Imagen provisional local */
       background-color: #111;
       background-image: url("https://appassets.androidplatform.net/assets/images/placeholder.jpeg");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .poster img.loaded {
+      opacity: 1;
     }
 
     .poster img:hover {
@@ -1545,8 +1549,7 @@ async function cargarTMDB(){
 
         const almacenado = cache[cacheId];
 
-
-        /* ================= CACHE VÁLIDA ================= */
+/* ================= CACHE VÁLIDA ================= */
 
         if(
             almacenado &&
@@ -1564,8 +1567,7 @@ async function cargarTMDB(){
 
         }
 
-
-        /* ================= NUEVA PETICIÓN ================= */
+/* ================= NUEVA PETICIÓN ================= */
 
         nuevasPeticiones.push({
             tarjeta,
@@ -1687,10 +1689,8 @@ function aplicarDatosTMDB(tarjeta, datos){
 
     if(!datos) return;
 
-
     const tituloManual =
         tarjeta.dataset.nombre?.trim();
-
 
     const titulo =
         tituloManual ||
@@ -1698,112 +1698,101 @@ function aplicarDatosTMDB(tarjeta, datos){
         datos.name ||
         "Sin título";
 
-
     tarjeta.dataset.nombre = titulo;
-
 
     const tituloMostrar =
         titulo.length > 30
             ? titulo.substring(0,30).trim() + "..."
             : titulo;
 
-
     const tituloElemento =
         tarjeta.querySelector(".titulo-serie");
 
-
     if(tituloElemento){
-
-        tituloElemento.textContent =
-            tituloMostrar;
-
+        tituloElemento.textContent = tituloMostrar;
     }
 
+    /* ================= POSTER ================= */
 
-    /*
-  ================= POSTER =================
-*/
+    const img = tarjeta.querySelector("img");
 
-const img = tarjeta.querySelector("img");
+    if(!img) return;
 
-if(!img) return;
+    const posterManual =
+        tarjeta.dataset.poster?.trim();
 
-const posterManual =
-    tarjeta.dataset.poster?.trim();
+    const posterTMDB =
+        datos.poster_path
+            ? IMG + datos.poster_path
+            : "";
 
+    const posterURL =
+        posterManual || posterTMDB;
 
-const posterTMDB =
-    datos.poster_path
-        ? IMG + datos.poster_path
-        : "";
+    if(!posterURL){
+        img.removeAttribute("src");
+        delete img.dataset.src;
+        img.classList.remove("loaded");
+        return;
+    }
 
+    const posicion = series.indexOf(tarjeta);
 
-const posterURL =
-    posterManual || posterTMDB;
+    /* ================= PRIMERAS 50 ================= */
 
+    if(posicion < 50){
 
-if(!posterURL){
+        img.loading = "eager";
+        img.decoding = "async";
 
-    img.removeAttribute("src");
-    delete img.dataset.src;
+        cargarPosterConAnimacion(img, posterURL);
 
-    return;
+        return;
+    }
 
-}
+    /* ================= RESTO ================= */
 
-const posicion = series.indexOf(tarjeta);
-
-
-/*
-  ================= PRIMERAS 50 =================
-*/
-
-if(posicion < 50){
-
-    img.loading = "eager";
+    img.loading = "lazy";
     img.decoding = "async";
 
-    img.onerror = function(){
+    img.dataset.src = posterURL;
 
-        this.removeAttribute("src");
+    cargarImagenLazy(img);
+}
 
-        this.style.backgroundImage =
+/* ================= CARGA DE POSTERS ================= */
+
+function cargarPosterConAnimacion(img, url){
+
+    if(!img || !url) return;
+
+    img.classList.remove("loaded");
+
+    const nuevaImagen = new Image();
+
+    nuevaImagen.onload = function(){
+
+        img.src = url;
+
+        requestAnimationFrame(() => {
+            img.classList.add("loaded");
+        });
+
+    };
+
+    nuevaImagen.onerror = function(){
+
+        img.removeAttribute("src");
+        img.classList.remove("loaded");
+
+        img.style.backgroundImage =
             `url("${PLACEHOLDER}")`;
 
     };
 
-    img.src = posterURL;
-
-    return;
-
+    nuevaImagen.src = url;
 }
 
-
-/*
-  ================= RESTO =================
-*/
-
-img.loading = "lazy";
-img.decoding = "async";
-
-
-img.onerror = function(){
-
-    this.removeAttribute("src");
-
-    delete this.dataset.src;
-
-    this.style.backgroundImage =
-        `url("${PLACEHOLDER}")`;
-
-};
-
-
-img.dataset.src = posterURL;
-
-cargarImagenLazy(img);
-
-}
 
 /* ================= LAZY LOAD ================= */
 
@@ -1819,23 +1808,20 @@ function cargarImagenLazy(img){
 
                     entries.forEach(entry => {
 
-                        if(!entry.isIntersecting)
-                            return;
+                        if(!entry.isIntersecting) return;
 
-
-                        const imagen =
-                            entry.target;
-
+                        const imagen = entry.target;
 
                         if(imagen.dataset.src){
 
-                            imagen.src =
-                                imagen.dataset.src;
+                            cargarPosterConAnimacion(
+                                imagen,
+                                imagen.dataset.src
+                            );
 
                             delete imagen.dataset.src;
 
                         }
-
 
                         observer.unobserve(imagen);
 
@@ -1843,10 +1829,9 @@ function cargarImagenLazy(img){
 
                 },
                 {
-                    rootMargin:"300px"
+                    rootMargin: "300px"
                 }
             );
-
 
         observer.observe(img);
 
@@ -1854,8 +1839,10 @@ function cargarImagenLazy(img){
 
         if(img.dataset.src){
 
-            img.src =
-                img.dataset.src;
+            cargarPosterConAnimacion(
+                img,
+                img.dataset.src
+            );
 
             delete img.dataset.src;
 
