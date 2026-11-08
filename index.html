@@ -1,206 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movies Premium+</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <title>Rakuen Hentai</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   <style>
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-    
-    body {
-      background-color: #000000;
-      color: white;
-      margin-bottom: 50px;
+    :root {
+      --bg: #080808;
+      --surface: #151515;
+      --surface-light: #202020;
+      --accent: #ff3c78;
+      --text: #ffffff;
+      --muted: #999999;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: red;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1000px;
-      margin: auto;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    .category-title {
-      margin-top: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .series-list {
-      display: flex;
-      overflow-x: auto;
-      gap: 9px;
-      padding-bottom: 2px;
-    }
-
-    .series-card {
-      width: 140px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .series-card img {
-      width: 100%;
-      height: 205px;
-      object-fit: cover;
-      border-radius: 10px;
-      display: block;
-    }
-    
-    .recientes .series-card {
-      width: 205px;
-    }
-
-    .recientes .series-card img {
-      height: 120px;
-      border-radius: 10px;
-    }
-
-    .recientes .series-title {
-      font-size: 0.75rem;
-      font-weight: bold;
-      text-align: left;
-      padding: 4px 2px;
-    }
-    
-    /* === TITULO CENTRADO SOLO EN RECIENTES === */
-    .recientes .series-title {
-      text-align: center;
-    }
-
-    .series-title {
-      font-size: 0.8rem;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 5px;
-      color: #ddd;
-      word-wrap: break-word;
-      white-space: normal;
-      overflow-wrap: break-word;
-      line-height: 1.1;
-    }
-
-    .series-card a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      width: 100%;
-    }
-
-    .series-card a:hover .series-title {
-      color: white;
-    }
-
-    .bottom-menu {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background-color: #000;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      border-top: 1px solid #222;
-      z-index: 1000;
-    }
-
-    .bottom-menu a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .bottom-menu a.active {
-      color: white;
-    }
-
-    .bottom-menu i {
-      font-size: 1.2rem;
-    }
-    
-    /* Badge NUEVO / ESTRENO */
-    .series-card {
-      position: relative;
-    }
-
-    .badge-new {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      background: #ff3c78;
-      color: white;
-      font-size: 0.75rem;
-      padding: 3px 6px;
-      border-radius: 6px;
-      font-weight: bold;
-      z-index: 10;
-    }
-
-    /* Toast */
-    #reconnect-toast {
-      background: rgba(33, 150, 243, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.5);
-      min-width: 280px;
-      max-width: 90vw;
-      font-weight: 600;
-      font-size: 1rem;
-      z-index: 12000;
-    }
-
-    /* Modal moderno */
-    #offlineModal .modal-content {
-      background: #1f1f1f;
-      color: white;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-    }
-
-    #offlineModal .modal-body i {
-      color: #ff4d4d;
-    }
-
-    #offlineModal .modal-title {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .modal-backdrop.show {
-      opacity: 0.85 !important;
-      background-color: #000 !important;
-      z-index: 1050;
-    }
-
-    /* Bloqueo de selección y arrastre */
     * {
+      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
     }
 
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+    }
+
     body {
+      padding-bottom: 90px;
+      font-family: Arial, sans-serif;
       -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
     }
 
@@ -209,376 +47,988 @@
       user-drag: none;
       pointer-events: none;
     }
-    
-  #ad-container {
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
 
-  #ad-container * {
-    -webkit-user-drag: none;
-  }
-  
-.custom-ad-container{
-  width:100%;
-  max-width:1000px;
-  margin:auto;
-  position:relative;
-  padding:0 8px;
-  box-sizing:border-box;
-  margin-bottom:25px;
+    /* ENCABEZADO */
+
+    .home-header {
+      width: 100%;
+      padding: 22px 16px 18px;
+      background: linear-gradient(180deg, #171717 0%, var(--bg) 100%);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.7px;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .header-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-light);
+      border-radius: 50%;
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    .welcome {
+      max-width: 1000px;
+      margin: 20px auto 0;
+    }
+
+    .welcome h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    /* CONTENEDOR */
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    /* CATEGORÍAS */
+
+    .category-section {
+      margin-top: 23px;
+    }
+
+    .category-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 13px;
+      padding: 0 2px;
+    }
+
+    .category-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .category-title::before {
+      content: "";
+      display: block;
+      width: 4px;
+      height: 21px;
+      border-radius: 5px;
+      background: var(--accent);
+    }
+
+    .category-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    /* CARRUSEL */
+
+    .series-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 2px 2px 12px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .series-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .series-card {
+      position: relative;
+      width: 140px;
+      flex: 0 0 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .series-card a {
+      width: 100%;
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .poster-wrapper {
+      width: 100%;
+      height: 205px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid #292929;
+    }
+
+    .poster-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .series-card a:active .poster-wrapper img {
+      transform: scale(0.96);
+    }
+
+    .series-title {
+      font-size: 0.79rem;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 8px;
+      color: #e5e5e5;
+      line-height: 1.25;
+      overflow-wrap: break-word;
+    }
+
+    /* CARRUSEL DE ESTRENOS */
+
+    .recientes .series-card {
+      width: 205px;
+      flex-basis: 205px;
+    }
+
+    .recientes .poster-wrapper {
+      height: 120px;
+      border-radius: 12px;
+    }
+
+    .recientes .poster-wrapper img {
+      object-fit: cover;
+    }
+
+    .recientes .series-title {
+      font-size: 0.82rem;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ETIQUETAS */
+
+    .badge-new {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 5;
+      background: var(--accent);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 6px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    /* ANUNCIO */
+
+    .custom-ad-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 25px auto 15px;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .fake-banner {
+      width: 100%;
+      display: block;
+      border-radius: 13px;
+      pointer-events: none;
+    }
+
+    #ad-wrapper {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      right: 12px;
+      bottom: 0;
+      z-index: 5;
+      opacity: 0.01;
+    }
+
+    #ad-container {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: manipulation;
+    }
+
+    #ad-container * {
+      -webkit-user-drag: none;
+    }
+
+    /* MENÚ INFERIOR - ESTILO CONCEPTUAL */
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #151515;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #292929;
+  z-index: 1000;
 }
 
-/* imagen personalizada */
-.fake-banner{
-  width:100%;
-  display:block;
-  border-radius:14px;
-  pointer-events:none;
+.bottom-menu a {
+  flex: 1;
+  height: 100%;
+  color: #888888;
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
 }
 
-/* anuncio REAL */
-#ad-wrapper{
-  position:absolute;
-  top:0;
-  left:8px;
-  right:8px;
-  bottom:0;
-
-  z-index:5;
-
-  opacity:0.01;
+.bottom-menu a i {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border-radius: 12px;
+  color: #888888;
+  transition: all 0.2s ease;
 }
-</style>
+
+/* ELEMENTO SELECCIONADO */
+
+.bottom-menu a.active {
+  color: #ff3c78;
+}
+
+.bottom-menu a.active i {
+  background: #482033;
+  color: #ff3c78;
+}
+
+/* MENÚ DESACTIVADO */
+
+.bottom-menu.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+    /* MODAL SIN CONEXIÓN */
+
+    #offlineModal .modal-content {
+      background: #1b1b1b;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255,60,120,0.12);
+    }
+
+    #offlineModal .modal-body i {
+      color: var(--accent);
+    }
+
+    #offlineModal .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    #offlineModal p {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .modal-backdrop.show {
+      opacity: 0.85 !important;
+      background: #000 !important;
+      z-index: 1050;
+    }
+
+    /* TOAST */
+
+    #reconnect-toast {
+      background: #202020;
+      border: 1px solid #333 !important;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      min-width: 260px;
+      max-width: 90vw;
+      font-weight: 600;
+      font-size: 0.9rem;
+      z-index: 12000;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 600px) {
+      .home-header {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .series-card {
+        width: 155px;
+        flex-basis: 155px;
+      }
+
+      .poster-wrapper {
+        height: 225px;
+      }
+
+      .recientes .series-card {
+        width: 230px;
+        flex-basis: 230px;
+      }
+
+      .recientes .poster-wrapper {
+        height: 135px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- Header -->
-  
-  
-    <!-- Carrusel de destacados -->
+  <!-- ENCABEZADO -->
 
-  <!-- Categorías -->
-  <div class="container">
-    <div class="category-title">Estrenos</div>
-    <div class="series-list recientes">
-      <div class="series-card">
-        <div class="badge-new">Episodio 6</div>
-        <a href="https://voe.sx/e/hn6cfafe17x5">
-          <img
-src="https://image.tmdb.org/t/p/w500/vHwKCWDr9sWbdIANtl04JzCmJgA.jpg" alt="Sister Breeder">
-          <div class="series-title">Sister Breeder</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 5</div>
-        <a href="https://voe.sx/e/9ki0x5euskzf">
-          <img
-src="https://image.tmdb.org/t/p/w500/vHwKCWDr9sWbdIANtl04JzCmJgA.jpg" alt="Sister Breeder">
-          <div class="series-title">Sister Breeder</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 4</div>
-        <a href="https://voe.sx/e/97yqcjut3pkj">
-          <img
-src="https://image.tmdb.org/t/p/w500/uf6sJMh6lXMAPSpX7mZr61jrZcB.jpg" alt="Mouse Cursor de Genjitsu o Sousa Dekiru You ni Natta no de, Onnanoko o Ippai Click Shimasu">
-          <div class="series-title">Mouse Cursor de Genjitsu o Sousa Dekiru You ni Natta no de, Onnanoko o Ippai Click Shimasu</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 4</div>
-        <a href="https://voe.sx/e/7mp7llryq4mb">
-          <img src="https://image.tmdb.org/t/p/w500/4E8BJMdkKaRiKnIJf8q5ZxceJl9.jpg" alt="Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa">
-          <div class="series-title">Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 2</div>
-        <a href="https://voe.sx/e/4ajbtr4ej1vh">
-          <img src="https://image.tmdb.org/t/p/w500/c3IiYpa6AYWjE2FTmQcrAN53qxx.jpg" alt="Oushun Jogakuen no Danyuu">
-          <div class="series-title">Oushun Jogakuen no Danyuu</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 1</div>
-        <a href="https://voe.sx/e/8t4hbr0anntl">
-          <img
-src="https://image.tmdb.org/t/p/w500/wqXCeRTZYLbJe61uJaGQ06vxTVU.jpg" alt="NTR Kishi">
-          <div class="series-title">NTR Kishi</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 2</div>
-        <a href="https://voe.sx/e/ggv43pbaza1j">
-          <img src="https://image.tmdb.org/t/p/w500/VKNIVV3Af8POSv5pL0gt9QMOmx.jpg" alt="Netorareta Bakunyuu Tsuma-tachi 2">
-          <div class="series-title">Netorareta Bakunyuu Tsuma-tachi 2</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 2</div>
-        <a href="https://voe.sx/e/mxtwyjjla9m2">
-          <img
-src="https://image.tmdb.org/t/p/w500/yujIVz37vI9tpgwncd6TmbXL5Dl.jpg" alt="Hamehara: Sore Sekuhara desu!">
-          <div class="series-title">Hamehara: Sore Sekuhara desu!</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 1</div>
-        <a href="https://voe.sx/e/28uwfs6w554n">
-          <img
-src="https://image.tmdb.org/t/p/w500/mtCuPym7y5P7PpdOVIDwrEoJHIQ.jpg" alt="Muramata-san no Aijou">
-          <div class="series-title">Muramata-san no Aijou</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <div class="badge-new">Episodio 2</div>
-        <a href="https://voe.sx/e/an2yma2y1wde">
-          <img
-src="https://image.tmdb.org/t/p/w500/zErL8K5sxHrVv4j9ui6PM1kXBHI.jpg" alt="Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation">
-          <div class="series-title">Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation</div>
-        </a>
+  <header class="home-header">
+    <div class="header-top">
+      <div class="logo">RAKUEN <span>HENTAI</span></div>
+      <div class="header-icon">
+        <i class="fa-solid fa-circle-play"></i>
       </div>
     </div>
+  </header>
 
-    <div class="category-title">Recientes</div>
-    <div class="series-list">
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai645.html">
-          <img src="https://image.tmdb.org/t/p/w500/gBTscSOdFqQzpJGvazskNByaHV1.jpg" alt="NTR Kishi">
-          <div class="series-title">NTR Kishi</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai644.html">
-          <img src="https://image.tmdb.org/t/p/w500/i4Jdsi3p7FQ9ugjh5MPZSwg8anw.jpg" alt="Muramata-san no Aijou">
-          <div class="series-title">Muramata-san no Aijou</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai643.html">
-          <img src="https://image.tmdb.org/t/p/w500/wrqnMRBnh5L2BTTLYUBrkF1L1vh.jpg" alt="Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation">
-          <div class="series-title">Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai534.html">
-          <img src="https://image.tmdb.org/t/p/w500/d2AXekwOKH5bIQnlD5oeP15TPIk.jpg" alt="Netorareta Bakunyuu Tsuma-tachi 2">
-          <div class="series-title">Netorareta Bakunyuu Tsuma-tachi 2</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai550.html">
-          <img src="https://image.tmdb.org/t/p/w500/qxromWcA2F2D5Hy1QG68M5tWzQd.jpg" alt="Oushun Jogakuen no Danyuu">
-          <div class="series-title">Oushun Jogakuen no Danyuu</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai581.html">
-          <img src="https://image.tmdb.org/t/p/w500/1qmyS9zOskTN8sr5UnqlU0PsSNE.jpg" alt="Sare Tsuma wa Ubawaretai">
-          <div class="series-title">Sare Tsuma wa Ubawaretai</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai562.html">
-          <img src="https://image.tmdb.org/t/p/w500/tgEeBiZtoprLvth2LZvYDCeMOYx.jpg" alt="Pure x Holic: Junketsu Otome to Konin Kankei!? The Animation">
-          <div class="series-title">Pure x Holic: Junketsu Otome to Konin Kankei!? The Animation</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai642.html">
-          <img src="https://image.tmdb.org/t/p/w500/dYJOSnFf9O9hDcTbSyZPQb5Xnb8.jpg" alt="Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa">
-          <div class="series-title">Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai494.html">
-          <img src="https://image.tmdb.org/t/p/w500/ydNCpPX8sMaHBcVQcLv2PoMjyMk.jpg" alt="Kanojo Saimin">
-          <div class="series-title">Kanojo Saimin</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai400.html">
-          <img src="https://image.tmdb.org/t/p/w500/zMCjPkuQOYRBYQBRQHo6l9sURJF.jpg" alt="Deco x Deco">
-          <div class="series-title">Deco x Deco</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai464.html">
-          <img src="https://image.tmdb.org/t/p/w500/jurgwTEeKgXOkubTrOC9EO1FDjI.jpg" alt="Harem Shima e Youkoso!">
-          <div class="series-title">Harem Shima e Youkoso!</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai641.html">
-          <img src="https://image.tmdb.org/t/p/w500/vifNrALHUsHq81JIBcVnBy9dBQ6.jpg" alt="Juurin Oukoku">
-          <div class="series-title">Juurin Oukoku</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai468.html">
-          <img src="https://image.tmdb.org/t/p/w500/yyKKBIAYpqdgDo9n4yByYLWau5F.jpg" alt="Inaka ni wa Kore Kurai Shika Goraku ga Nai">
-          <div class="series-title">Inaka ni wa Kore Kurai Shika Goraku ga Nai</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai465.html">
-          <img src="https://image.tmdb.org/t/p/w500/fj2fmKBmoUKwlnn7TKL7vGXhEbh.jpg" alt="Hamehara: Sore Sekuhara desu!">
-          <div class="series-title">Hamehara: Sore Sekuhara desu!</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="CatalogoHent/Hentai535.html">
-          <img src="https://image.tmdb.org/t/p/w500/7SlVs7Tz3UbGghfvTH5RvrpodT1.jpg" alt="Nuki Nuki Zupposism">
-          <div class="series-title">Nuki Nuki Zupposism</div>
-        </a>
-      </div>
-    </div>
-    
-    <div class="category-title">Hentai Latino</div>
-    <div class="series-list">
-      <div class="series-card">
-        <a href="HentaiLat/HenLa001.html">
-          <img src="https://image.tmdb.org/t/p/w500/t5hPL0gOoTyBFPvzdefPcqEeHx3.jpg" alt="Ane wa Yan Mama">
-          <div class="series-title">Ane wa Yan Mama</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HentaiLat/HenLa002.html">
-          <img 
-src="https://image.tmdb.org/t/p/w500/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="Itadaki! Seieki">
-          <div class="series-title">Itadaki! Seieki</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HentaiLat/HenLa003.html">
-          <img src="https://image.tmdb.org/t/p/w500/4QZEWfL34hYW845iiJZCaj522WB.jpg" alt="Overflow">
-          <div class="series-title">Overflow</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HentaiLat/HenLa004.html">
-          <img src="https://image.tmdb.org/t/p/w500/ybcSDAHvjVq0br9auUIoqYC44al.jpg" alt="Imaizumin-chi wa Douyara">
-          <div class="series-title">Imaizumin-chi wa Douyara</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HentaiLat/HenLa005.html">
-          <img src="https://image.tmdb.org/t/p/w500/5kdFJzQpFErFKF5sjO9slXo24j6.jpg" alt="Uchi no Otouto">
-          <div class="series-title">Uchi no Otouto</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HentaiLat/HenLa006.html">
-          <img src="https://image.tmdb.org/t/p/w500/fu19rN3cEKVillGJiNUGy7kr5L7.jpg" alt="Kaede to Suzu">
-          <div class="series-title">Kaede to Suzu</div>
-        </a>
-      </div>
-      <div class="series-card">
-        <a href="HenLat.html">
-          <img src="https://appassets.androidplatform.net/assets/images/vermas.jpeg" alt="Ver Más">
-          <div class="series-title">Ver Más</div>
-        </a>
-      </div>
-    </div>
+  <!-- CONTENIDO -->
 
-    <div class="category-title">Anime</div>
-    <div class="series-list">
-      <div class="series-card">
-        <div class="badge-new">Latino</div>
-        <a href="Anime/Anime001.html">
-          <img src="https://image.tmdb.org/t/p/w500/cHhJzdUGcEBq6av4wr9jsIvUITH.jpg" alt="Sousou no Frieren 2nd Season">
-          <div class="series-title">Sousou no Frieren 2nd Season</div>
-        </a>
+  <main class="container">
+
+    <!-- ESTRENOS -->
+
+    <section class="category-section">
+      <div class="category-heading">
+        <h2 class="category-title">Estrenos</h2>
+        <span class="category-label">Últimos episodios</span>
       </div>
-      <div class="series-card">
-        <div class="badge-new">Subtitulado</div>
-        <a href="Anime/Anime002.html">
-          <img src="https://image.tmdb.org/t/p/w500/8s1Cym5F7EesthvaLMDvi6DpMK5.jpg" alt="Solo Leveling 2nd Season">
-          <div class="series-title">Solo Leveling 2nd Season</div>
-        </a>
+
+      <div class="series-list recientes">
+
+        <div class="series-card">
+          <div class="badge-new">Episodio 6</div>
+          <a href="https://voe.sx/e/hn6cfafe17x5">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/vHwKCWDr9sWbdIANtl04JzCmJgA.jpg"
+                alt="Sister Breeder">
+            </div>
+            <div class="series-title">Sister Breeder</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 5</div>
+          <a href="https://voe.sx/e/9ki0x5euskzf">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/vHwKCWDr9sWbdIANtl04JzCmJgA.jpg"
+                alt="Sister Breeder">
+            </div>
+            <div class="series-title">Sister Breeder</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 4</div>
+          <a href="https://voe.sx/e/97yqcjut3pkj">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/uf6sJMh6lXMAPSpX7mZr61jrZcB.jpg"
+                alt="Mouse Cursor de Genjitsu o Sousa Dekiru You ni Natta no de, Onnanoko o Ippai Click Shimasu">
+            </div>
+            <div class="series-title">Mouse Cursor de Genjitsu o Sousa Dekiru You ni Natta no de, Onnanoko o Ippai Click Shimasu</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 4</div>
+          <a href="https://voe.sx/e/7mp7llryq4mb">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/4E8BJMdkKaRiKnIJf8q5ZxceJl9.jpg"
+                alt="Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa">
+            </div>
+            <div class="series-title">Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 2</div>
+          <a href="https://voe.sx/e/4ajbtr4ej1vh">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/c3IiYpa6AYWjE2FTmQcrAN53qxx.jpg"
+                alt="Oushun Jogakuen no Danyuu">
+            </div>
+            <div class="series-title">Oushun Jogakuen no Danyuu</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 1</div>
+          <a href="https://voe.sx/e/8t4hbr0anntl">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/wqXCeRTZYLbJe61uJaGQ06vxTVU.jpg"
+                alt="NTR Kishi">
+            </div>
+            <div class="series-title">NTR Kishi</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 2</div>
+          <a href="https://voe.sx/e/ggv43pbaza1j">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/VKNIVV3Af8POSv5pL0gt9QMOmx.jpg"
+                alt="Netorareta Bakunyuu Tsuma-tachi 2">
+            </div>
+            <div class="series-title">Netorareta Bakunyuu Tsuma-tachi 2</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 2</div>
+          <a href="https://voe.sx/e/mxtwyjjla9m2">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/yujIVz37vI9tpgwncd6TmbXL5Dl.jpg"
+                alt="Hamehara: Sore Sekuhara desu!">
+            </div>
+            <div class="series-title">Hamehara: Sore Sekuhara desu!</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 1</div>
+          <a href="https://voe.sx/e/28uwfs6w554n">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/mtCuPym7y5P7PpdOVIDwrEoJHIQ.jpg"
+                alt="Muramata-san no Aijou">
+            </div>
+            <div class="series-title">Muramata-san no Aijou</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Episodio 2</div>
+          <a href="https://voe.sx/e/an2yma2y1wde">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/zErL8K5sxHrVv4j9ui6PM1kXBHI.jpg"
+                alt="Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation">
+            </div>
+            <div class="series-title">Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation</div>
+          </a>
+        </div>
+
       </div>
-      <div class="series-card">
-        <div class="badge-new">Latino</div>
-        <a href="Anime/Anime003.html">
-          <img src="https://image.tmdb.org/t/p/w500/pHyxb2RV5wLlboAwm9ZJ9qTVEDw.jpg" alt="Chainsaw Man Movie: Reze-hen">
-          <div class="series-title">Chainsaw Man Movie: Reze-hen</div>
-        </a>
+    </section>
+
+    <!-- RECIENTES -->
+
+    <section class="category-section">
+      <div class="category-heading">
+        <h2 class="category-title">Recientes</h2>
+        <span class="category-label">Agregados recientemente</span>
       </div>
-      <div class="series-card">
-        <div class="badge-new">Subtitulado</div>
-        <a href="Anime/Anime004.html">
-          <img src="https://image.tmdb.org/t/p/w500/k8bh5mvHDx3czHSF56v9lRyulLC.jpg" alt="Yuusha-kei ni Shosu">
-          <div class="series-title">Yuusha-kei ni Shosu</div>
-        </a>
+
+      <div class="series-list">
+
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai645.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/gBTscSOdFqQzpJGvazskNByaHV1.jpg"
+                alt="NTR Kishi">
+            </div>
+            <div class="series-title">NTR Kishi</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai644.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/i4Jdsi3p7FQ9ugjh5MPZSwg8anw.jpg"
+                alt="Muramata-san no Aijou">
+            </div>
+            <div class="series-title">Muramata-san no Aijou</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai643.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/wrqnMRBnh5L2BTTLYUBrkF1L1vh.jpg"
+                alt="Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation">
+            </div>
+            <div class="series-title">Mujikaku na Osananajimi to Kyoumi Honi de Yattemitara The Animation</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai534.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/d2AXekwOKH5bIQnlD5oeP15TPIk.jpg"
+                alt="Netorareta Bakunyuu Tsuma-tachi 2">
+            </div>
+            <div class="series-title">Netorareta Bakunyuu Tsuma-tachi 2</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai550.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/qxromWcA2F2D5Hy1QG68M5tWzQd.jpg"
+                alt="Oushun Jogakuen no Danyuu">
+            </div>
+            <div class="series-title">Oushun Jogakuen no Danyuu</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai581.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/1qmyS9zOskTN8sr5UnqlU0PsSNE.jpg"
+                alt="Sare Tsuma wa Ubawaretai">
+            </div>
+            <div class="series-title">Sare Tsuma wa Ubawaretai</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai562.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/tgEeBiZtoprLvth2LZvYDCeMOYx.jpg"
+                alt="Pure x Holic: Junketsu Otome to Konin Kankei!? The Animation">
+            </div>
+            <div class="series-title">Pure x Holic: Junketsu Otome to Konin Kankei!? The Animation</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai642.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/dYJOSnFf9O9hDcTbSyZPQb5Xnb8.jpg"
+                alt="Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa">
+            </div>
+            <div class="series-title">Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai494.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/ydNCpPX8sMaHBcVQcLv2PoMjyMk.jpg"
+                alt="Kanojo Saimin">
+            </div>
+            <div class="series-title">Kanojo Saimin</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai400.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/zMCjPkuQOYRBYQBRQHo6l9sURJF.jpg"
+                alt="Deco x Deco">
+            </div>
+            <div class="series-title">Deco x Deco</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai464.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/jurgwTEeKgXOkubTrOC9EO1FDjI.jpg"
+                alt="Harem Shima e Youkoso!">
+            </div>
+            <div class="series-title">Harem Shima e Youkoso!</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai641.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/vifNrALHUsHq81JIBcVnBy9dBQ6.jpg"
+                alt="Juurin Oukoku">
+            </div>
+            <div class="series-title">Juurin Oukoku</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai468.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/yyKKBIAYpqdgDo9n4yByYLWau5F.jpg"
+                alt="Inaka ni wa Kore Kurai Shika Goraku ga Nai">
+            </div>
+            <div class="series-title">Inaka ni wa Kore Kurai Shika Goraku ga Nai</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai465.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/fj2fmKBmoUKwlnn7TKL7vGXhEbh.jpg"
+                alt="Hamehara: Sore Sekuhara desu!">
+            </div>
+            <div class="series-title">Hamehara: Sore Sekuhara desu!</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="CatalogoHent/Hentai535.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/7SlVs7Tz3UbGghfvTH5RvrpodT1.jpg"
+                alt="Nuki Nuki Zupposism">
+            </div>
+            <div class="series-title">Nuki Nuki Zupposism</div>
+          </a>
+        </div>
+
       </div>
-      <div class="series-card">
-        <div class="badge-new">Latino</div>
-        <a href="Anime/Anime005.html">
-          <img src="https://image.tmdb.org/t/p/w500/8tpLyWAmYhe1D0d62gV3CWFDu2f.jpg" alt="Dragon Ball Daima">
-          <div class="series-title">Dragon Ball Daima</div>
-        </a>
+    </section>
+
+    <!-- HENTAI LATINO -->
+
+    <section class="category-section">
+      <div class="category-heading">
+        <h2 class="category-title">Hentai Latino</h2>
+        <span class="category-label">Series con Audio Latino</span>
       </div>
-      <div class="series-card">
-        <div class="badge-new">Latino</div>
-        <a href="Anime/Anime006.html">
-          <img src="https://image.tmdb.org/t/p/w500/gzs2XMWatrPjVJputJUugbKA4Z.jpg" alt="Shingeki no Kyojin The Last Attack">
-          <div class="series-title">Shingeki no Kyojin The Last Attack</div>
-        </a>
+
+      <div class="series-list">
+
+        <div class="series-card">
+          <a href="HentaiLat/HenLa001.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/t5hPL0gOoTyBFPvzdefPcqEeHx3.jpg"
+                alt="Ane wa Yan Mama Junyuu Chuu">
+            </div>
+            <div class="series-title">Ane wa Yan Mama Junyuu Chuu</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HentaiLat/HenLa002.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg"
+                alt="Itadaki! Seieki">
+            </div>
+            <div class="series-title">Itadaki! Seieki</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HentaiLat/HenLa003.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/4QZEWfL34hYW845iiJZCaj522WB.jpg"
+                alt="Overflow">
+            </div>
+            <div class="series-title">Overflow</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HentaiLat/HenLa004.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/ybcSDAHvjVq0br9auUIoqYC44al.jpg"
+                alt="Imaizumin-chi wa Douyara Gal no Tamariba ni Natteru Rashii">
+            </div>
+            <div class="series-title">Imaizumin-chi wa Douyara Gal no Tamariba ni Natteru Rashii</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HentaiLat/HenLa005.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/5kdFJzQpFErFKF5sjO9slXo24j6.jpg"
+                alt="Uchi no Otouto Maji de Dekain Dakedo Mi ni Konai?">
+            </div>
+            <div class="series-title">Uchi no Otouto Maji de Dekain Dakedo Mi ni Konai?</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HentaiLat/HenLa006.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/fu19rN3cEKVillGJiNUGy7kr5L7.jpg"
+                alt="Kaede to Suzu The Animation">
+            </div>
+            <div class="series-title">Kaede to Suzu The Animation</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="HenLat.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://appassets.androidplatform.net/assets/images/vermas.jpeg"
+                alt="Ver Más">
+            </div>
+            <div class="series-title">Ver Más</div>
+          </a>
+        </div>
+
       </div>
-      <div class="series-card">
-        <a href="BuscAni.html">
-          <img src="https://appassets.androidplatform.net/assets/images/vermas.jpeg" alt="Ver Más">
-          <div class="series-title">Ver Más</div>
-        </a>
+    </section>
+
+    <!-- ANIME -->
+
+    <section class="category-section">
+      <div class="category-heading">
+        <h2 class="category-title">Anime</h2>
+        <span class="category-label">Sección de Animes</span>
       </div>
-    </div>
+
+      <div class="series-list">
+
+        <div class="series-card">
+          <div class="badge-new">Latino</div>
+          <a href="Anime/Anime001.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/cHhJzdUGcEBq6av4wr9jsIvUITH.jpg"
+                alt="Sousou no Frieren 2nd Season">
+            </div>
+            <div class="series-title">Sousou no Frieren 2nd Season</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Subtitulado</div>
+          <a href="Anime/Anime002.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/8s1Cym5F7EesthvaLMDvi6DpMK5.jpg"
+                alt="Solo Leveling 2nd Season">
+            </div>
+            <div class="series-title">Solo Leveling 2nd Season</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Latino</div>
+          <a href="Anime/Anime003.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/pHyxb2RV5wLlboAwm9ZJ9qTVEDw.jpg"
+                alt="Chainsaw Man Movie: Reze-hen">
+            </div>
+            <div class="series-title">Chainsaw Man Movie: Reze-hen</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Subtitulado</div>
+          <a href="Anime/Anime004.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/k8bh5mvHDx3czHSF56v9lRyulLC.jpg"
+                alt="Yuusha-kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku">
+            </div>
+            <div class="series-title">Yuusha-kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Latino</div>
+          <a href="Anime/Anime005.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/8tpLyWAmYhe1D0d62gV3CWFDu2f.jpg"
+                alt="Dragon Ball Daima">
+            </div>
+            <div class="series-title">Dragon Ball Daima</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <div class="badge-new">Latino</div>
+          <a href="Anime/Anime006.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://image.tmdb.org/t/p/w500/gzs2XMWatrPjVJputJUugbKA4Z.jpg"
+                alt="Shingeki no Kyojin Movie: Kanketsu-hen - The Last Attack">
+            </div>
+            <div class="series-title">Shingeki no Kyojin Movie: Kanketsu-hen - The Last Attack</div>
+          </a>
+        </div>
+        <div class="series-card">
+          <a href="BuscAni.html">
+            <div class="poster-wrapper">
+              <img
+                src="https://appassets.androidplatform.net/assets/images/vermas.jpeg"
+                alt="Ver Más">
+            </div>
+            <div class="series-title">Ver Más</div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ANUNCIO -->
+
+  <div class="custom-ad-container">
+
+    <img
+      class="fake-banner"
+      src="https://appassets.androidplatform.net/assets/images/fake-banner.jpeg"
+      alt="Publicidad">
+
+    <div id="ad-wrapper"></div>
+
   </div>
-    <br>
 
-  <!-- Menú inferior fijo -->
-  <div class="bottom-menu">
-    <a href="" class="active"><i class="fas fa-home"></i><span>Inicio</span></a>
-    <a href="Buscar.html"><i class="fas fa-search"></i><span>Buscar</span></a>
-    <a href="Favori.html"><i class="fa-solid fa-heart"></i><span>Favoritos</span></a>
-    <a href="Info.html"><i class="fas fa-info-circle"></i><span>Seguridad</span></a>
-  </div>
+  <!-- MENÚ INFERIOR -->
 
-  <!-- Modal Sin Conexión -->
-  <div class="modal fade" id="offlineModal" tabindex="-1" aria-labelledby="offlineModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <nav class="bottom-menu">
+
+  <a href="" class="active">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>Inicio</span>
+  </a>
+
+  <a href="Buscar.html">
+    <i class="fa-mosaic fa-solid fa-magnifying-glass"></i>
+    <span>Explorar</span>
+  </a>
+
+  <a href="Favori.html">
+    <i class="fa-jelly-fill fa-regular fa-heart"></i>
+    <span>Favoritos</span>
+  </a>
+
+  <a href="Info.html">
+    <i class="fa-regular fa-circle-question"></i>
+    <span>Información</span>
+  </a>
+
+</nav>
+
+  <!-- MODAL SIN CONEXIÓN -->
+
+  <div
+    class="modal fade"
+    id="offlineModal"
+    tabindex="-1"
+    aria-labelledby="offlineModalLabel"
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false">
+
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content p-4">
+
         <div class="modal-body">
           <i class="fas fa-wifi-slash fa-3x mb-3"></i>
-          <h5 class="modal-title mb-3">Sin conexión a Internet</h5>
-          <p>Revisa tu conexión y vuelve a intentarlo.</p>
+
+          <h5 class="modal-title mb-3">
+            Sin conexión a Internet
+          </h5>
+
+          <p>
+            Revisa tu conexión y vuelve a intentarlo.
+          </p>
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Toast Reconectado -->
-  <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5" style="z-index: 12000;">
-    <div id="reconnect-toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body d-flex align-items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M21 7L9 19l-5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
-          Conexión restablecida
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- TOAST RECONEXIÓN -->
+
+  <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5"
+       style="z-index:12000;">
+
+    <div
+      id="reconnect-toast"
+      class="toast align-items-center text-white border-0"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true">
+
+      <div class="d-flex">
+
+        <div class="toast-body d-flex align-items-center gap-2">
+          <i class="fas fa-check-circle"></i>
+          Conexión restablecida
+        </div>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          data-bs-dismiss="toast"
+          aria-label="Cerrar">
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOTSTRAP -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- CONEXIÓN -->
+
   <script>
-    const offlineModal = new bootstrap.Modal(document.getElementById('offlineModal'));
-    const reconnectToastEl = document.getElementById('reconnect-toast');
-    const reconnectToast = new bootstrap.Toast(reconnectToastEl, { delay: 3000 });
+    const offlineModal = new bootstrap.Modal(
+      document.getElementById('offlineModal')
+    );
+
+    const reconnectToast = new bootstrap.Toast(
+      document.getElementById('reconnect-toast'),
+      { delay: 3000 }
+    );
+
     const bottomMenu = document.querySelector('.bottom-menu');
 
     function setMenuDisabled(state) {
@@ -608,78 +1058,85 @@ src="https://image.tmdb.org/t/p/w500/MZVgsMXNzDRfmRJ1hPHMn97rnr.jpg" alt="Itadak
 
     window.addEventListener('load', checkConnection);
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<div class="custom-ad-container">
 
-  <!-- imagen personalizada -->
-  <img
-   class="fake-banner"
-   src="https://appassets.androidplatform.net/assets/images/fake-banner.jpeg"
-   alt="Publicidad"
-   >
+  <!-- PUBLICIDAD -->
 
-  <!-- anuncio REAL transparente -->
-  <div id="ad-wrapper"></div>
+  <script>
+    function loadAd() {
+      const container = document.getElementById("ad-wrapper");
 
-</div>
+      if (!container) return;
 
-<script>
-function loadAd() {
+      container.innerHTML = "";
 
-  var container = document.getElementById("ad-wrapper");
-  container.innerHTML = "";
+      const adWidth = window.innerWidth < 520 ? 320 : 500;
+      const adHeight = window.innerWidth < 520 ? 55 : 80;
 
-  var adWidth = window.innerWidth < 520 ? 320 : 500;
-  var adHeight = window.innerWidth < 520 ? 55 : 80;
+      const script1 = document.createElement("script");
 
-  var script1 = document.createElement("script");
+      script1.innerHTML = `
+        atOptions = {
+          'key': 'ccb7d23a9f7a6eeca31298ea3d62a03f',
+          'format': 'iframe',
+          'height': ${adHeight},
+          'width': ${adWidth},
+          'params': {}
+        };
+      `;
 
-  script1.innerHTML = `
-    atOptions = {
-      'key' : 'ccb7d23a9f7a6eeca31298ea3d62a03f',
-      'format' : 'iframe',
-      'height' : ${adHeight},
-      'width' : ${adWidth},
-      'params' : {}
-    };
-  `;
+      const script2 = document.createElement("script");
 
-  var script2 = document.createElement("script");
+      script2.src =
+        "https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js";
 
-  script2.src =
-  "https://www.highperformanceformat.com/ccb7d23a9f7a6eeca31298ea3d62a03f/invoke.js";
+      container.appendChild(script1);
+      container.appendChild(script2);
+    }
 
-  container.appendChild(script1);
-  container.appendChild(script2);
-}
+    loadAd();
 
-loadAd();
-window.addEventListener("resize", loadAd);
-</script>
-<script>
-  document.addEventListener("dragstart", function(event) {
-    event.preventDefault();
-  });
+    let resizeTimer;
 
-  document.addEventListener("selectstart", function(event) {
-    event.preventDefault();
-  });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(loadAd, 500);
+    });
+  </script>
 
-    document.querySelectorAll(".series-title").forEach(titulo => {
+  <!-- BLOQUEO DE SELECCIÓN Y ARRASTRE -->
+
+  <script>
+    document.addEventListener("dragstart", event => {
+      event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", event => {
+      event.preventDefault();
+    });
+  </script>
+
+  <!-- RECORTAR TÍTULOS LARGOS -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      document.querySelectorAll(".series-title").forEach(titulo => {
 
         const texto = titulo.textContent.trim();
 
         if (texto.length > 30) {
-            titulo.textContent = texto.substring(0, 30).trim() + "...";
+          titulo.textContent =
+            texto.substring(0, 30).trim() + "...";
         }
 
-    });
+      });
 
-});
-</script>
-<script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
+    });
+  </script>
+
+  <!-- SCRIPT DE PUBLICIDAD ADICIONAL -->
+
+  <script src="https://pl29062337.profitablecpmratenetwork.com/e5/ef/1f/e5ef1f01266a4ac20b8edfb4cfd1565d.js"></script>
+
 </body>
 </html>
